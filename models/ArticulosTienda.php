@@ -82,6 +82,56 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             'modi_usuario_id' => 'Modi Usuario ID',
             'modi_fecha' => 'Modi Fecha',
             'notas_admin' => 'Notas Admin',
+            'nomTienda' => 'Nombre Tienda',
+            'nomArticulo' => 'Nombre Articulo',
+            'artBloqueado' => 'Bloqueado',
+            'artVisible' => 'Visible',
         ];
+    }
+
+    public function getTiendas(){
+
+    	return $this->hasOne(Tiendas::className(),['id' => 'tienda_id']);
+
+    }
+
+    public function getNomTienda(){
+
+    	return $this->tiendas->nombre_tienda;
+
+    }
+
+   	public function getArticulos(){
+
+		return $this->hasOne(Articulos::className(),['id' => 'articulo_id']);
+
+	}
+
+    public function getNomArticulo(){
+
+		return $this->articulos->nombre;
+
+    }
+
+    public function getArtVisible(){
+
+    	if($this->visible==0){
+    		return 'invisible';
+    	}else{
+    		return 'visible';
+    	}
+
+    }
+
+    public function getArtBloqueado(){
+
+    	if($this->bloqueado==0){
+    		return 'No';
+    	}else if($this->bloqueado==1){
+    		return 'Bloqueado por denuncias';
+    	}else{
+    		return 'Bloqueado por Administrador';
+    	}	
+
     }
 }

@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticulosTiendaSearch */
+/* @var $searchModel app\models\ArticulostiendaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articulos Tiendas';
+$this->title = 'Articulostiendas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="articulos-tienda-index">
+<div class="articulostienda-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articulos Tienda', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Articulostienda', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,19 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'articulo_id',
-            'tienda_id',
+            //'articulo_id',
+            'nomArticulo',
+            //'tienda_id',
+            'nomTienda',
             'imagen_id',
             'url_articulo:ntext',
-            //'precio',
+            'precio',
             //'sumaValores',
             //'totalVotos',
-            //'visible',
+            'visible',
+            'artVisible',
             //'cerrado',
-            //'num_denuncias',
+            'num_denuncias',
             //'fecha_denuncia1',
             //'notas_denuncia:ntext',
-            //'bloqueado',
+            'bloqueado',
+            'artBloqueado',
             //'fecha_bloqueo',
             //'notas_bloqueo:ntext',
             //'cerrado_comentar',
