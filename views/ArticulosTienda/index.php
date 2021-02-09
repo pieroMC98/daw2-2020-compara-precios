@@ -4,7 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
+<<<<<<< HEAD
 /* @var $searchModel app\models\ArticulostiendaSearch */
+=======
+/* @var $searchModel app\models\articulostiendaSearch */
+>>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Articulostiendas';

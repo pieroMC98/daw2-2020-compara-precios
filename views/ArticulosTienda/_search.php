@@ -4,7 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
+<<<<<<< HEAD
 /* @var $model app\models\ArticulostiendaSearch */
+=======
+/* @var $model app\models\articulostiendaSearch */
+>>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

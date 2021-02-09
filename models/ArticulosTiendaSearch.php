@@ -4,12 +4,21 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+<<<<<<< HEAD
 use app\models\Articulostienda;
 
 /**
  * ArticulostiendaSearch represents the model behind the search form of `app\models\Articulostienda`.
  */
 class ArticulostiendaSearch extends Articulostienda
+=======
+use app\models\articulostienda;
+
+/**
+ * articulostiendaSearch represents the model behind the search form of `app\models\articulostienda`.
+ */
+class articulostiendaSearch extends articulostienda
+>>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 {
     public $nomArticulo;
     public $nomTienda;
@@ -45,7 +54,11 @@ class ArticulostiendaSearch extends Articulostienda
      */
     public function search($params)
     {
+<<<<<<< HEAD
         $query = Articulostienda::find();
+=======
+        $query = articulostienda::find();
+>>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 
         // add conditions that should always apply here
 
