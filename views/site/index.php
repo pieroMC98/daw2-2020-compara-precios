@@ -49,5 +49,6 @@ $this->title = 'My Yii Application';
             </div>
         </div>
 
+        <a class="btn btn-default" href="../config/backup.php">Copia &raquo;</a>
     </div>
 </div>

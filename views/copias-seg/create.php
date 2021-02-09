@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Comentarios */
+/* @var $model app\models\CopiasSeg */
 
-$this->title = 'Create Comentarios';
-$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
+$this->title = 'Create Copias Seg';
+$this->params['breadcrumbs'][] = ['label' => 'Copias Segs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="comentarios-create">
+<div class="copias-seg-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
