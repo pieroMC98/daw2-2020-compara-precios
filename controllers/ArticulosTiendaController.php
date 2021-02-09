@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\ArticulosTienda;
-use app\models\ArticulosTiendaSearch;
+use app\models\articulostienda;
+use app\models\articulostiendaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ArticulosTiendaController implements the CRUD actions for ArticulosTienda model.
+ * ArticulostiendaController implements the CRUD actions for articulostienda model.
  */
-class ArticulosTiendaController extends Controller
+class ArticulostiendaController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Lists all ArticulosTienda models.
+     * Lists all articulostienda models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticulosTiendaSearch();
+        $searchModel = new articulostiendaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Displays a single ArticulosTienda model.
+     * Displays a single articulostienda model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Creates a new ArticulosTienda model.
+     * Creates a new articulostienda model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ArticulosTienda();
+        $model = new articulostienda();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Updates an existing ArticulosTienda model.
+     * Updates an existing articulostienda model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Deletes an existing ArticulosTienda model.
+     * Deletes an existing articulostienda model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ArticulosTiendaController extends Controller
     }
 
     /**
-     * Finds the ArticulosTienda model based on its primary key value.
+     * Finds the articulostienda model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ArticulosTienda the loaded model
+     * @return articulostienda the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ArticulosTienda::findOne($id)) !== null) {
+        if (($model = articulostienda::findOne($id)) !== null) {
             return $model;
         }
 

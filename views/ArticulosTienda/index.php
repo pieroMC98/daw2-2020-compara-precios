@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticulosTiendaSearch */
+/* @var $searchModel app\models\articulostiendaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articulos Tiendas';
+$this->title = 'Articulostiendas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="articulos-tienda-index">
+<div class="articulostienda-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articulos Tienda', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Articulostienda', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

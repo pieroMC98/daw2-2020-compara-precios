@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ArticulosTienda;
+use app\models\articulostienda;
 
 /**
- * ArticulosTiendaSearch represents the model behind the search form of `app\models\ArticulosTienda`.
+ * articulostiendaSearch represents the model behind the search form of `app\models\articulostienda`.
  */
-class ArticulosTiendaSearch extends ArticulosTienda
+class articulostiendaSearch extends articulostienda
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class ArticulosTiendaSearch extends ArticulosTienda
      */
     public function search($params)
     {
-        $query = ArticulosTienda::find();
+        $query = articulostienda::find();
 
         // add conditions that should always apply here
 

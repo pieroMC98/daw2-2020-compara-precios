@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ArticulosTiendaSearch */
+/* @var $model app\models\articulostiendaSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="articulos-tienda-search">
+<div class="articulostienda-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
