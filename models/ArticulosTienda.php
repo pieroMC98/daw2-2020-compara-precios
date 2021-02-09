@@ -116,9 +116,9 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     public function getArtVisible(){
 
     	if($this->visible==0){
-    		return 'invisible';
+    		return 'Invisible';
     	}else{
-    		return 'visible';
+    		return 'Visible';
     	}
 
     }

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Articulostienda;
-use app\models\ArticulostiendaSearch;
+use app\models\Avisosusuarios;
+use app\models\AvisosusuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ArticulostiendaController implements the CRUD actions for Articulostienda model.
+ * AvisosusuariosController implements the CRUD actions for Avisosusuarios model.
  */
-class ArticulostiendaController extends Controller
+class AvisosusuariosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Lists all Articulostienda models.
+     * Lists all Avisosusuarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticulostiendaSearch();
+        $searchModel = new AvisosusuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Displays a single Articulostienda model.
+     * Displays a single Avisosusuarios model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Creates a new Articulostienda model.
+     * Creates a new Avisosusuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Articulostienda();
+        $model = new Avisosusuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Updates an existing Articulostienda model.
+     * Updates an existing Avisosusuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Deletes an existing Articulostienda model.
+     * Deletes an existing Avisosusuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ArticulostiendaController extends Controller
     }
 
     /**
-     * Finds the Articulostienda model based on its primary key value.
+     * Finds the Avisosusuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Articulostienda the loaded model
+     * @return Avisosusuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Articulostienda::findOne($id)) !== null) {
+        if (($model = Avisosusuarios::findOne($id)) !== null) {
             return $model;
         }
 

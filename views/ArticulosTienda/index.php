@@ -3,12 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-<<<<<<< HEAD
-/* @var $searchModel app\models\ArticulostiendaSearch */
-=======
+
 /* @var $searchModel app\models\articulostiendaSearch */
->>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Articulostiendas';
@@ -35,19 +31,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'nomArticulo',
             //'tienda_id',
             'nomTienda',
-            'imagen_id',
+            //'imagen_id',
             'url_articulo:ntext',
             'precio',
             //'sumaValores',
             //'totalVotos',
-            'visible',
-            'artVisible',
+            //'visible',
+            [
+                'attribute'=>'visible',
+                'value'=>'artVisible',
+                'filter'=>['0'=>'Invisible', '1'=>'Visible'],
+
+            ],
+            //'artVisible',
             //'cerrado',
             'num_denuncias',
             //'fecha_denuncia1',
             //'notas_denuncia:ntext',
-            'bloqueado',
-            'artBloqueado',
+            //'bloqueado',
+            [
+                'attribute'=>'bloqueado',
+                'value'=>'artBloqueado',
+                'filter'=>['0'=>'No', '1'=>'Bloqueado por denuncias', '2'=>'Bloqueado por Administrador'],
+
+            ],
+            //'artBloqueado',
             //'fecha_bloqueo',
             //'notas_bloqueo:ntext',
             //'cerrado_comentar',

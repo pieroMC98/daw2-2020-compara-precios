@@ -92,20 +92,20 @@ class ComentariosSearch extends Comentarios
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'tienda_id' => $this->tienda_id,
-            'articulo_id' => $this->articulo_id,
-            'valoracion' => $this->valoracion,
-            'comentario_id' => $this->comentario_id,
-            'cerrado' => $this->cerrado,
-            'num_denuncias' => $this->num_denuncias,
-            'fecha_denuncia1' => $this->fecha_denuncia1,
-            'bloqueado' => $this->bloqueado,
-            'fecha_bloqueo' => $this->fecha_bloqueo,
-            'crea_usuario_id' => $this->crea_usuario_id,
-            'crea_fecha' => $this->crea_fecha,
-            'modi_usuario_id' => $this->modi_usuario_id,
-            'modi_fecha' => $this->modi_fecha,
+            'comentarios.id' => $this->id,
+            'comentarios.tienda_id' => $this->tienda_id,
+            'comentarios.articulo_id' => $this->articulo_id,
+            'comentarios.valoracion' => $this->valoracion,
+            'comentarios.comentario_id' => $this->comentario_id,
+            'comentarios.cerrado' => $this->cerrado,
+            'comentarios.num_denuncias' => $this->num_denuncias,
+            'comentarios.fecha_denuncia1' => $this->fecha_denuncia1,
+            'comentarios.bloqueado' => $this->bloqueado,
+            'comentarios.fecha_bloqueo' => $this->fecha_bloqueo,
+            'comentarios.crea_usuario_id' => $this->crea_usuario_id,
+            'comentarios.crea_fecha' => $this->crea_fecha,
+            'comentarios.modi_usuario_id' => $this->modi_usuario_id,
+            'comentarios.modi_fecha' => $this->modi_fecha,
         ]);
 
         $query->andFilterWhere(['like', 'texto', $this->texto])

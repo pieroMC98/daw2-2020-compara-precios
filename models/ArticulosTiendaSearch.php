@@ -4,21 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-<<<<<<< HEAD
-use app\models\Articulostienda;
-
-/**
- * ArticulostiendaSearch represents the model behind the search form of `app\models\Articulostienda`.
- */
-class ArticulostiendaSearch extends Articulostienda
-=======
 use app\models\articulostienda;
 
 /**
  * articulostiendaSearch represents the model behind the search form of `app\models\articulostienda`.
  */
 class articulostiendaSearch extends articulostienda
->>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 {
     public $nomArticulo;
     public $nomTienda;
@@ -54,11 +45,7 @@ class articulostiendaSearch extends articulostienda
      */
     public function search($params)
     {
-<<<<<<< HEAD
-        $query = Articulostienda::find();
-=======
         $query = articulostienda::find();
->>>>>>> 4f292c02449476aa1046f6afaba692881f2a80ca
 
         // add conditions that should always apply here
 
@@ -70,7 +57,7 @@ class articulostiendaSearch extends articulostienda
         $orden->attributes['nomTienda']= [
             'asc' => ['tiendas.nombre_tienda' => SORT_ASC],
             'desc' => ['tiendas.nombre_tienda' => SORT_DESC],
-            //'default' => SORT_DESC,
+            'default' => SORT_DESC,
         ];
 
         $orden->attributes['nomArticulo']= [
@@ -92,43 +79,32 @@ class articulostiendaSearch extends articulostienda
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'articulo_id' => $this->articulo_id,
-            'tienda_id' => $this->tienda_id,
-            'precio' => $this->precio,
-            'sumaValores' => $this->sumaValores,
-            'totalVotos' => $this->totalVotos,
-            'visible' => $this->visible,
-            'cerrado' => $this->cerrado,
-            'num_denuncias' => $this->num_denuncias,
-            'fecha_denuncia1' => $this->fecha_denuncia1,
-            'bloqueado' => $this->bloqueado,
-            'fecha_bloqueo' => $this->fecha_bloqueo,
-            'cerrado_comentar' => $this->cerrado_comentar,
-            'crea_usuario_id' => $this->crea_usuario_id,
-            'crea_fecha' => $this->crea_fecha,
-            'modi_usuario_id' => $this->modi_usuario_id,
-            'modi_fecha' => $this->modi_fecha,
+            'articulos_tienda.id' => $this->id,
+            'articulos_tienda.articulo_id' => $this->articulo_id,
+            'articulos_tienda.tienda_id' => $this->tienda_id,
+            'articulos_tienda.precio' => $this->precio,
+            'articulos_tienda.sumaValores' => $this->sumaValores,
+            'articulos_tienda.totalVotos' => $this->totalVotos,
+            'articulos_tienda.visible' => $this->visible,
+            'articulos_tienda.cerrado' => $this->cerrado,
+            'articulos_tienda.num_denuncias' => $this->num_denuncias,
+            'articulos_tienda.fecha_denuncia1' => $this->fecha_denuncia1,
+            'articulos_tienda.bloqueado' => $this->bloqueado,
+            'articulos_tienda.fecha_bloqueo' => $this->fecha_bloqueo,
+            'articulos_tienda.cerrado_comentar' => $this->cerrado_comentar,
+            'articulos_tienda.crea_usuario_id' => $this->crea_usuario_id,
+            'articulos_tienda.crea_fecha' => $this->crea_fecha,
+            'articulos_tienda.modi_usuario_id' => $this->modi_usuario_id,
+            'articulos_tienda.modi_fecha' => $this->modi_fecha,
+            'articulos_tienda.imagen_id', $this->imagen_id,
         ]);
 
-        $query->andFilterWhere(['like', 'imagen_id', $this->imagen_id])
-            ->andFilterWhere(['like', 'url_articulo', $this->url_articulo])
+        $query->andFilterWhere(['like', 'url_articulo', $this->url_articulo])
             ->andFilterWhere(['like', 'notas_denuncia', $this->notas_denuncia])
             ->andFilterWhere(['like', 'notas_bloqueo', $this->notas_bloqueo])
             ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
             ->andFilterWhere(['like', 'tiendas.nombre_tienda', $this->nomTienda])
             ->andFilterWhere(['like', 'articulos.nombre', $this->nomArticulo]);
-            //->andFilterWhere(['like', 'Visible', $this->artVisible]);
-            //->andFilterWhere(['like', 'artBloqueado', $this->bloqueado]);
-
-            if (empty($this->artVisible)) {
-            $query->andFilterWhere( ['==', 'visible'
-                , $this->visible]);
-            } else {
-            $query->andFilterWhere( ['==', 'visible'
-                , $this->visible]);
-            }
-
         return $dataProvider;
     }
 }
