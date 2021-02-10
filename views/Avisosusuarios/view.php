@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Articulostienda */
+/* @var $model app\models\Avisosusuarios */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Articulostiendas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Avisosusuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="articulostienda-view">
+<div class="avisosusuarios-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,27 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'articulo_id',
+            'fecha_aviso',
+            'clase_aviso',
+            'texto:ntext',
+            'destino_usuario_id',
+            'origen_usuario_id',
             'tienda_id',
-            'imagen_id',
-            'url_articulo:ntext',
-            'precio',
-            'sumaValores',
-            'totalVotos',
-            'visible',
-            'cerrado',
-            'num_denuncias',
-            'fecha_denuncia1',
-            'notas_denuncia:ntext',
-            'bloqueado',
-            'fecha_bloqueo',
-            'notas_bloqueo:ntext',
-            'cerrado_comentar',
-            'crea_usuario_id',
-            'crea_fecha',
-            'modi_usuario_id',
-            'modi_fecha',
-            'notas_admin:ntext',
+            'articulo_id',
+            'comentario_id',
+            'fecha_lectura',
+            'fecha_aceptado',
         ],
     ]) ?>
 
