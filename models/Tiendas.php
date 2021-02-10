@@ -61,7 +61,7 @@ class Tiendas extends \yii\db\ActiveRecord
             [['nombre_tienda', 'nif_cif'], 'required'],
             [['nombre_tienda', 'descripcion_tienda', 'lugar_tienda', 'url_tienda', 'direccion_tienda', 'notas_denuncia', 'notas_bloqueo', 'direccion', 'notas_admin'], 'string'],
             [['region_id_tienda', 'clasificacion_id', 'sumaValores', 'totalVotos', 'visible', 'cerrada', 'num_denuncias', 'bloqueada', 'cerrado_comentar', 'usuario_id', 'region_id', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
+            [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha', 'nombreCompleto'], 'safe'],
             [['telefono_tienda', 'imagen_id', 'telefono_contacto'], 'string', 'max' => 25],
             [['nif_cif'], 'string', 'max' => 12],
             [['nombre'], 'string', 'max' => 100],
@@ -110,6 +110,40 @@ class Tiendas extends \yii\db\ActiveRecord
             'modi_usuario_id' => 'Modi Usuario ID',
             'modi_fecha' => 'Modi Fecha',
             'notas_admin' => 'Notas Admin',
+            'nombreCompleto' => 'Nombre Completo',
+            'nickPropietario' => 'Nick Propietario',
         ];
     }
+
+    public function getNombreCompleto()
+    {
+        return $this->nombre.' '.$this->apellidos;
+    }
+
+    public function getUsuarios(){
+
+        return $this->hasOne(Usuarios::className(),['id' => 'usuario_id']);
+
+    }
+
+    public function getNickPropietario(){
+
+        return $this->usuarios->nick;
+
+    }
+
+    public function deletePropietario(){
+
+        $this->usuario_id =0;
+        $this->nif_cif='NULO';
+        $this->nombre = NULL;
+        $this->apellidos = NULL;
+        $this->razon_social = NULL;
+        $this->direccion = NULL;
+        $this->region_id = 0;
+        $this->telefono_contacto = NULL;
+
+        $this->save();
+    }
+
 }

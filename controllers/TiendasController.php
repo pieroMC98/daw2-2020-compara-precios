@@ -124,4 +124,43 @@ class TiendasController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionPropietarios()
+    {
+        $searchModel = new TiendasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('propietarios', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionPropietarios_view($id)
+    {
+        return $this->render('propietarios_view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionPropietarios_update($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['propietarios_view', 'id' => $model->id]);
+        }
+
+        return $this->render('propietarios_update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionPropietarios_delete($id)
+    {
+        $var_delete=$this->findModel($id);
+
+        $var_delete->deletePropietario();
+        return $this->redirect(['propietarios']);
+    }
 }

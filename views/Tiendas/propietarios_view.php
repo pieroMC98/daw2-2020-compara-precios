@@ -4,14 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Comentarios */
+/* @var $model app\models\Tiendas */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
+$this->title = $model->nombre_tienda;
+$this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Propietarios', 'url' => ['propietarios']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="comentarios-view">
+<div class="tiendas-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,24 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'nomTienda',
-            'nomArticulo',
-            'articulo_id',
-            'valoracion',
-            'texto:ntext',
-            'comentario_id',
-            'cerrado',
-            'num_denuncias',
-            'fecha_denuncia1',
-            'notas_denuncia:ntext',
-            'bloqueado',
-            'fecha_bloqueo',
-            'notas_bloqueo:ntext',
-            'crea_usuario_id',
-            'crea_fecha',
-            'modi_usuario_id',
-            'modi_fecha',
-            'notas_admin:ntext',
+            'nombre_tienda:ntext',
+            'usuario_id',
+            'nif_cif',
+            'nombre',
+            'apellidos',
+            'razon_social',
+            'direccion:ntext',
+            'region_id',
+            'telefono_contacto',
         ],
     ]) ?>
 

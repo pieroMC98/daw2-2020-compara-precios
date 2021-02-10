@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'modi_usuario_id',
             //'modi_fecha',
             //'notas_admin:ntext',
+            'nombreCompleto',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
