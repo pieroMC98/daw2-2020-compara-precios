@@ -8,6 +8,7 @@ use app\models\CategoriasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * CategoriasController implements the CRUD actions for Categorias model.
@@ -70,6 +71,7 @@ class CategoriasController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'subcategorias' => $this->getSubcategorias($id),
         ]);
     }
 
@@ -139,5 +141,19 @@ class CategoriasController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    //Devuelve las subcategorías de una categoría
+    public function getSubcategorias($id)
+    {
+        $query = new Query;
+        // compose the query
+        $query->select('id, nombre')
+            ->from('categorias')
+            ->where(['=', 'categoria_id', $id]);
+        // build and execute the query
+        $rows = $query->all();
+
+        return $rows;
     }
 }

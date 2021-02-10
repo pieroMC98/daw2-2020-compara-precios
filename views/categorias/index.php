@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion:ntext',
             'icono',
             'categoria_id',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

@@ -49,6 +49,8 @@ class Categorias extends \yii\db\ActiveRecord
         ];
     }
 
+    
+
     /**
      * {@inheritdoc}
      * @return CategoriasQuery the active query used by this AR class.
