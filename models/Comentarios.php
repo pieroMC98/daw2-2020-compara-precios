@@ -73,6 +73,58 @@ class Comentarios extends \yii\db\ActiveRecord
             'modi_usuario_id' => 'Modi Usuario ID',
             'modi_fecha' => 'Modi Fecha',
             'notas_admin' => 'Notas Admin',
+            'nomTienda' => 'Nombre Tienda',
+            'nomArticulo' => 'Nombre Articulo',
+            'nickCreador' => 'Nick Usuario Creador',
+            'nickModificador' => 'Nick Usuario Modificador',
         ];
+    }
+
+    public function getTiendas(){
+
+    	return $this->hasOne(Tiendas::className(),['id' => 'tienda_id']);
+
+    }
+
+    public function getNomTienda(){
+
+    	return $this->tiendas->nombre_tienda;
+
+    }
+
+   	public function getArticulos(){
+
+		return $this->hasOne(Articulos::className(),['id' => 'articulo_id']);
+
+	}
+
+    public function getNomArticulo(){
+
+		return $this->articulos->nombre;
+
+    }
+
+    public function getUsuarios(){
+
+		return $this->hasOne(Usuarios::className(),['id' => 'crea_usuario_id']);
+
+	}
+
+    public function getNickCreador(){
+
+		return $this->usuarios->nick;
+
+    }
+
+     public function getUsuariosModif(){
+
+		return $this->hasOne(Usuarios::className(),['id' => 'modi_usuario_id']);
+
+	}
+
+    public function getNickModif(){
+
+		return $this->usuariosModif->nick;
+
     }
 }
