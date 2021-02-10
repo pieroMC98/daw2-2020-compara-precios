@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Categorias;
-use app\models\CategoriasSearch;
+use app\models\Oferta;
+use app\models\OfertaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoriasController implements the CRUD actions for Categorias model.
+ * OfertaController implements the CRUD actions for Oferta model.
  */
-class CategoriasController extends Controller
+class OfertaController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Lists all Categorias models.
+     * Lists all Oferta models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriasSearch();
+        $searchModel = new OfertaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,23 +45,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Lists all Categorias models.
-     * @return mixed
-     */
-    public function actionPublic()
-    {
-        $searchModel = new CategoriasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('public', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-
-    /**
-     * Displays a single Categorias model.
+     * Displays a single Oferta model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -74,13 +58,13 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Creates a new Categorias model.
+     * Creates a new Oferta model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Categorias();
+        $model = new Oferta();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,7 +76,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Updates an existing Categorias model.
+     * Updates an existing Oferta model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -112,7 +96,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Deletes an existing Categorias model.
+     * Deletes an existing Oferta model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -126,15 +110,15 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Finds the Categorias model based on its primary key value.
+     * Finds the Oferta model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Categorias the loaded model
+     * @return Oferta the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Categorias::findOne($id)) !== null) {
+        if (($model = Oferta::findOne($id)) !== null) {
             return $model;
         }
 

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Categorias;
-use app\models\CategoriasSearch;
+use app\models\Comentarios;
+use app\models\ComentariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoriasController implements the CRUD actions for Categorias model.
+ * ComentariosController implements the CRUD actions for Comentarios model.
  */
-class CategoriasController extends Controller
+class ComentariosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Lists all Categorias models.
+     * Lists all Comentarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriasSearch();
+        $searchModel = new ComentariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,23 +45,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Lists all Categorias models.
-     * @return mixed
-     */
-    public function actionPublic()
-    {
-        $searchModel = new CategoriasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('public', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-
-    /**
-     * Displays a single Categorias model.
+     * Displays a single Comentarios model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -74,13 +58,13 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Creates a new Categorias model.
+     * Creates a new Comentarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Categorias();
+        $model = new Comentarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,7 +76,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Updates an existing Categorias model.
+     * Updates an existing Comentarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -112,7 +96,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Deletes an existing Categorias model.
+     * Deletes an existing Comentarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -126,15 +110,15 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Finds the Categorias model based on its primary key value.
+     * Finds the Comentarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Categorias the loaded model
+     * @return Comentarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Categorias::findOne($id)) !== null) {
+        if (($model = Comentarios::findOne($id)) !== null) {
             return $model;
         }
 
