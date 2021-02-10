@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nif_cif',
             //'nombre',
             //'apellidos',
-            'NombreCompleto',
+            'nombreCompleto',
             'razon_social',
             'direccion:ntext',
             //'region_id',
