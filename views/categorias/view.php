@@ -47,5 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 
     ?>
+    <h2>Productos</h2>
+    <?php
+    foreach ($articulos as $art)
+    {
+        echo "<a href='index.php?r=categorias%2Fview&id=".$art['id']."'>".$art['nombre']."</a>, ";
+    }
+
+    ?>
 
 </div>

@@ -72,6 +72,7 @@ class CategoriasController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
             'subcategorias' => $this->getSubcategorias($id),
+            'articulos' => $this->getArticulos($id)
         ]);
     }
 
@@ -150,6 +151,20 @@ class CategoriasController extends Controller
         // compose the query
         $query->select('id, nombre')
             ->from('categorias')
+            ->where(['=', 'categoria_id', $id]);
+        // build and execute the query
+        $rows = $query->all();
+
+        return $rows;
+    }
+
+    //Devuelve los articulos de una categoría
+    public function getArticulos($id)
+    {
+        $query = new Query;
+        // compose the query
+        $query->select('id, nombre')
+            ->from('articulos')
             ->where(['=', 'categoria_id', $id]);
         // build and execute the query
         $rows = $query->all();
