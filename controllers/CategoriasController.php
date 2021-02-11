@@ -148,13 +148,29 @@ class CategoriasController extends Controller
     public function getSubcategorias($id)
     {
         $query = new Query;
+        $rows=array();
+        $i = 1;
+        $paro = false;
         // compose the query
         $query->select('id, nombre')
             ->from('categorias')
             ->where(['=', 'categoria_id', $id]);
         // build and execute the query
-        $rows = $query->all();
-
+        $rows['padre'] = $query->all();
+       
+        do{
+            foreach ($rows['padre'] as $row)
+            {
+                 $query->select('id, nombre')
+                    ->from('categorias')
+                    ->where(['=', 'categoria_id', $row['id']]);
+                 $hijoSiguiente = sprintf("hijo%d",$i);
+                 $rows[$hijoSiguiente] = $query->all();
+                 $i++;
+            }
+            $rows['numeroHijos'] = $i;
+        }while($paro==false);
+            
         return $rows;
     }
 

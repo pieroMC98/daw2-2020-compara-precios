@@ -42,17 +42,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     if(!empty($subcategorias)){
         echo '<h2>Subcategorias</h2>';
-        foreach ($subcategorias as $sub)
+        foreach ($subcategorias['padre'] as $sub)
         {
-            echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
+            echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'><strong>".$sub['nombre']."</strong></a>, ";
         }
+        for($i=1;$i<$subcategorias['numeroHijos'];$i++)
+        {   
+            foreach ($subcategorias['hijo'.$i] as $sub)
+            {
+                echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
+            }
+        }           
     }
+    var_dump($subcategorias['numeroHijos']);
     ?>
     <h2>Productos</h2>
     <?php
-    foreach ($articulos as $art)
-    {
-        echo "<a href='index.php?r=articulos%2Fview&id=".$art['id']."'>".$art['nombre']."</a>, ";
+    if(!empty($articulos)){
+        echo '<h2>Productos</h2>';
+        foreach ($articulos as $art)
+        {
+            echo "<a href='index.php?r=articulos%2Fview&id=".$art['id']."'>".$art['nombre']."</a>, ";
+        }
     }
 
     ?>
