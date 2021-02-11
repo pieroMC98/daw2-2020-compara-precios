@@ -197,14 +197,13 @@ class TiendasController extends Controller
 
     public function actionCrear_propietario()
     {
-        $model = new Tiendas();
+        $model = $this->findModel(Yii::$app->request->get('id_tienda'));
         $modelousuario = new Usuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
-        $model=Tiendas::findOne(Yii::$app->request->get('id_tienda'));
+		
         $modelousuario=Usuarios::findOne(Yii::$app->request->get('id_usuario'));
 
         if ($model === null || $modelousuario === null) {
