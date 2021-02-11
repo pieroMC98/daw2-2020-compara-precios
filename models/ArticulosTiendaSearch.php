@@ -96,7 +96,6 @@ class articulostiendaSearch extends articulostienda
             'articulos_tienda.crea_fecha' => $this->crea_fecha,
             'articulos_tienda.modi_usuario_id' => $this->modi_usuario_id,
             'articulos_tienda.modi_fecha' => $this->modi_fecha,
-            'articulos_tienda.imagen_id', $this->imagen_id,
         ]);
 
         $query->andFilterWhere(['like', 'url_articulo', $this->url_articulo])
