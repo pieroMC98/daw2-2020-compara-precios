@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Oferta;
+use app\models\OfertaSearch;
 use app\models\Articulostienda;
 use app\models\ArticulostiendaSearch;
 use yii\web\Controller;
@@ -71,6 +73,30 @@ class ArticulostiendaController extends Controller
         }
 
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Creates a new Oferta model from articulos.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateOferta($articulo_id, $tienda_id, $precio_original)
+    {
+        $model = new Oferta();
+
+        $model['articulo_id'] =$articulo_id;
+        $model['tienda_id'] =$tienda_id;
+        $model['precio_original']=$precio_original;
+        $model['crea_fecha']=date('Y-m-d');
+        $model['crea_usuario_id']=$user['id'];
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $articulo_id]);
+        }
+
+        return $this->render('createOferta', [
             'model' => $model,
         ]);
     }

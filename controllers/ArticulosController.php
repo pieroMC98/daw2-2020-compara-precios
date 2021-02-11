@@ -8,6 +8,7 @@ use app\models\ArticulosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\controllers\OfertaController;
 
 /**
  * ArticulosController implements the CRUD actions for Articulos model.
@@ -108,7 +109,7 @@ class ArticulosController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    
     /**
      * Finds the Articulos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
