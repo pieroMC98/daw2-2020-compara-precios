@@ -10,9 +10,13 @@ use yii\widgets\ActiveForm;
 
 <div class="articulostienda-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?> 
+	
+	<?= $form->field($model, 'nomArticulo')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'articulo_id')->textInput(['readonly'=> true]) ?>
+	
+	<?= $form->field($model, 'nomTienda')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'tienda_id')->textInput(['readonly'=> true]) ?>
 

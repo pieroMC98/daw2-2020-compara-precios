@@ -7,6 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Create Tiendas';
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Popietarios', 'url' => ['propietarios']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tiendas-create">

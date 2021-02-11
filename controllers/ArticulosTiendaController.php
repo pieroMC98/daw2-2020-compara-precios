@@ -8,10 +8,10 @@ use app\models\ArticulostiendaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-/*use app\models\Tiendas;
+use app\models\Tiendas;
 use app\models\TiendasSearch;
 use app\models\Articulos;
-use app\models\ArticulosSearch;*/
+use app\models\ArticulosSearch;
 
 /**
  * ArticulostiendaController implements the CRUD actions for Articulostienda model.

@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nombre_tienda')->textInput(['readonly'=> true])?>
 
     <?= $form->field($model, 'usuario_id')->textInput(['readonly'=> true])?>
+	
+	<?= $form->field($model, 'nickPropietario')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'nif_cif')->textInput(['maxlength' => true]) ?>
 
@@ -26,6 +28,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'razon_social')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'direccion')->textInput(['readonly'=> true])?>
+	
+	<?= $form->field($model, 'region_id')->textInput(['readonly'=> true])?>
+
+    <?= $form->field($model, 'telefono_contacto')->textInput(['readonly'=> true])?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

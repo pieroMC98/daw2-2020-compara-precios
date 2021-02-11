@@ -201,7 +201,7 @@ class TiendasController extends Controller
         $modelousuario = new Usuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['propietarios_view', 'id' => $model->id]);
         }
 		
         $modelousuario=Usuarios::findOne(Yii::$app->request->get('id_usuario'));
