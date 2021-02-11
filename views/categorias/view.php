@@ -38,14 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ],        
     ])   
     ?>
-    <h2>Subcategorias</h2>
+    
     <?php
-
-    foreach ($subcategorias as $sub)
-    {
-        echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
+    if(!empty($subcategorias)){
+        echo '<h2>Subcategorias</h2>';
+        foreach ($subcategorias as $sub)
+        {
+            echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
+        }
     }
-
     ?>
     <h2>Productos</h2>
     <?php
