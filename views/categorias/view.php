@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     foreach ($articulos as $art)
     {
-        echo "<a href='index.php?r=categorias%2Fview&id=".$art['id']."'>".$art['nombre']."</a>, ";
+        echo "<a href='index.php?r=articulos%2Fview&id=".$art['id']."'>".$art['nombre']."</a>, ";
     }
 
     ?>
