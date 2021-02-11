@@ -144,37 +144,46 @@ class CategoriasController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    //Devuelve las subcategorías de una categoría
+    //Devuelve las subcategorï¿½as de una categorï¿½a
     public function getSubcategorias($id)
     {
         $query = new Query;
         $rows=array();
         $i = 1;
-        $paro = false;
+        $j =0;
         // compose the query
         $query->select('id, nombre')
             ->from('categorias')
             ->where(['=', 'categoria_id', $id]);
+
+        $hijoSiguiente = sprintf("hijo-%d-%d",$j,$i);
         // build and execute the query
-        $rows['padre'] = $query->all();
+        $rows['hijos'.$j][$hijoSiguiente] = $query->all();
+        $rows['numeroHijos'.$j] = $i;
+        $j++;
        
         do{
-            foreach ($rows['padre'] as $row)
+            $i=1;
+            foreach ($rows['hijos'.$j-1]['hijo-'.($j-1).'-'.$i] as $row)
             {
-                 $query->select('id, nombre')
-                    ->from('categorias')
-                    ->where(['=', 'categoria_id', $row['id']]);
-                 $hijoSiguiente = sprintf("hijo%d",$i);
-                 $rows[$hijoSiguiente] = $query->all();
-                 $i++;
+                //var_dump($row);
+                $query->select('id, nombre')
+                ->from('categorias')
+                ->where(['=', 'categoria_id', $row['id']]);
+
+                $hijoSiguiente = sprintf("hijo-%d-%d",$j,$i);
+                $rows['hijos'.$j][$hijoSiguiente] = $query->all();
+                $i++;
             }
-            $rows['numeroHijos'] = $i;
-        }while($paro==false);
-            
+            $rows['numeroHijos'.$j] = $i-1;
+            $j++;
+        }while(!empty($rows['hijos'.$j-1]) );
+        $rows['numeroNiveles']=$j;
+
         return $rows;
     }
 
-    //Devuelve los articulos de una categoría
+    //Devuelve los articulos de una categorï¿½a
     public function getArticulos($id)
     {
         $query = new Query;
