@@ -32,7 +32,9 @@ class TiendasSearch extends Tiendas
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        $scenarios=Model::scenarios();
+        $scenarios['elegir_tienda']=['usuario_id','nombre_tienda', 'descripcion_tienda', 'lugar_tienda', 'url_tienda'];
+        return $scenarios;
 
     }
 
@@ -123,6 +125,11 @@ class TiendasSearch extends Tiendas
             , 'CONCAT(tiendas.nombre," ",tiendas.apellidos)'
             , $this->nombreCompleto]);
 
+        if($this->scenario=='elegir_tienda'){
+
+            $query->andFilterWhere(['tiendas.usuario_id' => 0]);
+
+        }
         return $dataProvider;
     }
 }

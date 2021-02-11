@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Tiendas;
 use app\models\TiendasSearch;
+use app\models\Usuarios;
+use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -162,5 +164,64 @@ class TiendasController extends Controller
 
         $var_delete->deletePropietario();
         return $this->redirect(['propietarios']);
+    }
+
+    public function actionElegir_tienda()
+    {
+        $searchModel = new TiendasSearch();
+        $searchModel->scenario='elegir_tienda';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('elegir_tienda', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionElegir_usuario()
+    {
+        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
+            
+            return $this->redirect(['elegir_tienda']);
+
+        }
+
+        $searchModel = new UsuariosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('elegir_usuario', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'id_tienda' => $id_tienda,
+        ]);
+    }
+
+    public function actionCrear_propietario()
+    {
+        $model = new Tiendas();
+        $modelousuario = new Usuarios();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        $model=Tiendas::findOne(Yii::$app->request->get('id_tienda'));
+        $modelousuario=Usuarios::findOne(Yii::$app->request->get('id_usuario'));
+
+        if ($model === null || $modelousuario === null) {
+            
+            return $this->redirect(['elegir_tienda']);
+
+        }
+
+        $model->usuario_id= $modelousuario->id;
+        $model->nombre = $modelousuario->nombre;
+        $model->apellidos = $modelousuario->apellidos;
+        $model->direccion = $modelousuario->direccion;
+        $model->region_id = $modelousuario->region_id;
+        $model->telefono_contacto = $modelousuario->telefono_contacto;
+        
+        return $this->render('crear_propietario', [
+            'model' => $model,
+        ]);
     }
 }
