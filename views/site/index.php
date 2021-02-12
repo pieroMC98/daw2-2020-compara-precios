@@ -16,6 +16,17 @@ $this->title = 'My Yii Application';
 
     <div class="body-content">
 
+        <div>
+            <h2>Partes</h2>
+            <a class="btn btn-default" href='index.php?r=copias-seg'>Copias de seguridad &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=categorias'>Categorias &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=oferta'>Ofertas &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=articulos'>Articulos &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=articulostienda'>articulosTienda &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=tiendas'>Tiendas &raquo;</a>
+            <a class="btn btn-default" href='index.php?r=seguimientos-usuario'>Seguimientos &raquo;</a>
+        </div>
+
         <div class="row">
             <div class="col-lg-4">
                 <h2>Heading</h2>
@@ -49,6 +60,9 @@ $this->title = 'My Yii Application';
             </div>
         </div>
 
-        <a class="btn btn-default" href="../config/backup.php">Copia &raquo;</a>
+        
+
+
+
     </div>
 </div>

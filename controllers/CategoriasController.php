@@ -70,10 +70,12 @@ class CategoriasController extends Controller
      */
     public function actionView($id)
     {
+        $subcategorias = $this->getSubcategorias($id);
+        $articulos = $this->getArticulos($subcategorias, $id);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'subcategorias' => $this->getSubcategorias($id),
-            'articulos' => $this->getArticulos($id)
+            'subcategorias' => $subcategorias,
+            'articulos' => $articulos
         ]);
     }
 
@@ -164,22 +166,29 @@ class CategoriasController extends Controller
             {
                 $rows[$i]['hijos'] = $this->getSubcategorias($rows[$i]['id']);
             }
-        }
-       
+        }       
         return $rows;
     }
 
-    //Devuelve los articulos de una categor�a
-    public function getArticulos($id)
+    //Devuelve los articulos de una categor�a y sus subcategorias
+    public function getArticulos($categorias, $id)
     {
         $query = new Query;
-        // compose the query
+        $rows = array(); //array para ir guardando id
+        $n_hijos=count($categorias);
         $query->select('id, nombre')
             ->from('articulos')
             ->where(['=', 'categoria_id', $id]);
         // build and execute the query
         $rows = $query->all();
-
+        if(!empty($categorias))
+        {               
+            for( $i=0; $i<$n_hijos; $i++)
+            {
+                $rows = array_merge($this->getArticulos($categorias[$i]['hijos'],$categorias[$i]['id']),$rows);
+            }
+        }   
         return $rows;
     }
+
 }

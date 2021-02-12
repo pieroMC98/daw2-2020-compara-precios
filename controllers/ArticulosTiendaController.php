@@ -85,12 +85,12 @@ class ArticulostiendaController extends Controller
     public function actionCreateOferta($articulo_id, $tienda_id, $precio_original)
     {
         $model = new Oferta();
-        /*
+        
         $model['articulo_id'] =$articulo_id;
         $model['tienda_id'] =$tienda_id;
         $model['precio_original']=$precio_original;
         $model['crea_fecha']=date('Y-m-d');
-        $model['crea_usuario_id']=$user['id'];*/
+        $model['crea_usuario_id']=$user['id'];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'articulo_id' => $model->articulo_id]);
