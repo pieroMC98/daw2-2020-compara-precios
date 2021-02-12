@@ -5,11 +5,11 @@ use yii\web\Controller;
 use app\models\User;
 use app\models\LoginForm;
 use yii\web\Request;
-
+use app\Traits\ApiResponse;
 
 class UserController extends Controller
 {
-
+	use ApiResponse;
 	function logout()
 	{
 	}
@@ -21,12 +21,20 @@ class UserController extends Controller
 
 	function actionCreate()
 	{
-		return $this->render('create');
+		return $this->render("create");
 	}
 
-	function actionCargar(){
+	function actionStorage()
+	{
 		$request = Yii::$app->request;
+		if( !$request->isPut )
+			return $this->render('error');
 		$new_user = new User();
-		$request->get("name");
+		$new_user->username = $request->post('name');
+		$new_user->password = $request->post('pass');
+		if( $new_user->validate() )
+			return $this->responseJson($new_user);
+		else
+			return null;
 	}
 }
