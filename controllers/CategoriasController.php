@@ -157,11 +157,12 @@ class CategoriasController extends Controller
             ->where(['=', 'categoria_id', $id]);
         // build and execute the query
         $rows = $query->all();
+        $n_hijos=count($rows);
         if(!empty($rows))
         {
-            foreach($rows as $row)
+            for( $i=0; $i<$n_hijos; $i++)
             {
-                $rows['hijos'] = $this->getSubcategorias($row['id']);
+                $rows[$i]['hijos'] = $this->getSubcategorias($rows[$i]['id']);
             }
         }
        
