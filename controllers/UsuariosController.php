@@ -8,6 +8,8 @@ use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Tiendas;
+use app\models\TiendasSearch;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -123,5 +125,23 @@ class UsuariosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+	
+	public function actionElegir_usuario()
+    {
+        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
+            
+            return $this->redirect(['tiendas/elegir_tienda']);
+
+        }
+
+        $searchModel = new UsuariosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('elegir_usuario', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'id_tienda' => $id_tienda,
+        ]);
     }
 }

@@ -166,32 +166,25 @@ class TiendasController extends Controller
         return $this->redirect(['propietarios']);
     }
 
-    public function actionElegir_tienda()
-    {
+    public function actionElegir_tienda($modo=0)
+    {	$modo=(int)$modo;
         $searchModel = new TiendasSearch();
-        $searchModel->scenario='elegir_tienda';
+		
+		//viene desde articulos-tienda y va a usuarios 
+		if($modo===2)
+		{
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			return $this->render('elegir_tienda_articulo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+		}
+		
+        if($modo===0) $searchModel->scenario='elegir_tienda';
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('elegir_tienda', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionElegir_usuario()
-    {
-        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
-            
-            return $this->redirect(['elegir_tienda']);
-
-        }
-
-        $searchModel = new UsuariosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('elegir_usuario', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'id_tienda' => $id_tienda,
         ]);
     }
 

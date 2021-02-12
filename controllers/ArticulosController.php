@@ -8,6 +8,8 @@ use app\models\ArticulosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Tiendas;
+use app\models\TiendasSearch;
 
 /**
  * ArticulosController implements the CRUD actions for Articulos model.
@@ -123,5 +125,23 @@ class ArticulosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+	
+	public function actionElegir_articulo()
+    {
+        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
+            
+            return $this->redirect(['tiendas/elegir_tienda','modo'=>2]);
+
+        }
+
+        $searchModel = new ArticulosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('elegir_articulo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'id_tienda' => $id_tienda,
+        ]);
     }
 }

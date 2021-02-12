@@ -71,7 +71,7 @@ $this->title = 'Elige una tienda a la que añadir un articulo';
 
                 if ($action === 'elegir_articulo') {
 
-                    $url = 'index.php?r=articulostienda/elegir_articulo&id_tienda='.$model['id'];
+                    $url = 'index.php?r=articulos/elegir_articulo&id_tienda='.$model['id'];
 
                     return $url;
 

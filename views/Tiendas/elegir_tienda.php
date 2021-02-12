@@ -71,7 +71,7 @@ $this->title = 'Elige una tienda sin propietario';
 
                 if ($action === 'elegir_usuario') {
 
-                    $url = 'index.php?r=tiendas/elegir_usuario&id_tienda='.$model['id'];
+                    $url = 'index.php?r=usuarios/elegir_usuario&id_tienda='.$model['id'];
 
                     return $url;
 
