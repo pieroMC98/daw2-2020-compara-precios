@@ -109,7 +109,12 @@ class ArticulosTienda extends \yii\db\ActiveRecord
 
     public function getNomArticulo(){
 
-		return $this->articulos->nombre;
+        if($this->articulos!==null){
+
+            return $this->articulos->nombre;
+        }
+
+        return null;		
 
     }
 
