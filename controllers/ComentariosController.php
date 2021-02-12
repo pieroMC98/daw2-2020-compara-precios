@@ -104,8 +104,9 @@ class ComentariosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $var_delete=$this->findModel($id);
 
+        $var_delete->deleteComentario();
         return $this->redirect(['index']);
     }
 
