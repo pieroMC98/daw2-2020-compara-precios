@@ -96,8 +96,13 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     }
 
     public function getNomTienda(){
+		
+		if($this->tiendas!==null){
 
-    	return $this->tiendas->nombre_tienda;
+            return $this->tiendas->nombre_tienda;
+        }
+
+        return null;	
 
     }
 

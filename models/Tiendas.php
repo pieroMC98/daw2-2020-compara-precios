@@ -128,7 +128,12 @@ class Tiendas extends \yii\db\ActiveRecord
 
     public function getNickPropietario(){
 
-        return $this->usuarios->nick;
+        if($this->usuarios!==null){
+
+            return $this->usuarios->nick;
+        }
+
+        return null;
 
     }
 

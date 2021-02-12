@@ -1,8 +1,9 @@
 <?php
 
 namespace app\models;
-
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "comentarios".
@@ -51,6 +52,19 @@ class Comentarios extends \yii\db\ActiveRecord
             //[['crea_fecha'],'default', 'value'=>new CDbExpression('NOW()'), 'setOnEmpty'=>false],
         ];
     }
+	
+	public function behaviors()
+	{
+		return [
+					[
+						'class' => TimestampBehavior::className(),
+						'createdAtAttribute' => 'crea_fecha',
+						'updatedAtAttribute' => 'modi_fecha',
+						'value' => new Expression('NOW()'),
+					],
+				];
+	}
+	
 
     /**
      * {@inheritdoc}
@@ -93,7 +107,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNomTienda(){
 
-    	return $this->tiendas->nombre_tienda;
+		if($this->tiendas!==null){
+
+            return $this->tiendas->nombre_tienda;
+        }
+
+        return null;	
 
     }
 
@@ -105,7 +124,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNomArticulo(){
 
-		return $this->articulos->nombre;
+		if($this->articulos!==null){
+
+            return $this->articulos->nombre;
+        }
+
+        return null;	
 
     }
 
@@ -117,7 +141,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNickCreador(){
 
-		return $this->usuarios->nick;
+		if($this->usuarios!==null){
+
+            return $this->usuarios->nick;
+        }
+
+        return null;	
 
     }
 
@@ -129,7 +158,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNickModif(){
 
-		return $this->usuariosModif->nick;
+		if($this->usuariosModif!==null){
+
+            return $this->usuariosModif->nick;
+        }
+
+        return null;	
 
     }
 
