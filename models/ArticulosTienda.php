@@ -51,6 +51,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['precio'], 'number'],
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['imagen_id'], 'string', 'max' => 25],
+			[['articulo_id', 'tienda_id','precio','sumaValores', 'totalVotos','visible', 'cerrado','num_denuncias','bloqueado','cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'default', 'value' => 0],
         ];
     }
 

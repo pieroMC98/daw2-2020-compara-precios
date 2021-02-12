@@ -33,7 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'nomTienda',
             //'imagen_id',
             'url_articulo:ntext',
-            'precio',
+            //'precio',
+			[
+				'attribute' => 'precio',
+				//'format' => 'Currency',
+				'value' => function ($model) {
+					return Yii::$app->formatter->asCurrency($model->precio);
+				},
+			],
             //'sumaValores',
             //'totalVotos',
             //'visible',

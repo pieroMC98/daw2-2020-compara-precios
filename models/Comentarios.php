@@ -49,7 +49,6 @@ class Comentarios extends \yii\db\ActiveRecord
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['fecha_denuncia1','notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'modi_usuario_id', 'modi_fecha','notas_admin'], 'default', 'value' => NULL],
             [['articulo_id','comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id'], 'default', 'value' => 0],
-            //[['crea_fecha'],'default', 'value'=>new CDbExpression('NOW()'), 'setOnEmpty'=>false],
         ];
     }
 	
