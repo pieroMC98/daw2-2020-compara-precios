@@ -15,6 +15,7 @@ use yii\db\Query;
  */
 class CategoriasController extends Controller
 {
+    
     /**
      * {@inheritdoc}
      */
@@ -144,42 +145,26 @@ class CategoriasController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    //Devuelve las subcategor�as de una categor�a
+    //Devuelve los articulos de una categor�a
     public function getSubcategorias($id)
     {
         $query = new Query;
-        $rows=array();
-        $i = 1;
-        $j =0;
+        $rows = array(); //array para ir guardando id
+
         // compose the query
         $query->select('id, nombre')
             ->from('categorias')
             ->where(['=', 'categoria_id', $id]);
-
-        $hijoSiguiente = sprintf("hijo-%d-%d",$j,$i);
         // build and execute the query
-        $rows['hijos'.$j][$hijoSiguiente] = $query->all();
-        $rows['numeroHijos'.$j] = $i;
-        $j++;
-       
-        do{
-            $i=1;
-            foreach ($rows['hijos'.$j-1]['hijo-'.($j-1).'-'.$i] as $row)
+        $rows = $query->all();
+        if(!empty($rows))
+        {
+            foreach($rows as $row)
             {
-                //var_dump($row);
-                $query->select('id, nombre')
-                ->from('categorias')
-                ->where(['=', 'categoria_id', $row['id']]);
-
-                $hijoSiguiente = sprintf("hijo-%d-%d",$j,$i);
-                $rows['hijos'.$j][$hijoSiguiente] = $query->all();
-                $i++;
+                $rows['hijos'] = $this->getSubcategorias($row['id']);
             }
-            $rows['numeroHijos'.$j] = $i-1;
-            $j++;
-        }while(!empty($rows['hijos'.$j-1]) );
-        $rows['numeroNiveles']=$j;
-
+        }
+       
         return $rows;
     }
 

@@ -42,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     if(!empty($subcategorias)){
         echo '<h2>Subcategorias</h2>';
-        /*foreach ($subcategorias['hijos0'] as $sub)
+        foreach ($subcategorias['hijos0'] as $sub)
         {
             echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'><strong>".$sub['nombre']."</strong></a>, ";
-        }*/
+        }
         for($j=0;$j<$subcategorias['numeroNiveles'];$j++){
             for($i=1;$i<=$subcategorias['numeroHijos'.$j];$i++)
             {   
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
                 }
             }  
-        }             
+        }     
     }
     var_dump($subcategorias);
     ?>
