@@ -8,6 +8,10 @@ use app\models\ComentariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Tiendas;
+use app\models\TiendasSearch;
+use app\models\Articulos;
+use app\models\ArticulosSearch;
 
 /**
  * ComentariosController implements the CRUD actions for Comentarios model.
@@ -127,5 +131,33 @@ class ComentariosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+	
+	public function actionElegir_comentario($modo=0,$tienda_id=null,$articulo_id=null)
+    {
+		
+        if (Tiendas::findOne($tienda_id) === null) {
+            
+            return $this->redirect(['tiendas/elegir_tienda','modo'=>1]);
+        }
+		
+		if (Articulos::findOne($articulo_id) === null) {
+            $articulo_id=null;
+        }
+		
+
+		$searchModel = new ComentariosSearch();
+		$searchModel->tienda_id=$tienda_id;
+		$searchModel->articulo_id=$articulo_id;
+		$searchModel->cerrado=0;
+		$searchModel->bloqueado=0;
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+		return $this->render('elegir_comentario', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+			'tienda_id' => $tienda_id,
+			'articulo_id' => $articulo_id,
+		]);
     }
 }

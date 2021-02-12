@@ -175,17 +175,35 @@ class TiendasController extends Controller
 		{
 			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 			return $this->render('elegir_tienda_articulo', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+			]);
 		}
 		
-        if($modo===0) $searchModel->scenario='elegir_tienda';
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('elegir_tienda', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+       
+		if($modo===1)
+		{
+			$searchModel->cerrada = 0;
+			$searchModel->bloqueada = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			return $this->render('elegir_tienda_com', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+			]);
+		}
+		
+		if($modo===0)
+		{
+			$searchModel->usuario_id = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			return $this->render('elegir_tienda', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+			]);
+		}
+		
+		return $this->goHome();
+        
     }
 
     public function actionCrear_propietario()

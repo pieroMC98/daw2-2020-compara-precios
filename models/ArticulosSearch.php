@@ -73,7 +73,7 @@ class ArticulosSearch extends Articulos
             ->andFilterWhere(['like', 'descripcion', $this->descripcion])
             ->andFilterWhere(['like', 'imagen_id', $this->imagen_id])
             ->andFilterWhere(['like', 'notas_admin', $this->notas_admin]);
-
+			
         return $dataProvider;
     }
 }

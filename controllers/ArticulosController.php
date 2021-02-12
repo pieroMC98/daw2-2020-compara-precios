@@ -127,21 +127,43 @@ class ArticulosController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 	
-	public function actionElegir_articulo()
+	public function actionElegir_articulo($modo=0,$id_tienda=null)
     {
-        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
-            
-            return $this->redirect(['tiendas/elegir_tienda','modo'=>2]);
+		$modo=(int)$modo;
+		
+        if (Tiendas::findOne($id_tienda) === null) {
+            $dev=null;
+			($modo===0) ? $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>2]) : $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>1]);
+            return $dev;
 
         }
+		
+		if($modo===1)
+        {
+			$searchModel = new ArticulosSearch();
+			$searchModel->visible = 1;
+			$searchModel->cerrado = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $searchModel = new ArticulosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			return $this->render('elegir_articulo_com', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
 
-        return $this->render('elegir_articulo', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'id_tienda' => $id_tienda,
-        ]);
+		if($modo===0)
+        {
+			$searchModel = new ArticulosSearch();
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			return $this->render('elegir_articulo', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
+		
+		return $this->goHome();
     }
 }
