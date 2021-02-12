@@ -1,5 +1,15 @@
 <?php
 
+function recorrerCategorias($array){
+    $n_hijos=count($array);
+    for( $i=0; $i<$n_hijos; $i++){
+        echo "<a href='index.php?r=categorias%2Fview&id=".$array[$i]['id']."'>".$array[$i]['nombre']."</a>, ";
+        if(!empty($array[$i]['hijos'])){
+            recorrerCategorias( $array[$i]['hijos']);
+        }
+    }
+}
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\ListView;
@@ -42,21 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     if(!empty($subcategorias)){
         echo '<h2>Subcategorias</h2>';
-        /*foreach ($subcategorias['hijos0'] as $sub)
-        {
-            echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'><strong>".$sub['nombre']."</strong></a>, ";
-        }
-        for($j=0;$j<$subcategorias['numeroNiveles'];$j++){
-            for($i=1;$i<=$subcategorias['numeroHijos'.$j];$i++)
-            {   
-                foreach ( $subcategorias['hijos'.$j]['hijo-'.$j.'-'.$i] as $sub)
-                {
-                    echo "<a href='index.php?r=categorias%2Fview&id=".$sub['id']."'>".$sub['nombre']."</a>, ";
-                }
-            }  
-        } */    
+        recorrerCategorias($subcategorias);  
     }
-    var_dump($subcategorias);
     ?>
     <h2>Productos</h2>
     <?php
