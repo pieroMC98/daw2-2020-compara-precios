@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="comentarios-form">
 
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'tienda_id')->textInput(['readonly'=> true]) ?>
