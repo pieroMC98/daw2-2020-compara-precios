@@ -12,37 +12,24 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tienda_id')->textInput() ?>
+    <?= $form->field($model, 'tienda_id')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'articulo_id')->textInput() ?>
+    <?= $form->field($model, 'articulo_id')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'valoracion')->textInput() ?>
+    <?= $form->field($model, 'valoracion')->textInput()->dropdownList([
+
+        1=>"1",2=>"2",3=>"3",4=>"4",5=>"5",6=>"6",7=>"7",8=>"8",9=>"9",10=>"10",
+    ],
+    ['prompt'=>'Elige la valoración']) ?>
+
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'comentario_id')->textInput() ?>
-
-    <?= $form->field($model, 'cerrado')->textInput() ?>
-
-    <?= $form->field($model, 'num_denuncias')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_denuncia1')->textInput() ?>
-
-    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'bloqueado')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_bloqueo')->textInput() ?>
-
-    <?= $form->field($model, 'notas_bloqueo')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'crea_usuario_id')->textInput() ?>
-
-    <?= $form->field($model, 'crea_fecha')->textInput() ?>
-
-    <?= $form->field($model, 'modi_usuario_id')->textInput() ?>
-
-    <?= $form->field($model, 'modi_fecha')->textInput() ?>
+    <?= $form->field($model, 'cerrado')->textInput()->dropdownList([
+        0 => 'No', 
+        1 => 'Si',
+    ],
+    ['prompt'=>'Selecciona si es posible responder a este mensaje']) ?>
 
     <?= $form->field($model, 'notas_admin')->textarea(['rows' => 6]) ?>
 

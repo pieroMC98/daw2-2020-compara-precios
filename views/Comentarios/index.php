@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Comentarios', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear un comentario', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -38,11 +38,19 @@ $this->params['breadcrumbs'][] = $this->title;
 				'filter'=>array("1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5","6"=>"6","7"=>"7","8"=>"8","9"=>"9","10"=>"10"),
 			],
             //'comentario_id',
-            //'cerrado',
-            //'num_denuncias',
+            [
+                'attribute'=>'cerrado',
+                'value'=>'comentariosCerrado',
+                'filter'=>array("0"=>"No","1"=>"Si"),
+            ],
+            'num_denuncias',
             //'fecha_denuncia1',
             //'notas_denuncia:ntext',
-            //'bloqueado',
+            [
+                'attribute'=>'bloqueado',
+                'value'=>'comBloqueado',
+                'filter'=>array("0"=>"No","1"=>"Bloqueado por denuncias","2"=>"Bloqueado por administrador"),
+            ],
             //'fecha_bloqueo',
             //'notas_bloqueo:ntext',
             //'crea_usuario_id',
