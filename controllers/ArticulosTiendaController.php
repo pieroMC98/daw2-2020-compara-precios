@@ -90,10 +90,10 @@ class ArticulostiendaController extends Controller
         $model['tienda_id'] =$tienda_id;
         $model['precio_original']=$precio_original;
         $model['crea_fecha']=date('Y-m-d');
-        $model['crea_usuario_id']=$crea_usuario_id;
+        $model['crea_usuario_id']=Yii::$app->user->getId();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'articulo_id' => $model->articulo_id,'tienda_id'=>$model->tienda_id,'precio_original'=>$model->precio_original]);
+            return $this->redirect(['oferta/view', 'id' => $model->id]);
         }
         return $this->render('../oferta/create', [
             'model' => $model,
