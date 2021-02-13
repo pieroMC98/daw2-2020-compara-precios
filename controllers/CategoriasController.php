@@ -80,6 +80,23 @@ class CategoriasController extends Controller
     }
 
     /**
+     * Displays a single Categorias model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionVistaCategorias($id)
+    {
+        $subcategorias = $this->getSubcategorias($id);
+        $articulos = $this->getArticulos($subcategorias, $id);
+        return $this->render('vistaCategorias', [
+            'model' => $this->findModel($id),
+            'subcategorias' => $subcategorias,
+            'articulos' => $articulos
+        ]);
+    }
+
+    /**
      * Creates a new Categorias model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed

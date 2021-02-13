@@ -82,7 +82,7 @@ class ArticulostiendaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreateOferta($articulo_id, $tienda_id, $precio_original)
+    public function actionOferta($articulo_id,$tienda_id,$precio_original,$crea_usuario_id)
     {
         $model = new Oferta();
         
@@ -90,13 +90,12 @@ class ArticulostiendaController extends Controller
         $model['tienda_id'] =$tienda_id;
         $model['precio_original']=$precio_original;
         $model['crea_fecha']=date('Y-m-d');
-        $model['crea_usuario_id']=$user['id'];
+        $model['crea_usuario_id']=$crea_usuario_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'articulo_id' => $model->articulo_id]);
+            return $this->redirect(['view', 'articulo_id' => $model->articulo_id,'tienda_id'=>$model->tienda_id,'precio_original'=>$model->precio_original]);
         }
-
-        return $this->render('createOferta', [
+        return $this->render('../oferta/create', [
             'model' => $model,
         ]);
     }
