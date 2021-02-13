@@ -35,6 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'tienda_id',
             'nomTienda',
             'imagen_id',
+			[
+				'attribute' => 'imagen_id',
+				'format' => 'html',
+				'label' => 'Imagen',
+				'value' => function ($model) {
+					return Html::img('@web/uploads/'.$model->imagen_id,['width' => '300px']);
+				},
+			],
             'url_articulo:ntext',
             //'precio',
 			[

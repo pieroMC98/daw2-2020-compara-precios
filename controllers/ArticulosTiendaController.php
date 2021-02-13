@@ -12,6 +12,7 @@ use app\models\Tiendas;
 use app\models\TiendasSearch;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+use yii\web\UploadedFile;
 
 /**
  * ArticulostiendaController implements the CRUD actions for Articulostienda model.
@@ -72,7 +73,16 @@ class ArticulostiendaController extends Controller
         $modelousuario = new Articulos();
 		$modelotienda= new Tiendas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+			
+			$model->imagen = UploadedFile::getInstance($model, 'imagen');
+			
+			$nombre=$model->tienda_id.'_'.$model->articulo_id;
+			$model->imagen_id=$nombre.'.'.$model->imagen->extension;
+			
+			$model->save();
+			$model->imagen->saveAs('uploads/'.$model->imagen_id);
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 		
@@ -104,7 +114,16 @@ class ArticulostiendaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+			
+			$model->imagen = UploadedFile::getInstance($model, 'imagen');
+			
+			$nombre=$model->tienda_id.'_'.$model->articulo_id;
+			$model->imagen_id=$nombre.'.'.$model->imagen->extension;
+			
+			$model->save();
+			$model->imagen->saveAs('uploads/'.$model->imagen_id);
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

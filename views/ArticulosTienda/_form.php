@@ -10,7 +10,13 @@ use yii\widgets\ActiveForm;
 
 <div class="articulostienda-form">
 
-    <?php $form = ActiveForm::begin(); ?> 
+    <?php $form = ActiveForm::begin([
+		'options' => [
+			'enctype' => 'multipart/form-data'
+		
+		]
+	
+	]); ?> 
 	
 	<?= $form->field($model, 'nomArticulo')->textInput(['disabled' => true]) ?>
 
@@ -20,7 +26,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tienda_id')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true,'disabled' => true]) ?>
+	
+	<?= $form->field($model, 'imagen')->fileInput() ?>
 
     <?= $form->field($model, 'url_articulo')->textarea(['rows' => 6]) ?>
 

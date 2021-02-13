@@ -34,6 +34,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class ArticulosTienda extends \yii\db\ActiveRecord
 {
+	public $imagen;
+	
     /**
      * {@inheritdoc}
      */
@@ -51,6 +53,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['articulo_id', 'tienda_id', 'sumaValores', 'totalVotos', 'visible', 'cerrado', 'num_denuncias', 'bloqueado', 'cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
             [['url_articulo', 'notas_denuncia', 'notas_bloqueo', 'notas_admin'], 'string'],
             [['precio'], 'number'],
+			[['imagen'], 'image', 'extensions' => 'png, jpg'],
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['imagen_id'], 'string', 'max' => 25],
 			[['articulo_id', 'tienda_id','precio','sumaValores', 'totalVotos','visible', 'cerrado','num_denuncias','bloqueado','cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'default', 'value' => 0],
@@ -104,6 +107,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             'nomArticulo' => 'Nombre Articulo',
             'artBloqueado' => 'Bloqueado',
             'artVisible' => 'Visible',
+			'imagen' => 'Imagen',
         ];
     }
 
