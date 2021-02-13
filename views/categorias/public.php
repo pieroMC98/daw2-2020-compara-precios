@@ -1,5 +1,15 @@
 <?php
 
+function recorrerCategorias($array, $display){
+    $n_hijos=count($array);
+    for( $i=0; $i<$n_hijos; $i++){
+        echo "<a href='index.php?r=categorias%2Fview&id=".$array[$i]['id']."'><span class='display- ".$display."'>".$array[$i]['nombre']."</span></a>  ";
+        if(!empty($array[$i]['hijos'])){
+            recorrerCategorias( $array[$i]['hijos'], $display-1);
+        }
+    }
+}
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -15,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php  //echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <h2>Nube de categorías</h2>
+    <?php recorrerCategorias($categorias,1)?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

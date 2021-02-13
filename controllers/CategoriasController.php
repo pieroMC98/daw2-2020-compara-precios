@@ -55,9 +55,28 @@ class CategoriasController extends Controller
         $searchModel = new CategoriasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        // obtengo la nube de categorías
+
+        $query = new Query;
+        $rows = array(); //array para ir guardando id
+
+        $query->select('id, nombre')
+        ->from('categorias')
+        ->where(['=', 'categoria_id', '0']);
+        $rows = $query->all();
+        $n_hijos=count($rows);
+        if(!empty($rows))
+        {
+            for( $i=0; $i<$n_hijos; $i++)
+            {
+                $rows[$i]['hijos'] = $this->getSubcategorias($rows[$i]['id']);
+            }
+        }       
+
         return $this->render('public', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'categorias'=> $rows,
         ]);
     }
 

@@ -1,13 +1,12 @@
 <?php
 
-function recorrerCategorias($array){
+function recorrerCategorias($array, $display){
     $n_hijos=count($array);
     for( $i=0; $i<$n_hijos; $i++){
-        echo "<a href='index.php?r=categorias%2Fview&id=".$array[$i]['id']."'>".$array[$i]['nombre']."</a>  ";
+        echo "<a href='index.php?r=categorias%2Fview&id=".$array[$i]['id']."'><span class='display- ".$display."'>".$array[$i]['nombre']."</span></a>  ";
         if(!empty($array[$i]['hijos'])){
-            recorrerCategorias( $array[$i]['hijos']);
+            recorrerCategorias( $array[$i]['hijos'], $display-1);
         }
-
     }
 }
 
@@ -60,8 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     if(!empty($subcategorias)){
         echo '<h2>Subcategorias</h2>';
-        recorrerCategorias($subcategorias);
-
+        recorrerCategorias($subcategorias, 1);
     }
     ?>
     <?php
