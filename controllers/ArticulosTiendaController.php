@@ -84,20 +84,27 @@ class ArticulostiendaController extends Controller
      */
     public function actionOferta($articulo_id,$tienda_id,$precio_original,$crea_usuario_id)
     {
-        $model = new Oferta();
+        if(Yii::$app->user->getId()!=NULL){
+            $model = new Oferta();
         
-        $model['articulo_id'] =$articulo_id;
-        $model['tienda_id'] =$tienda_id;
-        $model['precio_original']=$precio_original;
-        $model['crea_fecha']=date('Y-m-d');
-        $model['crea_usuario_id']=Yii::$app->user->getId();
+            $model['articulo_id'] =$articulo_id;
+            $model['tienda_id'] =$tienda_id;
+            $model['precio_original']=$precio_original;
+            $model['crea_fecha']=date('Y-m-d');
+            $model['crea_usuario_id']=Yii::$app->user->getId();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['oferta/view', 'id' => $model->id]);
+            
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['oferta/view', 'id' => $model->id]);
+            }
+            return $this->render('../oferta/create', [
+                'model' => $model,
+            ]);
         }
-        return $this->render('../oferta/create', [
-            'model' => $model,
-        ]);
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede crear una oferta si no has iniciado sesión']);
+        }
     }
 
     /**

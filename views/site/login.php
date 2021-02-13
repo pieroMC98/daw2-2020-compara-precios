@@ -13,6 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php
+        if(isset($_GET['error']))
+        {
+            echo '<p class="alert alert-danger">'.$_GET['error'].'</p>';
+        }
+    ?>
+
     <p>Please fill out the following fields to login:</p>
 
     <?php $form = ActiveForm::begin([
