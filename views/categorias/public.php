@@ -44,8 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php  //echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <h2>Nube de categorías</h2>
     <div class='container'>
         <?php recorrerCategorias($categorias,1)?>

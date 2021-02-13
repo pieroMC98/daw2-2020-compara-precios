@@ -1,0 +1,30 @@
+/*Clases para mostrar texto de distintos tamaños predefinidos*/
+.tam-1{
+  font-size: 4rem;
+  font-weight: bolder;
+}
+.tam-2{
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.tam-3{
+  font-size: 2rem;
+}
+
+.tam-4{
+  font-size: 1.8rem;
+  font-weight: lighter;
+}
+
+.tam-5{
+  font-size: 1.25rem;
+}
+
+.tam-6{
+  font-size: 1rem;
+}
+
+.tam-7{
+  font-size: 0.80rem;
+}
