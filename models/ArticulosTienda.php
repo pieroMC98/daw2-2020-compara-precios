@@ -56,6 +56,7 @@ class ArticulosTienda extends \yii\db\ActiveRecord
 			[['articulo_id', 'tienda_id','precio','sumaValores', 'totalVotos','visible', 'cerrado','num_denuncias','bloqueado','cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'default', 'value' => 0],
 			['tienda_id', 'exist', 'targetClass' => '\app\models\Tiendas','targetAttribute' => 'id','on'=>'crear'],
 			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
+			[['tienda_id','articulo_id'],'unique','targetAttribute' => ['tienda_id','articulo_id'],'on' => 'crear'],
         ];
     }
 	
