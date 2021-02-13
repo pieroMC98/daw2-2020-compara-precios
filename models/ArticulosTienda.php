@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "articulos_tienda".
@@ -52,8 +54,22 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['imagen_id'], 'string', 'max' => 25],
 			[['articulo_id', 'tienda_id','precio','sumaValores', 'totalVotos','visible', 'cerrado','num_denuncias','bloqueado','cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'default', 'value' => 0],
+			['tienda_id', 'exist', 'targetClass' => '\app\models\Tiendas','targetAttribute' => 'id','on'=>'crear'],
+			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
         ];
     }
+	
+	public function behaviors()
+	{
+		return [
+					[
+						'class' => TimestampBehavior::className(),
+						'createdAtAttribute' => 'crea_fecha',
+						'updatedAtAttribute' => 'modi_fecha',
+						'value' => new Expression('NOW()'),
+					],
+				];
+	}
 
     /**
      * {@inheritdoc}

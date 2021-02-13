@@ -44,36 +44,9 @@ use yii\widgets\ActiveForm;
     ],
     ['prompt'=>'Indicador de artículo cancelado']) ?>
 
-    <?= $form->field($model, 'num_denuncias')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_denuncia1')->textInput() ?>
-
-    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'bloqueado')->textInput()->dropdownList([
-        0 => 'No', 
-        1 => 'Bloqueado por denuncias',
-		2 => 'Bloqueado por moderador o administrador',
-    ],
-    ['prompt'=>'Seleccionar tipo de bloqueado']) ?>
-
-    <?= $form->field($model, 'fecha_bloqueo')->textInput() ?>
-
-    <?= $form->field($model, 'notas_bloqueo')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'cerrado_comentar')->textInput()->textInput()->dropdownList([
-        0 => 'No', 
-        1 => 'Si',
-    ],
-    ['prompt'=>'Selecciona si se pueden añadir comentarios']) ?>
-
     <?= $form->field($model, 'crea_usuario_id')->textInput() ?>
 
-    <?= $form->field($model, 'crea_fecha')->textInput() ?>
-
     <?= $form->field($model, 'modi_usuario_id')->textInput() ?>
-
-    <?= $form->field($model, 'modi_fecha')->textInput() ?>
 
     <?= $form->field($model, 'notas_admin')->textarea(['rows' => 6]) ?>
 

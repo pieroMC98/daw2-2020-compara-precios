@@ -12,8 +12,12 @@ use yii\widgets\ActiveForm;
 
 
     <?php $form = ActiveForm::begin(); ?>
+	
+	<?= $form->field($model, 'nomTienda')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'tienda_id')->textInput(['readonly'=> true]) ?>
+	
+	<?= $form->field($model, 'nomArticulo')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'articulo_id')->textInput(['readonly'=> true]) ?>
 
@@ -25,6 +29,9 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6]) ?>
+	
+	<?= $form->field($model, 'comentario_id')->hiddenInput()->label(false) ?>
+
 
     <?= $form->field($model, 'cerrado')->textInput()->dropdownList([
         0 => 'No', 

@@ -68,7 +68,7 @@ class ArticulostiendaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Articulostienda();
+        $model = new Articulostienda(['scenario'=>'crear']);
         $modelousuario = new Articulos();
 		$modelotienda= new Tiendas();
 
@@ -81,7 +81,7 @@ class ArticulostiendaController extends Controller
 
         if ($modeloart === null || $modelotienda === null) {
             
-            return $this->redirect(['elegir_tienda']);
+            return $this->redirect(['tiendas/elegir_tienda','modo'=>2]);
 
         }
 

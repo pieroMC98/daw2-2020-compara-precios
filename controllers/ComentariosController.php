@@ -66,9 +66,9 @@ class ComentariosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($tienda_id,$articulo_id=null)
+    public function actionCreate($tienda_id,$articulo_id=null,$comentario_id=null)
     {
-        $model = new Comentarios();
+        $model = new Comentarios(['scenario'=>'crear']);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,6 +76,7 @@ class ComentariosController extends Controller
 		
 		$model->tienda_id=$tienda_id;
 		$model->articulo_id=$articulo_id;
+		$model->comentario_id=$comentario_id;
 
         return $this->render('create', [
             'model' => $model,
@@ -145,10 +146,19 @@ class ComentariosController extends Controller
             $articulo_id=null;
         }
 		
+		$tiene_articulo=null;
+		if($articulo_id===null)
+		{
+			$tiene_articulo=0;
+		}
+		else
+		{
+			$tiene_articulo=$articulo_id;
+		}
 
 		$searchModel = new ComentariosSearch();
 		$searchModel->tienda_id=$tienda_id;
-		$searchModel->articulo_id=$articulo_id;
+		$searchModel->articulo_id=$tiene_articulo;
 		$searchModel->cerrado=0;
 		$searchModel->bloqueado=0;
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);

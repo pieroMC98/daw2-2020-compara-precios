@@ -48,7 +48,10 @@ class Comentarios extends \yii\db\ActiveRecord
             [['texto', 'notas_denuncia', 'notas_bloqueo', 'notas_admin'], 'string'],
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['fecha_denuncia1','notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'modi_usuario_id', 'modi_fecha','notas_admin'], 'default', 'value' => NULL],
-            [['articulo_id','comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id'], 'default', 'value' => 0],
+			['tienda_id', 'exist', 'targetClass' => '\app\models\Tiendas','targetAttribute' => 'id','on'=>'crear'],
+			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
+			['comentario_id', 'exist', 'targetClass' => '\app\models\Comentarios','targetAttribute' => 'id','on'=>'crear'],
+			[['articulo_id','comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id'], 'default', 'value' => 0],
         ];
     }
 	
