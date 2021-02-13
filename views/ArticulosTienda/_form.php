@@ -26,10 +26,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'precio')->textInput() ?>
 
-    <?= $form->field($model, 'sumaValores')->textInput() ?>
-
-    <?= $form->field($model, 'totalVotos')->textInput() ?>
-
     <?= $form->field($model, 'visible')->textInput()->dropdownList([
         0 => 'Invisible', 
         1 => 'Visible',

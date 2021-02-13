@@ -161,4 +161,16 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     	}	
 
     }
+	
+	public function actualizarVotos(){
+		
+		$query = new \yii\db\Query();
+		
+		$numVotos=$query->from('comentarios')->where(['tienda_id' => $this->tienda_id,'articulo_id'=>$this->articulo_id])->count('valoracion');
+		$sumVotos=$query->from('comentarios')->where(['tienda_id' => $this->tienda_id,'articulo_id'=>$this->articulo_id])->sum('valoracion');
+
+        $this->totalVotos=$numVotos;
+        $this->sumaValores=$sumVotos;
+        $this->save();
+    }
 }

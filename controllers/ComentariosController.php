@@ -12,6 +12,8 @@ use app\models\Tiendas;
 use app\models\TiendasSearch;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+use app\models\Articulostienda;
+use app\models\ArticulostiendaSearch;
 
 /**
  * ComentariosController implements the CRUD actions for Comentarios model.
@@ -71,6 +73,11 @@ class ComentariosController extends Controller
         $model = new Comentarios(['scenario'=>'crear']);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			
+			//actualizar votos
+			$modelAT=Articulostienda::findOne(['tienda_id' => $model->tienda_id, 'articulo_id' => $model->articulo_id]);
+			$modelAT->actualizarVotos();
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 		
@@ -95,6 +102,11 @@ class ComentariosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			
+			//actualizar votos
+			$modelAT=Articulostienda::findOne(['tienda_id' => $model->tienda_id, 'articulo_id' => $model->articulo_id]);
+			$modelAT->actualizarVotos();
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
