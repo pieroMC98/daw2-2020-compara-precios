@@ -1,7 +1,20 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\db\Query;
+
+function enSeguimiento($model_id){
+    
+    $query = new Query;
+    $query->select('id')
+        ->from('seguimientos_usuario')
+        ->where(['=', 'tienda_id', $model_id])
+        ->andWhere(['=', 'usuario_id', Yii::$app->user->getId()]);
+    $rows = $query->all();
+
+    return $rows;
+}
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tiendas */
@@ -17,6 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        
+        <?php
+        $res = enSeguimiento($model->id);
+        if(count($res)===0)
+        {?>
+            <?=Html::a('Seguir', ['seguimiento', 'id' => $model->id], ['class' => 'btn btn-primary'])?>
+        <?php }
+        else{?>
+            <?=Html::a('Dejar de seguir', ['quitarseguimiento', 'id' => $res[0]['id']],[
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Estas seguro de que quieres dejar de seguir esta tienda?',
+                'method' => 'post',
+            ],
+            ]) ?>
+        <?php } ?>
+
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

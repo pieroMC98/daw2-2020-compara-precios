@@ -125,4 +125,32 @@ class ArticulosController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * Creates a new Seguimiento usuarios model from the articulo.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionSeguimiento($id){
+        if(Yii::$app->user->getId()!=NULL){
+            return $this->redirect(['seguimientos-usuario/seguimiento', 'id_articulo' => $id, 'id_tienda'=>'', 'id_oferta'=>'']);
+        }
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
+        }
+    }
+    
+    /**
+     * Creates a new Seguimiento usuarios model from the articulo.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionQuitarseguimiento($id){
+        if(Yii::$app->user->getId()!=NULL){
+            return $this->redirect(['seguimientos-usuario/quitarseguimiento', 'id' => $id]);
+        }
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
+        }
+    }
 }
