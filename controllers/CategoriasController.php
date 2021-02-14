@@ -162,9 +162,19 @@ class CategoriasController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $subcategorias = $this->getSubcategorias($id);
+        $articulos = $this->getArticulos($subcategorias, $id);
 
-        return $this->redirect(['index']);
+        if(count($articulos)=== 0 && count($subcategorias)=== 0 ){
+            $this->findModel($id)->delete();
+            $error ='Borrado correctamente';
+        }   
+        else if(count($articulos)!= 0)
+            $error ='No se puede borrar, hay articulos en la categoria o en las subcategorias';
+        else if(count($subcategorias)!= 0)
+            $error ='No se puede borrar, contiene subcategorias';
+
+        return $this->redirect(['index', 'error' => $error]);
     }
 
     /**
