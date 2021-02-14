@@ -15,6 +15,8 @@ class articulostiendaSearch extends articulostienda
     public $nomTienda;
     public $artVisible;
     public $artBloqueado;
+    public $precioDesde;
+    public $precioHasta;
     /**
      * {@inheritdoc}
      */
@@ -22,7 +24,7 @@ class articulostiendaSearch extends articulostienda
     {
         return [
             [['id', 'articulo_id', 'tienda_id', 'sumaValores', 'totalVotos', 'visible', 'cerrado', 'num_denuncias', 'bloqueado', 'cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['imagen_id', 'url_articulo', 'fecha_denuncia1', 'notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'crea_fecha', 'modi_fecha', 'notas_admin','nomTienda','nomArticulo','artVisible','artBloqueado'], 'safe'],
+            [['imagen_id', 'url_articulo', 'fecha_denuncia1', 'notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'crea_fecha', 'modi_fecha', 'notas_admin','nomTienda','nomArticulo','artVisible','artBloqueado','precioDesde', 'precioHasta'], 'safe'],
             [['precio'], 'number'],
         ];
     }
@@ -104,6 +106,17 @@ class articulostiendaSearch extends articulostienda
             ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
             ->andFilterWhere(['like', 'tiendas.nombre_tienda', $this->nomTienda])
             ->andFilterWhere(['like', 'articulos.nombre', $this->nomArticulo]);
+
+        if (empty($this->precioHasta)) {
+            $query->andFilterWhere( ['>=', 'precio'
+                , $this->precioDesde]);
+        } else if (empty($this->precioDesde)) {
+            $query->andFilterWhere( ['<=', 'precio'
+                , $this->precioHasta]);
+        } else {
+            $query->andFilterWhere( ['between', 'precio'
+                , $this->precioDesde, $this->precioHasta ]);
+        }
         return $dataProvider;
     }
 }

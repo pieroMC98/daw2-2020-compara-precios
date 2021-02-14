@@ -32,15 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
             //'tienda_id',
             'nomTienda',
             //'imagen_id',
-            'url_articulo:ntext',
+            'url_articulo:url',
             //'precio',
-			[
+            ['attribute'=>'precio'
+                , 'filter'=>
+                            Html::activeTextInput($searchModel, 'precioDesde', ['class'=>'form-control', 'size'=>4])
+                            .Html::activeTextInput($searchModel, 'precioHasta', ['class'=>'form-control', 'size'=>4])
+                ,'value' => function ($model) {
+                    return Yii::$app->formatter->asCurrency($model->precio);
+                },
+            ],
+			/*[
 				'attribute' => 'precio',
 				//'format' => 'Currency',
 				'value' => function ($model) {
 					return Yii::$app->formatter->asCurrency($model->precio);
 				},
-			],
+			],*/
             //'sumaValores',
             //'totalVotos',
             //'visible',

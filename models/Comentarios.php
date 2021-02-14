@@ -52,6 +52,7 @@ class Comentarios extends \yii\db\ActiveRecord
 			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
 			['comentario_id', 'exist', 'targetClass' => '\app\models\Comentarios','targetAttribute' => 'id','on'=>'crear'],
 			[['articulo_id','comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id'], 'default', 'value' => 0],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
         ];
     }
 	

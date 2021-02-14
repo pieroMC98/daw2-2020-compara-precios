@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\Expression;
 use app\models\Articulostienda;
 use app\models\ArticulostiendaSearch;
 use yii\web\Controller;
@@ -71,22 +72,26 @@ class ArticulostiendaController extends Controller
     {
         $model = new Articulostienda(['scenario'=>'crear']);
         $modelousuario = new Articulos();
-		$modelotienda= new Tiendas();
+		    $modelotienda= new Tiendas();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 			
-			$model->imagen = UploadedFile::getInstance($model, 'imagen');
-			
-			$nombre=$model->tienda_id.'_'.$model->articulo_id;
-			$model->imagen_id=$nombre.'.'.$model->imagen->extension;
-			
-			$model->save();
-			$model->imagen->saveAs('uploads/'.$model->imagen_id);
-			
+      			$model->imagen = UploadedFile::getInstance($model, 'imagen');
+      					
+      			
+      			$model->save();
+
+            if($model->imagen){
+              $nombre=$model->tienda_id.'_'.$model->articulo_id;
+              $model->imagen_id=$nombre.'.'.$model->imagen->extension;
+              $model->save();
+        			$model->imagen->saveAs('uploads/'.$model->imagen_id);
+
+      			}
             return $this->redirect(['view', 'id' => $model->id]);
         }
 		
-		$modelotienda = Tiendas::findOne($idtienda=Yii::$app->request->get('id_tienda'));
+		    $modelotienda = Tiendas::findOne($idtienda=Yii::$app->request->get('id_tienda'));
         $modeloart=Articulos::findOne($idarticulo=Yii::$app->request->get('id_articulo'));
 
         if ($modeloart === null || $modelotienda === null) {
@@ -96,7 +101,7 @@ class ArticulostiendaController extends Controller
         }
 
         $model->articulo_id= $idarticulo;
-		$model->tienda_id= $idtienda;
+		    $model->tienda_id= $idtienda;
         
         return $this->render('create', [
             'model' => $model,
@@ -118,11 +123,15 @@ class ArticulostiendaController extends Controller
 			
 			$model->imagen = UploadedFile::getInstance($model, 'imagen');
 			
-			$nombre=$model->tienda_id.'_'.$model->articulo_id;
-			$model->imagen_id=$nombre.'.'.$model->imagen->extension;
-			
 			$model->save();
-			$model->imagen->saveAs('uploads/'.$model->imagen_id);
+
+      if($model->imagen){
+        $nombre=$model->tienda_id.'_'.$model->articulo_id;
+        $model->imagen_id=$nombre.'.'.$model->imagen->extension;
+        $model->save();
+        $model->imagen->saveAs('uploads/'.$model->imagen_id);
+
+      }
 			
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -160,5 +169,94 @@ class ArticulostiendaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionBloqueo($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->scenario='bloqueo';
+
+        if($model->bloqueado!=0){
+
+              return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->bloqueado=2;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('bloqueos', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDenuncia($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model->bloqueado!=0){
+
+            /*Se aumenta el numero de denuncias aunque ya esté bloqueado para que los administradores conozcan el numero total de denuncias*/
+            $model->num_denuncias=$model->num_denuncias+1;
+            $model->save();
+            return $this->goHome();
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            $model->fecha_denuncia1=new Expression('NOW()');
+
+            $model->num_denuncias=1;
+            $model->save();
+            return $this->goHome();
+        }
+
+        if($model->num_denuncias===0){
+
+              return $this->render('denuncias', [
+                'model' => $model,
+                ]);
+
+        }
+
+        $model->num_denuncias=$model->num_denuncias+1;
+
+        /*El numero maximo de denuncias es 10 */
+        if($model->num_denuncias>=10){
+
+            //$model->num_denuncias=$model->num_denuncias+1;
+            $model->bloqueado=1;
+            $model->fecha_bloqueo=new Expression('NOW()');
+        }
+
+        $model->save();
+
+        return $this->goHome();
+    }
+
+    public function actionQuitabloqueo($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model===NULL){
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if($model->bloqueado!=0){
+
+            $model->bloqueado=0;
+            $model->notas_denuncia=NULL;
+            $model->num_denuncias=0;
+            $model->notas_denuncia=NULL;
+            $model->fecha_bloqueo=NULL;
+            $model->notas_bloqueo=NULL;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        };
     }
 }

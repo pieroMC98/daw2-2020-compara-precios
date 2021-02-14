@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Crear una tienda', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Añadir propietario', ['propietarios'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver propietarios', ['propietarios'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre_tienda:ntext',
             'descripcion_tienda:ntext',
             'lugar_tienda:ntext',
-            'url_tienda:ntext',
+            'url_tienda:url',
             //'direccion_tienda:ntext',
             //'region_id_tienda',
             //'telefono_tienda',

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\Expression;
 use app\models\Tiendas;
 use app\models\TiendasSearch;
 use app\models\Usuarios;
@@ -233,5 +234,94 @@ class TiendasController extends Controller
         return $this->render('crear_propietario', [
             'model' => $model,
         ]);
+    }
+
+        public function actionBloqueo($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->scenario='bloqueo';
+
+        if($model->bloqueada!=0){
+
+              return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->bloqueada=2;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('bloqueos', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDenuncia($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model->bloqueada!=0){
+
+            /*Se aumenta el numero de denuncias aunque ya esté bloqueada para que los administradores conozcan el numero total de denuncias*/
+            $model->num_denuncias=$model->num_denuncias+1;
+            $model->save();
+            return $this->goHome();
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            $model->fecha_denuncia1=new Expression('NOW()');
+
+            $model->num_denuncias=1;
+            $model->save();
+            return $this->goHome();
+        }
+
+        if($model->num_denuncias===0){
+
+              return $this->render('denuncias', [
+                'model' => $model,
+                ]);
+
+        }
+
+        $model->num_denuncias=$model->num_denuncias+1;
+
+        /*El numero maximo de denuncias es 10 */
+        if($model->num_denuncias>=10){
+
+            //$model->num_denuncias=$model->num_denuncias+1;
+            $model->bloqueada=1;
+            $model->fecha_bloqueo=new Expression('NOW()');
+        }
+
+        $model->save();
+
+        return $this->goHome();
+    }
+
+    public function actionQuitabloqueo($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model===NULL){
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if($model->bloqueada!=0){
+
+            $model->bloqueada=0;
+            $model->notas_denuncia=NULL;
+            $model->num_denuncias=0;
+            $model->notas_denuncia=NULL;
+            $model->fecha_bloqueo=NULL;
+            $model->notas_bloqueo=NULL;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        };
     }
 }

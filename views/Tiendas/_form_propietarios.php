@@ -14,13 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre_tienda')->textInput(['readonly'=> true])?>
 
-    <?= $form->field($model, 'usuario_id')->textInput() ?>
+    <?= $form->field($model, 'usuario_id')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'nif_cif')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nif_cif')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nombre')->textInput(['readonly'=> true]) ?>
 
-    <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'apellidos')->textInput(['readonly'=> true]) ?>
 
     <?= $form->field($model, 'razon_social')->textInput(['maxlength' => true]) ?>
 

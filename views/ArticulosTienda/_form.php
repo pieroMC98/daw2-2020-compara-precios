@@ -48,9 +48,9 @@ use yii\widgets\ActiveForm;
     ],
     ['prompt'=>'Indicador de artículo cancelado']) ?>
 
-    <?= $form->field($model, 'crea_usuario_id')->textInput() ?>
+    <?php //echo $form->field($model, 'crea_usuario_id')->textInput() ?>
 
-    <?= $form->field($model, 'modi_usuario_id')->textInput() ?>
+    <?php //echo $form->field($model, 'modi_usuario_id')->textInput() ?>
 
     <?= $form->field($model, 'notas_admin')->textarea(['rows' => 6]) ?>
 

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "tiendas".
@@ -67,6 +69,7 @@ class Tiendas extends \yii\db\ActiveRecord
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
             [['razon_social'], 'string', 'max' => 250],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
         ];
     }
 
@@ -113,6 +116,18 @@ class Tiendas extends \yii\db\ActiveRecord
             'nombreCompleto' => 'Nombre Completo',
             'nickPropietario' => 'Nick Propietario',
         ];
+    }
+
+    public function behaviors()
+    {
+        return [
+                    [
+                        'class' => TimestampBehavior::className(),
+                        'createdAtAttribute' => 'crea_fecha',
+                        'updatedAtAttribute' => 'modi_fecha',
+                        'value' => new Expression('NOW()'),
+                    ],
+                ];
     }
 
     public function getNombreCompleto()
