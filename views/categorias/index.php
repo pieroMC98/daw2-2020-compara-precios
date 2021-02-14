@@ -15,12 +15,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
-        if(strcmp($_GET['error'], 'Borrado correctamente')===0){
-            echo '<p class="alert alert-success">'.$_GET['error'].'</p>';
-        }
-        else if(isset($_GET['error']))
-        {
-            echo '<p class="alert alert-danger">'.$_GET['error'].'</p>';
+        if(isset($_GET['error'])){
+            if(strcmp($_GET['error'], 'Borrado correctamente')===0){
+                echo '<p class="alert alert-success">'.$_GET['error'].'</p>';
+            }
+            else 
+            {
+                echo '<p class="alert alert-danger">'.$_GET['error'].'</p>';
+            }
         }
     ?>
 
