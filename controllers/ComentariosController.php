@@ -127,6 +127,11 @@ class ComentariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    /*
+		Funcion para mostrar un comentario como eliminado con un mensaje pero realmente sigue en la base de datos, por lo que en la vista publica los hijos se muestran.
+    */
+		
     public function actionDelete($id)
     {
         $var_delete=$this->findModel($id);
@@ -138,6 +143,16 @@ class ComentariosController extends Controller
 		if($modelAT!==null){
 			$modelAT->actualizarVotos();
 		}
+
+        return $this->redirect(['index']);
+    }
+
+    /*
+		Funcion interna para el progrmador por si quiere eliminar un comentario de la Base de Datos completamente (dejando sus hijos)
+    */
+    public function actionDelete_completo($id)
+    {
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
