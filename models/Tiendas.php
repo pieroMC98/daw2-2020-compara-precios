@@ -165,5 +165,17 @@ class Tiendas extends \yii\db\ActiveRecord
 
         $this->save();
     }
+	
+	public function actualizarVotos(){
+		
+		$query = new \yii\db\Query();
+		
+		$numVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->count('valoracion');
+		$sumVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->sum('valoracion');
+
+        $this->totalVotos=$numVotos;
+        $this->sumaValores=$sumVotos;
+        $this->save();
+    }
 
 }

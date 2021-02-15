@@ -82,6 +82,11 @@ class ComentariosController extends Controller
 				$modelAT->actualizarVotos();
 			}
 			
+			$modelT=Tiendas::findOne($model->tienda_id);
+			if($modelT!==null){
+				$modelT->actualizarVotos();
+			}
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 		
@@ -111,6 +116,11 @@ class ComentariosController extends Controller
 			$modelAT=Articulostienda::findOne(['tienda_id' => $model->tienda_id, 'articulo_id' => $model->articulo_id]);
 			if($modelAT!==null){
 				$modelAT->actualizarVotos();
+			}
+			
+			$modelT=Tiendas::findOne($model->tienda_id);
+			if($modelT!==null){
+				$modelT->actualizarVotos();
 			}
 			
             return $this->redirect(['view', 'id' => $model->id]);
@@ -144,6 +154,11 @@ class ComentariosController extends Controller
 		if($modelAT!==null){
 			$modelAT->actualizarVotos();
 		}
+		
+		$modelT=Tiendas::findOne($var_delete->tienda_id);
+		if($modelT!==null){
+			$modelT->actualizarVotos();
+		}
 
         return $this->redirect(['index']);
     }
@@ -164,12 +179,16 @@ class ComentariosController extends Controller
 
     public function actionDelete_all($id)
     {
+		if($id===null || $id==0) return;
+		
     	$this->findModel($id)->delete();
 
     	$hijos=Comentarios::findAll(['comentario_id'=>$id]);
 
     	foreach ($hijos as $coment) {
-
+			
+			
+			$this->actionDelete_all($coment->id);
     		$coment->delete();
     	}
 
@@ -261,7 +280,7 @@ class ComentariosController extends Controller
 
         if ($model->load(Yii::$app->request->post()) || $aviso->load(Yii::$app->request->post())) {
 
-			$model->fecha_denuncia1=new Expression('NOW()');
+			
 
         	$aviso->clase_aviso='D';
 	        $aviso->fecha_aviso=new Expression('NOW()');
@@ -278,12 +297,14 @@ class ComentariosController extends Controller
 	            $model->fecha_bloqueo=new Expression('NOW()');
 	        }
 
-	        $model->save();
+	       
 
 	        if($model->num_denuncias===1){
+				$model->fecha_denuncia1=new Expression('NOW()');
 	        	$aviso->texto=$model->notas_denuncia;
 	        }
-
+			
+			$model->save();
 	        $aviso->save();
 
 	        return $this->goHome();

@@ -15,6 +15,8 @@ use app\models\TiendasSearch;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
 use yii\web\UploadedFile;
+use app\models\Comentarios;
+use app\models\ComentariosSearch;
 
 /**
  * ArticulostiendaController implements the CRUD actions for Articulostienda model.
@@ -151,7 +153,26 @@ class ArticulostiendaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+		
+		$tienda_id=$model->tienda_id;
+		$articulo_id=$model->articulo_id;
+		
+		$model->delete();
+		
+		$modelC=Comentarios::findAll(['tienda_id'=>$tienda_id,'articulo_id'=>$articulo_id]);
+		if($modelC!==null)
+		{
+			foreach($modelC as $coment)
+			{
+				$coment->delete();
+			}
+		}
+		
+		$modelT=Tiendas::findOne($tienda_id);
+		if($modelT!==null){
+			$modelT->actualizarVotos();
+		}
 
         return $this->redirect(['index']);
     }
@@ -204,7 +225,7 @@ class ArticulostiendaController extends Controller
 
         if ($model->load(Yii::$app->request->post()) || $aviso->load(Yii::$app->request->post())) {
 
-          $model->fecha_denuncia1=new Expression('NOW()');
+   
 
           $aviso->clase_aviso='D';
           $aviso->fecha_aviso=new Expression('NOW()');
@@ -219,15 +240,17 @@ class ArticulostiendaController extends Controller
 
             //$model->num_denuncias=$model->num_denuncias+1;
             $model->bloqueado=1;
-              $model->fecha_bloqueo=new Expression('NOW()');
+            $model->fecha_bloqueo=new Expression('NOW()');
           }
 
-          $model->save();
+          
 
           if($model->num_denuncias===1){
+			$model->fecha_denuncia1=new Expression('NOW()');
             $aviso->texto=$model->notas_denuncia;
           }
-
+		  
+		  $model->save();
           $aviso->save();
 
           return $this->goHome();

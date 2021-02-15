@@ -268,7 +268,7 @@ class TiendasController extends Controller
 
         if ($model->load(Yii::$app->request->post()) || $aviso->load(Yii::$app->request->post())) {
 
-          $model->fecha_denuncia1=new Expression('NOW()');
+          
 
           $aviso->clase_aviso='D';
           $aviso->fecha_aviso=new Expression('NOW()');
@@ -284,12 +284,14 @@ class TiendasController extends Controller
               $model->fecha_bloqueo=new Expression('NOW()');
           }
 
-          $model->save();
+          
 
           if($model->num_denuncias===1){
+			$model->fecha_denuncia1=new Expression('NOW()');
             $aviso->texto=$model->notas_denuncia;
           }
-
+		  
+		  $model->save();
           $aviso->save();
 
           return $this->goHome();
