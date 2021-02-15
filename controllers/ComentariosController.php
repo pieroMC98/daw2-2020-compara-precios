@@ -34,6 +34,31 @@ class ComentariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+	            'class' => AccessControl::className(),
+	            'rules' => [
+	                [
+	                    'allow' => true,
+	                    'actions' => ['index', 'view', 'update', 'bloqueo', 'quitabloqueo'],
+	                    'roles' => ['admin','moderador', 'sysadmin'],
+	                ],
+	                [
+	                    'allow' => true,
+	                    'actions' => ['delete', 'delete_all', 'elegir_comentario', 'create'],
+	                    'roles' => ['admin', 'sysadmin'],
+	                ],
+	                [
+	                    'allow' => true,
+	                    'actions' => ['delete_padre'],
+	                    'roles' => ['sysadmin'],
+	                ],
+	                [
+	                    'allow' => true,
+	                    'actions' => ['denuncia'],
+	                    'roles' => ['admin', 'sysadmin','moderador', 'normal'],
+	                ],
+	            ],
+            ],
         ];
     }
 

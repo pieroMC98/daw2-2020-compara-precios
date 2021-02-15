@@ -35,6 +35,26 @@ class ArticulostiendaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+	            'class' => AccessControl::className(),
+	            'rules' => [
+	                [
+	                    'allow' => true,
+	                    'actions' => ['index', 'view', 'update', 'bloqueo', 'quitabloqueo'],
+	                    'roles' => ['admin','moderador', 'sysadmin'],
+	                ],
+	                [
+	                    'allow' => true,
+	                    'actions' => ['delete', 'create'],
+	                    'roles' => ['admin', 'sysadmin'],
+	                ],
+	                [
+	                    'allow' => true,
+	                    'actions' => ['denuncia'],
+	                    'roles' => ['admin', 'sysadmin','moderador', 'normal'],
+	                ],
+	            ],
+            ],
         ];
     }
 

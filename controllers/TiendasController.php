@@ -30,6 +30,26 @@ class TiendasController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+              'class' => AccessControl::className(),
+              'rules' => [
+                  [
+                      'allow' => true,
+                      'actions' => ['index', 'view', 'update', 'bloqueo', 'quitabloqueo', 'propietarios', 'propietarios_view', 'propietarios_update',''],
+                      'roles' => ['admin','moderador', 'sysadmin'],
+                  ],
+                  [
+                      'allow' => true,
+                      'actions' => ['delete', 'create', 'propietarios_delete', 'elegir_tienda', 'crear_propietario'],
+                      'roles' => ['admin', 'sysadmin'],
+                  ],
+                  [
+                      'allow' => true,
+                      'actions' => ['denuncia'],
+                      'roles' => ['admin', 'sysadmin','moderador', 'normal'],
+                  ],
+              ],
+            ],
         ];
     }
 
