@@ -60,7 +60,7 @@ class CategoriasController extends Controller
         $query = new Query;
         $rows = array(); //array para ir guardando id
 
-        $query->select('id, nombre')
+        $query->select('id, nombre, icono')
         ->from('categorias')
         ->where(['=', 'categoria_id', '0']);
         $rows = $query->all();

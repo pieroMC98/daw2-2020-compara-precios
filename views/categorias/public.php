@@ -6,6 +6,7 @@ function recorrerCategorias($array, $display){
         
         if($display==1){
             echo '</br>';
+            echo "<img src='../web/iconos/iconos_cat/".$array[$i]['icono']."' alt=".$array[$i]['icono'].">";
             echo "<a href='index.php?r=categorias%2Fview&id=".$array[$i]['id']."'><span class='tam-".$display."'>".$array[$i]['nombre']."</span></a>  ";
             echo '<div class="row">';
         }
