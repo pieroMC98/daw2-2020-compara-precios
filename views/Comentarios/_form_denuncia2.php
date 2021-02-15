@@ -15,7 +15,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6,'disabled' => true]) ?>
 
-    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]);?>
+    <?= $form->field($aviso, 'texto')->textarea(['rows' => 6]);
+    ?>
 
 
     <div class="form-group">

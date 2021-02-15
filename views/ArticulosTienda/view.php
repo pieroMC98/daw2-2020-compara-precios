@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulostienda */
 
-$this->title = $model->id;
+$this->title = $model->nomArticulo . " en " . $model->nomTienda;
 $this->params['breadcrumbs'][] = ['label' => 'Articulostiendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-        <?php /*Boton para probar la denuncia publica echo Html::a('Denuncia?', ['denuncia', 'id' => $model->id], ['class' => 'btn btn-primary']) */?>
+        <?php /*Boton para probar la denuncia publica echo Html::a('Denuncia?', ['denuncia', 'id' => $model->id], ['class' => 'btn btn-primary'])*/ ?>
 
     </p>
 

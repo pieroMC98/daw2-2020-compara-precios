@@ -15,6 +15,7 @@ use app\models\Articulos;
 use app\models\ArticulosSearch;
 use app\models\Articulostienda;
 use app\models\ArticulostiendaSearch;
+use app\models\Avisosusuarios;
 
 /**
  * ComentariosController implements the CRUD actions for Comentarios model.
@@ -150,12 +151,31 @@ class ComentariosController extends Controller
     /*
 		Funcion interna para el progrmador por si quiere eliminar un comentario de la Base de Datos completamente (dejando sus hijos)
     */
-    public function actionDelete_completo($id)
+    public function actionDelete_padre($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
+
+    /*
+		Funcion interna para que el programador pueda eliminar un comentario y los hijos de este completamente de la base de datos 
+    */
+
+    public function actionDelete_all($id)
+    {
+    	$this->findModel($id)->delete();
+
+    	$hijos=Comentarios::findAll(['comentario_id'=>$id]);
+
+    	foreach ($hijos as $coment) {
+
+    		$coment->delete();
+    	}
+
+        return $this->redirect(['index']);
+    }
+
 
     /**
      * Finds the Comentarios model based on its primary key value.
@@ -173,7 +193,7 @@ class ComentariosController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 	
-	public function actionElegir_comentario($modo=0,$tienda_id=null,$articulo_id=null)
+	public function actionElegir_comentario($modo=0, $tienda_id=null, $articulo_id=null)
     {
 		
         if (Tiendas::findOne($tienda_id) === null) {
@@ -237,45 +257,50 @@ class ComentariosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if($model->bloqueado!=0){
+        $aviso = new Avisosusuarios();
 
-        	/*Se aumenta el numero de denuncias aunque ya esté bloqueado para que los administradores conozcan el numero total de denuncias*/
-        	$model->num_denuncias=$model->num_denuncias+1;
-        	$model->save();
-        	return $this->goHome();
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-
+        if ($model->load(Yii::$app->request->post()) || $aviso->load(Yii::$app->request->post())) {
 
 			$model->fecha_denuncia1=new Expression('NOW()');
 
-        	$model->num_denuncias=1;
-			$model->save();
-            return $this->goHome();
+        	$aviso->clase_aviso='D';
+	        $aviso->fecha_aviso=new Expression('NOW()');
+	        $aviso->comentario_id=$model->id;
+	        
+
+	        $model->num_denuncias=$model->num_denuncias+1;
+
+	        /*El numero maximo de denuncias es 10 */
+	        if($model->num_denuncias===10){
+
+	        	//$model->num_denuncias=$model->num_denuncias+1;
+	        	$model->bloqueado=1;
+	            $model->fecha_bloqueo=new Expression('NOW()');
+	        }
+
+	        $model->save();
+
+	        if($model->num_denuncias===1){
+	        	$aviso->texto=$model->notas_denuncia;
+	        }
+
+	        $aviso->save();
+
+	        return $this->goHome();
         }
 
         if($model->num_denuncias===0){
 
         	  return $this->render('denuncias', [
-            	'model' => $model,
+            	'model' => $model, 'aviso' => $aviso
         		]);
 
+        }else{
+        	 return $this->render('denuncias2', [
+            	'model' => $model, 'aviso' => $aviso
+        		]);
         }
-
-        $model->num_denuncias=$model->num_denuncias+1;
-
-        /*El numero maximo de denuncias es 10 */
-        if($model->num_denuncias>=10){
-
-        	//$model->num_denuncias=$model->num_denuncias+1;
-        	$model->bloqueado=1;
-            $model->fecha_bloqueo=new Expression('NOW()');
-        }
-
-        $model->save();
-
-        return $this->goHome();
+        
     }
 
     public function actionQuitabloqueo($id)

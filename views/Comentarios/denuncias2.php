@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Denuncia';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form_denuncia', [
+    <?= $this->render('_form_denuncia2', [
         'model' => $model, 'aviso' => $aviso,
     ]) ?>
 

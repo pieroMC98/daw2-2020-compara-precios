@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-        <?php /*Boton para probar la denuncia publica  Html::a('Denuncia?', ['denuncia', 'id' => $model->id], ['class' => 'btn btn-primary']) */?>
+        <?php /*Boton para probar la denuncia publica echo Html::a('Denuncia?', ['denuncia', 'id' => $model->id], ['class' => 'btn btn-primary'])*/?>
 
     </p>
 

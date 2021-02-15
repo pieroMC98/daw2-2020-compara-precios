@@ -8,14 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="comentarios-form">
+<div class="tiendas-form">
 
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'texto')->textarea(['rows' => 6,'disabled' => true]) ?>
+    <?= $form->field($model, 'nombre_tienda')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]);?>
+    <?= $form->field($aviso, 'texto')->textarea(['rows' => 6]) ?>
 
 
     <div class="form-group">
