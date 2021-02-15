@@ -17,6 +17,7 @@ use app\models\ArticulosSearch;
 use yii\web\UploadedFile;
 use app\models\Comentarios;
 use app\models\ComentariosSearch;
+use yii\filters\AccessControl;
 
 /**
  * ArticulostiendaController implements the CRUD actions for Articulostienda model.

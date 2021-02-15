@@ -16,6 +16,7 @@ use app\models\ArticulosSearch;
 use app\models\Articulostienda;
 use app\models\ArticulostiendaSearch;
 use app\models\Avisosusuarios;
+use yii\filters\AccessControl;
 
 /**
  * ComentariosController implements the CRUD actions for Comentarios model.
