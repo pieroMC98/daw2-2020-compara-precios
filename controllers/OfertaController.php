@@ -39,7 +39,7 @@ class OfertaController extends Controller
                     ],*/
                     [
                         'allow' => true,
-                        //'actions' => ['index', 'public'],
+                        // DESCOMENTAR CUANDO ESTE EL CONTROL DE PERMISOS 'actions' => ['index', 'public'],
                         'roles' => ['?', '@'],
                     ],
                     [

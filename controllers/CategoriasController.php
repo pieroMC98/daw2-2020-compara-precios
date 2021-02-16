@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Categorias;
+use app\models\Articulos;
+use app\models\UnificarForm;
 use app\models\CategoriasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -238,4 +240,31 @@ class CategoriasController extends Controller
         return $rows;
     }
 
+    // funcion para unificar el contenido de dos categorias
+    public function actionUnificar(){
+        $model=new UnificarForm(); // clase creada para establecer la estructura del formulario y hacer más sencilla la implementacion
+
+        if ($model->load(Yii::$app->request->post())) {
+            $id_eliminar = $model->categoriaEliminar_id;
+            $id_conservar = $model->categoriaMantener_id;
+            if($id_eliminar != $id_conservar)
+            {
+                Categorias::updateAll(['categoria_id' => $id_conservar], 'categoria_id = '.$id_eliminar);
+                Articulos::updateAll(['categoria_id' => $id_conservar], 'categoria_id = '.$id_eliminar);
+                $this->findModel($id_eliminar)->delete();
+            }
+
+            return $this->redirect(['index']);
+        }
+        $listaCategorias = Categorias::find()->all();
+
+        for($i=0; $i<count($listaCategorias); $i++){
+            $nombre_categorias[$listaCategorias[$i]['id']]=$listaCategorias[$i]['nombre'];
+        }
+
+        return $this->render('unificar', [
+            'model' => $model,
+            'nombre_categorias' => $nombre_categorias,
+        ]);
+    }
 }
