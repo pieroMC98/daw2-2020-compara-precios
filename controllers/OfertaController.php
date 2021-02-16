@@ -8,6 +8,7 @@ use app\models\OfertaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * OfertaController implements the CRUD actions for Oferta model.
@@ -24,6 +25,28 @@ class OfertaController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'recuperar', 'delete'],
+                'rules' => [
+                    /* DESCOMENTAR CUANDO ESTE EL CONTROL DE PERMISOS 
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete'],
+                        'roles' => ['admin', 'sysadmin', 'propietario'],
+                    ],*/
+                    [
+                        'allow' => true,
+                        //'actions' => ['index', 'public'],
+                        'roles' => ['?', '@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['seguimiento', 'quitarseguimiento'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
+use yii\filters\AccessControl;
 
 /**
  * CategoriasController implements the CRUD actions for Categorias model.
@@ -26,6 +27,23 @@ class CategoriasController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'recuperar', 'delete'],
+                'rules' => [
+                    /* DESCOMENTAR CUANDO ESTE EL CONTROL DE PERMISOS 
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],*/
+                    [
+                        'allow' => true,
+                        //'actions' => ['index', 'public'],
+                        'roles' => ['?', '@'],
+                    ],
                 ],
             ],
         ];
@@ -92,23 +110,6 @@ class CategoriasController extends Controller
         $subcategorias = $this->getSubcategorias($id);
         $articulos = $this->getArticulos($subcategorias, $id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'subcategorias' => $subcategorias,
-            'articulos' => $articulos
-        ]);
-    }
-
-    /**
-     * Displays a single Categorias model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionVistaCategorias($id)
-    {
-        $subcategorias = $this->getSubcategorias($id);
-        $articulos = $this->getArticulos($subcategorias, $id);
-        return $this->render('vistaCategorias', [
             'model' => $this->findModel($id),
             'subcategorias' => $subcategorias,
             'articulos' => $articulos

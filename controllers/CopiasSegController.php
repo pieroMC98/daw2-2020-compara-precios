@@ -8,6 +8,7 @@ use app\models\CopiasSegSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CopiasSegController implements the CRUD actions for CopiasSeg model.
@@ -27,6 +28,18 @@ class CopiasSegController extends Controller
                     'recuperar' => ['POST'],
                 ],
             ],
+            /* DESCOMENTAR CUANDO ESTE EL CONTROL DE PERMISOS 
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'recuperar', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'recuperar', 'delete'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],
+                ],
+            ],*/
         ];
     }
 
