@@ -11,6 +11,7 @@ use app\models\Tiendas;
  */
 class TiendasSearch extends Tiendas
 {
+    public $etiquetaId;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class TiendasSearch extends Tiendas
     {
         return [
             [['id', 'region_id_tienda', 'clasificacion_id', 'sumaValores', 'totalVotos', 'visible', 'cerrada', 'num_denuncias', 'bloqueada', 'cerrado_comentar', 'usuario_id', 'region_id', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['nombre_tienda', 'descripcion_tienda', 'lugar_tienda', 'url_tienda', 'direccion_tienda', 'telefono_tienda', 'imagen_id', 'fecha_denuncia1', 'notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'nif_cif', 'nombre', 'apellidos', 'razon_social', 'direccion', 'telefono_contacto', 'crea_fecha', 'modi_fecha', 'notas_admin'], 'safe'],
+            [['nombre_tienda', 'descripcion_tienda', 'lugar_tienda', 'url_tienda', 'direccion_tienda', 'telefono_tienda', 'imagen_id', 'fecha_denuncia1', 'notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'nif_cif', 'nombre', 'apellidos', 'razon_social', 'direccion', 'telefono_contacto', 'crea_fecha', 'modi_fecha', 'notas_admin', 'etiquetaId'], 'safe'],
         ];
     }
 
@@ -55,6 +56,8 @@ class TiendasSearch extends Tiendas
             // $query->where('0=1');
             return $dataProvider;
         }
+
+        $query->joinWith(['etiquetas']);
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -93,7 +96,9 @@ class TiendasSearch extends Tiendas
             ->andFilterWhere(['like', 'razon_social', $this->razon_social])
             ->andFilterWhere(['like', 'direccion', $this->direccion])
             ->andFilterWhere(['like', 'telefono_contacto', $this->telefono_contacto])
-            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin]);
+            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
+            ->andFilterWhere(['like', 'tiendas_etiquetas.etiqueta_id', $this->etiquetaId]);
+            
 
         return $dataProvider;
     }

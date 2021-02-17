@@ -70,6 +70,21 @@ class Tiendas extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getEtiquetas()
+    {
+        return $this->hasMany(TiendasEtiquetas::className(), ['tienda_id' => 'id'])->inverseOf('tiendas');
+    }
+
+    public function getEtiquetaId()
+    {
+        if($this->etiquetas!==null){
+
+            return $this->etiquetas->etiqueta_id;
+        }
+
+        return null;		
+    }
+
     /**
      * {@inheritdoc}
      */

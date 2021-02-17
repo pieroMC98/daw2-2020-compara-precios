@@ -28,3 +28,9 @@
 .tam-7{
   font-size: 0.80rem;
 }
+
+.etiqueta{
+  border: 2px solid rgb(3, 107, 204); 
+  border-radius: 3px;
+  padding: 5px;
+}

@@ -16,9 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Tiendas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Busqueda por clasificación', ['clasificacion'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Nube de etiquetas', ['etiquetas'], ['class' => 'btn btn-primary']) ?>
+
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

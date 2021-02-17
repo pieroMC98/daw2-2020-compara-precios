@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\controllers\OfertaController;
+use yii\db\Query;
 
 /**
  * ArticulosController implements the CRUD actions for Articulos model.
@@ -42,6 +43,57 @@ class ArticulosController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all etiquetas.
+     * @return mixed
+     */
+    public function actionEtiquetas()
+    {
+        $etiquetas= array();
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'articulos_etiquetas', 'etiquetas.id = articulos_etiquetas.etiqueta_id');
+
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('etiquetas', [
+            'etiquetas' => $etiquetas,
+        ]);
+    }
+
+    /**
+     * Lists all Articulos models filter by etiqueta.
+     * @return mixed
+     */
+    public function actionBusqetiquetas()
+    {
+        $searchModel = new ArticulosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'articulos_etiquetas', 'etiquetas.id = articulos_etiquetas.etiqueta_id');
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('busEtiquetas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'etiquetas' => $etiquetas,
         ]);
     }
 

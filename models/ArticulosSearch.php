@@ -11,6 +11,8 @@ use app\models\Articulos;
  */
 class ArticulosSearch extends Articulos
 {
+    public $etiquetaId;
+    public $categoriaNombre;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class ArticulosSearch extends Articulos
     {
         return [
             [['id', 'categoria_id', 'visible', 'cerrado', 'comun', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['nombre', 'descripcion', 'imagen_id', 'crea_fecha', 'modi_fecha', 'notas_admin'], 'safe'],
+            [['nombre', 'descripcion', 'imagen_id', 'crea_fecha', 'modi_fecha', 'notas_admin', 'etiquetaId', 'categoriaNombre'], 'safe'],
         ];
     }
 
@@ -56,6 +58,8 @@ class ArticulosSearch extends Articulos
             return $dataProvider;
         }
 
+        $query->joinWith(['etiquetas', 'categorias']);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -72,7 +76,9 @@ class ArticulosSearch extends Articulos
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'descripcion', $this->descripcion])
             ->andFilterWhere(['like', 'imagen_id', $this->imagen_id])
-            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin]);
+            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
+            ->andFilterWhere(['like', 'articulos_etiquetas.etiqueta_id', $this->etiquetaId])
+            ->andFilterWhere(['like', 'categorias.nombre', $this->categoriaNombre]);
 
         return $dataProvider;
     }

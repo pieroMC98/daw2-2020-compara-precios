@@ -3,10 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticulosSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Articulos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,23 +10,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Articulos', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Nube de etiquetas', ['etiquetas'], ['class' => 'btn btn-primary']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_searchEtiquetas', ['model' => $searchModel, 'etiquetas'=> $etiquetas]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'nombre:ntext',
             'descripcion:ntext',
-            'categoria_id',
             'categoriaNombre',
             'imagen_id',
             //'visible',

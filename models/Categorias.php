@@ -35,6 +35,11 @@ class Categorias extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getArticulos()
+    {
+        return $this->hasMany(Articulos::className(), [ 'categoria_id' => 'id' ])->inverseOf('categorias');
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -8,6 +8,7 @@ use app\models\TiendasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * TiendasController implements the CRUD actions for Tiendas model.
@@ -41,6 +42,84 @@ class TiendasController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Tiendas models filter by clasificacion.
+     * @return mixed
+     */
+    public function actionClasificacion()
+    {
+        $searchModel = new TiendasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = new Query;
+        // compose the query
+        $query->select('clasificadores.id, clasificadores.nombre')
+            ->from('clasificadores')
+            ->join('INNER JOIN', 'tiendas', 'clasificadores.id = tiendas.clasificacion_id');
+        // build and execute the query
+        $listaClases = $query->all();
+        for($i=0; $i<count($listaClases); $i++){
+            $clases[$listaClases[$i]['id']]=$listaClases[$i]['nombre'];
+        }
+        
+
+        return $this->render('busClas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'clases' => $clases,
+        ]);
+    }
+
+    /**
+     * Lists all etiquetas.
+     * @return mixed
+     */
+    public function actionEtiquetas()
+    {
+        $etiquetas= array();
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'tiendas_etiquetas', 'etiquetas.id = tiendas_etiquetas.etiqueta_id');
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('etiquetas', [
+            'etiquetas' => $etiquetas,
+        ]);
+    }
+
+    /**
+     * Lists all Tiendas models filter by etiqueta.
+     * @return mixed
+     */
+    public function actionBusqetiquetas()
+    {
+        $searchModel = new TiendasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'tiendas_etiquetas', 'etiquetas.id = tiendas_etiquetas.etiqueta_id');
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('busEtiquetas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'etiquetas' => $etiquetas,
         ]);
     }
 

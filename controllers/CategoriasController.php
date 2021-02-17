@@ -256,8 +256,8 @@ class CategoriasController extends Controller
 
             return $this->redirect(['index']);
         }
-        $listaCategorias = Categorias::find()->all();
 
+        $listaCategorias = Categorias::find()->all();
         for($i=0; $i<count($listaCategorias); $i++){
             $nombre_categorias[$listaCategorias[$i]['id']]=$listaCategorias[$i]['nombre'];
         }
