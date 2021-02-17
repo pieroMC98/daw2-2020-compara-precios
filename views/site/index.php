@@ -7,7 +7,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-$this->title = 'My Yii Application';
+$this->title = 'Comparador de precios';
 ?>
 
 <div class="site-index">
