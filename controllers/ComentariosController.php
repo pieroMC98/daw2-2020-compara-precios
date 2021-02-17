@@ -34,7 +34,7 @@ class ComentariosController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
+            ],/*
             'access' => [
 	            'class' => AccessControl::className(),
 	            'rules' => [
@@ -59,7 +59,7 @@ class ComentariosController extends Controller
 	                    'roles' => ['admin', 'sysadmin','moderador', 'normal'],
 	                ],
 	            ],
-            ],
+            ],*/
         ];
     }
 

@@ -35,7 +35,7 @@ class ArticulostiendaController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
+            ],/*
             'access' => [
 	            'class' => AccessControl::className(),
 	            'rules' => [
@@ -55,7 +55,7 @@ class ArticulostiendaController extends Controller
 	                    'roles' => ['admin', 'sysadmin','moderador', 'normal'],
 	                ],
 	            ],
-            ],
+            ],*/
         ];
     }
 

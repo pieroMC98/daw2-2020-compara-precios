@@ -30,7 +30,7 @@ class TiendasController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
+            ],/*
             'access' => [
               'class' => AccessControl::className(),
               'rules' => [
@@ -50,7 +50,7 @@ class TiendasController extends Controller
                       'roles' => ['admin', 'sysadmin','moderador', 'normal'],
                   ],
               ],
-            ],
+            ],*/
         ];
     }
 
