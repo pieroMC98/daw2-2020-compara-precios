@@ -53,7 +53,7 @@ class TiendasController extends Controller
     {
         $searchModel = new TiendasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $clases = array();
         $query = new Query;
         // compose the query
         $query->select('clasificadores.id, clasificadores.nombre')

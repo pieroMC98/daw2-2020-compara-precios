@@ -79,6 +79,7 @@ class CopiasSegController extends Controller
     public function actionCreate()
     {
         $model = new CopiasSeg();
+        $zip = new \ZipArchive();       
         $ficheros = array();
         $tablas = array("articulos","articulos_etiquetas","articulos_tienda","avisos_usuarios",
                "categorias","clasificadores","comentarios","configuraciones","etiquetas",
@@ -96,19 +97,17 @@ class CopiasSegController extends Controller
                 mkdir('../backups', 0777);
                             
             mkdir('../'.$ruta, 0777);
-            /*mkdir('../'.$ruta.'/uploads', 0777);
-            mkdir('../'.$ruta.'/iconos/iconos_cat' 0777);
-            $ficheros = scandir('../web/uploads'); //lista ficheros del directorio            
-            for($i=0;$i<count($ficheros);$i++)
+
+            $media = "../".$ruta."/media.zip";
+            if($zip->open($media,\ZipArchive::CREATE)===true)
             {
-                copy('../web/uploads','../backups/'.$model['ruta'].'/uploads');                
-            }
-            $ficheros = scandir('../web/uploads'); //lista ficheros del directorio 
-            for($i=0;$i<count($ficheros);$i++)
-            {
-                copy('../web/iconos','../backups/'.$model['ruta'].'/iconos');                
-            }
-            */
+                $options = array('add_path' => 'uploads/', 'remove_all_path' => TRUE);
+                $zip->addGlob("../web/uploads/*.{png,jpg,svg}",GLOB_BRACE, $options);
+                $options = array('add_path' => 'iconos/iconos_cat/', 'remove_all_path' => TRUE);
+                $zip->addGlob("../web/iconos/iconos_cat/*.{png,jpg,svg}",GLOB_BRACE, $options);
+                $zip->close();
+            }                            
+            
             foreach($tablas as $tabla)
             {
                 //Indico mi consulta a obtener
@@ -127,7 +126,7 @@ class CopiasSegController extends Controller
 
     public function actionRecuperar($id)
     {
-        //$model = new CopiasSeg();
+        $zip = new \ZipArchive;
 
         $ruta="backups/".$this->findModel($id)->buscaRuta($id);
 
@@ -135,6 +134,11 @@ class CopiasSegController extends Controller
                "categorias","clasificadores","comentarios","configuraciones","etiquetas",
                "historico_precios","moderadores","ofertas","regiones","regiones_moderador",
                "registros_aplicacion","seguimientos_usuario","tiendas","tiendas_etiquetas","usuarios", "copias_seg");
+        
+        if ($zip->open('../'.$ruta.'/media.zip') === true) {
+            $zip->extractTo('../web');
+            $zip->close();
+        }
 
         foreach($tablas as $tabla)
         {

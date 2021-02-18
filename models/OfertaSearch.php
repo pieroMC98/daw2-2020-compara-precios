@@ -79,7 +79,7 @@ class OfertaSearch extends Oferta
         $query->andFilterWhere(['like', 'texto', $this->texto])
             ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
             ->andFilterWhere(['like', 'articulos.nombre', $this->articuloNombre])
-            ->andFilterWhere(['like', 'tiendas.nombre', $this->tiendaNombre]);
+            ->andFilterWhere(['like', 'tiendas.nombre_tienda', $this->tiendaNombre]);
 
         return $dataProvider;
     }

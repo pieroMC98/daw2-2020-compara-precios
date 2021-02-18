@@ -86,7 +86,7 @@ class Oferta extends \yii\db\ActiveRecord
     {
         if($this->tiendas!==null){
 
-            return $this->tiendas->nombre;
+            return $this->tiendas->nombre_tienda;
         }
 
         return null;		
