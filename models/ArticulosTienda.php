@@ -113,6 +113,11 @@ class ArticulosTienda extends \yii\db\ActiveRecord
 
     }
 
+    public function getOfertas()
+    {
+        return $this->hasMany(Oferta::className(), (['tienda_id' => 'tienda_id'],['articulo_id' => 'articulo_id']))->inverseOf('articulosTiendas');
+    }
+
     public function getArtVisible(){
 
     	if($this->visible==0){

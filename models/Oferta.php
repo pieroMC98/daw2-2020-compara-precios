@@ -67,6 +67,41 @@ class Oferta extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getArticulos()
+    {
+        return $this->hasOne(Articulos::className(), (['id' => 'articulo_id']))->inverseOf('ofertas');
+    }
+
+    public function getArticulosTienda()
+    {
+        return $this->hasOne(ArticulosTienda::className(), (['tienda_id' => 'tienda_id','articulo_id' => 'articulo_id']))->inverseOf('ofertas');
+    }
+
+    public function getTiendas()
+    {
+        return $this->hasOne(Tiendas::className(), ['id' => 'tienda_id'])->inverseOf('ofertas');
+    }
+
+    public function getTiendaNombre()
+    {
+        if($this->tiendas!==null){
+
+            return $this->tiendas->nombre;
+        }
+
+        return null;		
+    }
+
+    public function getArticuloNombre()
+    {
+        if($this->articulos!==null){
+
+            return $this->articulos->nombre;
+        }
+
+        return null;		
+    }
+
     /**
      * {@inheritdoc}
      * @return OfertasQuery the active query used by this AR class.

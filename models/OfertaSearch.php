@@ -11,6 +11,8 @@ use app\models\Oferta;
  */
 class OfertaSearch extends Oferta
 {
+    public $tiendaNombre;
+    public $articuloNombre;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class OfertaSearch extends Oferta
     {
         return [
             [['id', 'articulo_id', 'tienda_id', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['texto', 'fecha_desde', 'fecha_hasta', 'crea_fecha', 'modi_fecha', 'notas_admin'], 'safe'],
+            [['texto', 'fecha_desde', 'fecha_hasta', 'crea_fecha', 'modi_fecha', 'notas_admin','tiendaNombre','articuloNombre'], 'safe'],
             [['precio_oferta', 'precio_original'], 'number'],
         ];
     }
@@ -57,6 +59,8 @@ class OfertaSearch extends Oferta
             return $dataProvider;
         }
 
+        $query->joinWith(['articulos', 'tiendas']);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -73,7 +77,9 @@ class OfertaSearch extends Oferta
         ]);
 
         $query->andFilterWhere(['like', 'texto', $this->texto])
-            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin]);
+            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin])
+            ->andFilterWhere(['like', 'articulos.nombre', $this->articuloNombre])
+            ->andFilterWhere(['like', 'tiendas.nombre', $this->tiendaNombre]);
 
         return $dataProvider;
     }

@@ -75,6 +75,11 @@ class Articulos extends \yii\db\ActiveRecord
         return null;		
     }
 
+    public function getOfertas()
+    {
+        return $this->hasMany(Oferta::className(), (['articulo_id' => 'id']))->inverseOf('articulos');
+    }
+
 
     /**
      * {@inheritdoc}
