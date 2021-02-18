@@ -65,7 +65,6 @@ class TiendasController extends Controller
             $clases[$listaClases[$i]['id']]=$listaClases[$i]['nombre'];
         }
         
-
         return $this->render('busClas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -14,6 +14,7 @@ use yii\db\Query;
 use yii\filters\AccessControl;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use app\models\ArticulosSearch;
 
 /**
  * CategoriasController implements the CRUD actions for Categorias model.
@@ -117,6 +118,27 @@ class CategoriasController extends Controller
             'model' => $this->findModel($id),
             'subcategorias' => $subcategorias,
             'articulos' => $articulos
+        ]);
+    }
+    //mostrar articulos de categorias
+    public function actionViewarticulos($id)
+    {
+        $searchModel = new ArticulosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
+        $subcategorias = $this->getSubcategorias($id);
+        $articulos = $this->getArticulos($subcategorias, $id);
+        /*
+        for($i=0;$i<count($articulos);$i++)
+        {
+            $dataProvider->query->andWhere('articulos.id ='.$articulos[$i]['id'].'');
+        }
+        */
+        return $this->render('viewArticulos', [
+            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'subcategorias' => $subcategorias,
+            'articulos' => $articulos,
+            'dataProvider' => $dataProvider
         ]);
     }
 
