@@ -126,18 +126,11 @@ class CategoriasController extends Controller
         $searchModel = new ArticulosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
         $subcategorias = $this->getSubcategorias($id);
-        $articulos = $this->getArticulos($subcategorias, $id);
-        /*
-        for($i=0;$i<count($articulos);$i++)
-        {
-            $dataProvider->query->andWhere('articulos.id ='.$articulos[$i]['id'].'');
-        }
-        */
+
         return $this->render('viewArticulos', [
             'model' => $this->findModel($id),
             'searchModel' => $searchModel,
             'subcategorias' => $subcategorias,
-            'articulos' => $articulos,
             'dataProvider' => $dataProvider
         ]);
     }
