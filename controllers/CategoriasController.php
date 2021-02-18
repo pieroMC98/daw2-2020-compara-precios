@@ -12,6 +12,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
 use yii\filters\AccessControl;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * CategoriasController implements the CRUD actions for Categorias model.
@@ -126,13 +128,25 @@ class CategoriasController extends Controller
     public function actionCreate()
     {
         $model = new Categorias();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $imagen = new UploadForm();      
+        if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isPost) {
+                $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+                if ($imagen->upload()) {
+                    $extension = substr($imagen->imageFile->name,-4);
+                    rename("../web/uploads/".$imagen->imageFile->name."","../web/iconos/iconos_cat/".$model['nombre']."".$extension."");
+                    $model['icono'] = $model['nombre']."".$extension;
+                }
+            }
+            if($model->save())
+            {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }                       
         }
 
         return $this->render('create', [
             'model' => $model,
+            'imagen' => $imagen,
         ]);
     }
 
@@ -146,13 +160,29 @@ class CategoriasController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $imagen = new UploadForm();      
+        if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isPost) {
+                $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+                if ($imagen->upload()) {
+                    $extension = substr($imagen->imageFile->name,-4);
+                    rename("../web/uploads/".$imagen->imageFile->name."","../web/iconos/iconos_cat/".$model['nombre']."".$extension."");
+                    $model['icono'] = $model['nombre']."".$extension;
+                }
+            }
+            if($model->save())
+            {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }                       
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+
         }
 
         return $this->render('update', [
             'model' => $model,
+            'imagen' => $imagen,
         ]);
     }
 
@@ -167,16 +197,17 @@ class CategoriasController extends Controller
     {
         $subcategorias = $this->getSubcategorias($id);
         $articulos = $this->getArticulos($subcategorias, $id);
-
+        $modelo = $this->findModel($id);
         if(count($articulos)=== 0 && count($subcategorias)=== 0 ){
-            $this->findModel($id)->delete();
+            unlink('../web/iconos/iconos_cat/'.$modelo['icono'].'');
+            $this->findModel($id)->delete();            
             $error ='Borrado correctamente';
         }   
         else if(count($articulos)!= 0)
             $error ='No se puede borrar, hay articulos en la categoria o en las subcategorias';
         else if(count($subcategorias)!= 0)
             $error ='No se puede borrar, contiene subcategorias';
-
+        
         return $this->redirect(['index', 'error' => $error]);
     }
 

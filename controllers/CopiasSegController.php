@@ -79,7 +79,7 @@ class CopiasSegController extends Controller
     public function actionCreate()
     {
         $model = new CopiasSeg();
-
+        $ficheros = array();
         $tablas = array("articulos","articulos_etiquetas","articulos_tienda","avisos_usuarios",
                "categorias","clasificadores","comentarios","configuraciones","etiquetas",
                "historico_precios","moderadores","ofertas","regiones","regiones_moderador",
@@ -94,9 +94,21 @@ class CopiasSegController extends Controller
             // compruebo que existe la carpeta para guardar las copias, si no existe la creo.
             if (!is_dir('../backups'))  
                 mkdir('../backups', 0777);
-            
+                            
             mkdir('../'.$ruta, 0777);
-
+            /*mkdir('../'.$ruta.'/uploads', 0777);
+            mkdir('../'.$ruta.'/iconos/iconos_cat' 0777);
+            $ficheros = scandir('../web/uploads'); //lista ficheros del directorio            
+            for($i=0;$i<count($ficheros);$i++)
+            {
+                copy('../web/uploads','../backups/'.$model['ruta'].'/uploads');                
+            }
+            $ficheros = scandir('../web/uploads'); //lista ficheros del directorio 
+            for($i=0;$i<count($ficheros);$i++)
+            {
+                copy('../web/iconos','../backups/'.$model['ruta'].'/iconos');                
+            }
+            */
             foreach($tablas as $tabla)
             {
                 //Indico mi consulta a obtener
@@ -107,7 +119,7 @@ class CopiasSegController extends Controller
             //
             if( is_dir('../'.$ruta) ){
                 
-                    return $this->redirect(['view', 'id' => $model->id]);  
+                return $this->redirect(['view', 'id' => $model->id]);  
             }
         }
 
