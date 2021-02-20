@@ -24,17 +24,26 @@ class UserController extends Controller
 		return $this->render("create");
 	}
 
+	function actionUpdate($id)
+	{
+		return $this->render("create", ["user" => User::findIdentity($id)]);
+	}
+
 	function actionStorage()
 	{
 		$request = Yii::$app->request;
-		if( !$request->isPut )
-			return $this->render('error');
+		if (!$request->isPut) {
+			return $this->render("error");
+		}
+
 		$new_user = new User();
-		$new_user->username = $request->post('name');
-		$new_user->password = $request->post('pass');
-		if( $new_user->validate() )
+		$new_user->username = $request->post("name");
+		$new_user->password = $request->post("pass");
+		$new_user->rool = $new_user->PROPIETARIO = true;
+		if ($new_user->validate()) {
 			return $this->responseJson($new_user);
-		else
+		} else {
 			return null;
+		}
 	}
 }

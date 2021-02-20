@@ -1,14 +1,40 @@
 <?php
 
 namespace app\models;
+use yii\behaviors\TimestampBehavior;
 
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
-	public $id;
-	public $username;
-	public $password;
+	public int $id ;
+	public string $username;
+	public string $password;
 	public $authKey;
 	public $accessToken;
+
+	static $MODERADOR = false;
+	static $PROPIETARIO = false;
+	static $ADMINISTRADOR = false;
+	public $rool;
+
+	function isAdmin()
+	{
+		return self::$ADMINISTRADOR;
+	}
+
+	function isPropietario()
+	{
+		return self::$PROPIETARIO;
+	}
+
+	function isModerador()
+	{
+		return self::$MODERADOR;
+	}
+
+	public function behaviors()
+	{
+		return TimestampBehavior::class;
+	}
 
 	private static $users = [
 		"100" => [

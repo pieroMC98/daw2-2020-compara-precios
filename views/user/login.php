@@ -13,7 +13,7 @@ $this->params["breadcrumbs"][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Nuevo Usuario:</p>
 
     <?php $form = ActiveForm::begin([
     	"id" => "login-form",
@@ -47,9 +47,9 @@ $this->params["breadcrumbs"][] = $this->title;
     <?php ActiveForm::end(); ?>
 
 	
-	<?= Html::beginForm(['user/create'],'get')?>
-	<?= Html::submitButton('Crear Usuario',['class'=>'btn btn-primary'])?>
-	<?= Html::endForm()?>
+	<?= Html::beginForm(["user/create"], "get") ?>
+	<?= Html::submitButton("Crear Usuario", ["class" => "btn btn-primary"]) ?>
+	<?= Html::endForm() ?>
 	
 
     <div class="col-lg-offset-1" style="color:#999;">
