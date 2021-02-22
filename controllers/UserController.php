@@ -16,7 +16,10 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
-		return $this->render("login", ["model" => new LoginForm()]);
+		return $this->render("login", [
+			"msg" => "mensaje de prueba",
+			"model" => new LoginForm(),
+		]);
 	}
 
 	function actionCreate()

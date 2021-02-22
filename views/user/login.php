@@ -11,6 +11,11 @@ $this->title = "Login";
 $this->params["breadcrumbs"][] = $this->title;
 ?>
 <div class="site-login">
+	<?php if(isset($error)): ?>
+		<div class="alert alert-danger">
+			<?= $error ?>
+		</div>
+	<?php endif; ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Nuevo Usuario:</p>
@@ -50,11 +55,6 @@ $this->params["breadcrumbs"][] = $this->title;
 	<?= Html::beginForm(["user/create"], "get") ?>
 	<?= Html::submitButton("Crear Usuario", ["class" => "btn btn-primary"]) ?>
 	<?= Html::endForm() ?>
-	<?php if(isset($error)): ?>
-		<div class="alert alert-danger">
-		<?= $error ?>
-		</div>
-	<?php endif; ?>
 	
 
     <div class="col-lg-offset-1" style="color:#999;">
