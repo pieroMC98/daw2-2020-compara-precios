@@ -16,32 +16,39 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
-		return $this->render("login", [
-			"msg" => "mensaje de prueba",
-			"model" => new LoginForm(),
+		return $this->render('login', [
+			'msg' => 'mensaje de prueba',
+			'model' => new LoginForm(),
 		]);
 	}
 
 	function actionCreate()
 	{
-		return $this->render("create");
+		return $this->render('create');
 	}
 
 	function actionUpdate($id)
 	{
-		return $this->render("create", ["user" => User::findIdentity($id)]);
+		return $this->render('create', ['user' => User::findIdentity($id)]);
+	}
+
+	function actionGet($id)
+	{
+		return $this->render('get', ['user' => User::findIdentity($id)]);
 	}
 
 	function actionStorage()
 	{
 		$request = Yii::$app->request;
 		if (!$request->isPut) {
-			return $this->render("error");
+			return $this->render('error');
 		}
 
 		$new_user = new User();
-		$new_user->username = $request->post("name");
-		$new_user->password = $request->post("pass");
+		/* $new_user->username = $request->post('name'); */
+		/* $new_user->password = $request->post('pass'); */
+		if( $new_user->load(Yii::$app->request->post()) )
+			$this->responseJson($new_user);
 		$new_user->rool = $new_user->PROPIETARIO = true;
 		if ($new_user->validate()) {
 			return $this->responseJson($new_user);

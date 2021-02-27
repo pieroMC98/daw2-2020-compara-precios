@@ -5,7 +5,7 @@ use yii\behaviors\TimestampBehavior;
 
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
-	public int $id ;
+	public int $id;
 	public string $username;
 	public string $password;
 	public $authKey;
@@ -37,19 +37,19 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 	}
 
 	private static $users = [
-		"100" => [
-			"id" => "100",
-			"username" => "admin",
-			"password" => "admin",
-			"authKey" => "test100key",
-			"accessToken" => "100-token",
+		'100' => [
+			'id' => '100',
+			'username' => 'admin',
+			'password' => 'admin',
+			'authKey' => 'test100key',
+			'accessToken' => '100-token',
 		],
-		"101" => [
-			"id" => "101",
-			"username" => "demo",
-			"password" => "demo",
-			"authKey" => "test101key",
-			"accessToken" => "101-token",
+		'101' => [
+			'id' => '101',
+			'username' => 'demo',
+			'password' => 'demo',
+			'authKey' => 'test101key',
+			'accessToken' => '101-token',
 		],
 	];
 
@@ -67,7 +67,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
 		foreach (self::$users as $user) {
-			if ($user["accessToken"] === $token) {
+			if ($user['accessToken'] === $token) {
 				return new static($user);
 			}
 		}
@@ -84,7 +84,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 	public static function findByUsername($username)
 	{
 		foreach (self::$users as $user) {
-			if (strcasecmp($user["username"], $username) === 0) {
+			if (strcasecmp($user['username'], $username) === 0) {
 				return new static($user);
 			}
 		}

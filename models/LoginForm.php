@@ -26,11 +26,11 @@ class LoginForm extends Model
 	{
 		return [
 			// username and password are both required
-			[["username", "password"], "required"],
+			[['username', 'password'], 'required'],
 			// rememberMe must be a boolean value
-			["rememberMe", "boolean"],
+			['rememberMe', 'boolean'],
 			// password is validated by validatePassword()
-			["password", "validatePassword"],
+			['password', 'validatePassword'],
 		];
 	}
 
@@ -47,7 +47,7 @@ class LoginForm extends Model
 			$user = $this->getUser();
 
 			if (!$user || !$user->validatePassword($this->password)) {
-				$this->addError($attribute, "Incorrect username or password.");
+				$this->addError($attribute, 'Incorrect username or password.');
 			}
 		}
 	}
@@ -64,7 +64,7 @@ class LoginForm extends Model
 				$this->rememberMe ? 3600 * 24 * 30 : 0
 			);
 		} else {
-			return $this->render("login", ["error" => "Intentelo de nuevo."]);
+			return $this->render('login', ['error' => 'Intentelo de nuevo.']);
 		}
 
 		return false;
