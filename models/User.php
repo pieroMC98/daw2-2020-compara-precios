@@ -2,12 +2,29 @@
 
 namespace app\models;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
-	public int $id;
-	public string $username;
-	public string $password;
+	public $id;
+	public $nombre;
+	public $password;
+	public $r_password;
+	public $email;
+	public $nick;
+	public $apellidos;
+	public $direccion;
+	public $region_id;
+	public $telefono_contacto;
+	public $fecha_nacimiento;
+	public $fecha_registro;
+	public $confirmado;
+	public $fecha_acceso;
+	public $num_accesos;
+	public $bloqueado;
+	public $fecha_bloqueo;
+	public $notas_bloqueo;
 	public $authKey;
 	public $accessToken;
 
@@ -15,6 +32,45 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 	static $PROPIETARIO = false;
 	static $ADMINISTRADOR = false;
 	public $rool;
+
+	const SCENARIO_LOGIN = 'login';
+	const SCENARIO_REGISTER = 'register';
+
+	public static function tableName()
+	{
+		return 'usuarios';
+	}
+
+	public function scenarios()
+	{
+		return [
+			self::SCENARIO_LOGIN => ['email', 'password'],
+			self::SCENARIO_REGISTER => ['nombre', 'password', 'nick', 'email'],
+		];
+	}
+
+	public function rules()
+	{
+		return [
+			[['email', 'password', 'nombre'], 'required'],
+			['email', 'email'],
+			[
+				'email',
+				'unique',
+				'targetClass' => 'app\models\User',
+				'message' => 'Email ya existe',
+			],
+			['password', 'string', 'min' => 6],
+			['r_password', 'required'],
+			[
+				'r_password',
+				'compare',
+				'compareAttribute' => 'password',
+				'on' => 'register',
+				'message' => 'contrasehna no coinciden',
+			],
+		];
+	}
 
 	function isAdmin()
 	{
@@ -31,10 +87,10 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 		return self::$MODERADOR;
 	}
 
-	public function behaviors()
-	{
-		return TimestampBehavior::class;
-	}
+	/* public function behaviors() */
+	/* { */
+	/* return TimestampBehavior::class; */
+	/* } */
 
 	private static $users = [
 		'100' => [
