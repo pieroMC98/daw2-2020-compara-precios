@@ -27,16 +27,13 @@ class UserController extends Controller
 		$new_user = new User();
 		$new_user->scenario = User::SCENARIO_REGISTER;
 		$new_user->rool = User::$MODERADOR;
-		$new_user->confirmado = true;
-		/* $new_user->nombre = $new_user->nick = 'p1'; */
-		/* $new_user->password = 'contrasehna 11 '; */
-		/* $new_user->email='p@localhost.com'; */
-
 		if (
 			$new_user->load(Yii::$app->request->post()) &&
 			$new_user->validate()
 		) {
+			$new_user->confirmado = true;
 			$new_user->save();
+			Yii::$app->response->statusCode = 201;
 			return $this->render('//site/index', ['model' => $new_user]);
 		} else {
 			return $this->render('create', ['model' => $new_user]);
@@ -53,24 +50,17 @@ class UserController extends Controller
 		return $this->render('get', ['user' => User::findIdentity($id)]);
 	}
 
-	function actionStorage()
+	function actionDelete($id)
 	{
-		$request = Yii::$app->request;
-		if (!$request->isPut) {
-			return $this->render('error');
+		$delete = User::findOne($id);
+		if( $delete != null ) {
+			$delete->delete();
+			Yii::$app->response->statusCode = 202;
+			return $this->render('index',['msg'=>'Usuario Eliminado']);
+		} else {
+			Yii::$app->response->statusCode = 400;
+			return $this->render('index',['msg'=>'Error al eliminar']);
 		}
 
-		$new_user = new User();
-		/* $new_user->username = $request->post('name'); */
-		/* $new_user->password = $request->post('pass'); */
-		if ($new_user->load(Yii::$app->request->post())) {
-			$this->responseJson($new_user);
-		}
-		$new_user->rool = $new_user->PROPIETARIO = true;
-		if ($new_user->validate()) {
-			return $this->responseJson($new_user);
-		} else {
-			return null;
-		}
 	}
 }
