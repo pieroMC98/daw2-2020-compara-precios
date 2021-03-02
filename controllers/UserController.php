@@ -29,19 +29,14 @@ class UserController extends Controller
 		$new_user->rool = User::$MODERADOR;
 
 		if (!$new_user->load(Yii::$app->request->post())) {
-			/* return $this->responseJson([ */
-				/* 'msg' => 'Error en las entradas', */
-				/* $new_user->getAttributes(), */
-			/* ]); */
 			return $this->render('create', [
 				'model' => $new_user,
 				'msg' => 'Error de guardado',
 			]);
 		}
 
-		$new_user->email_UNIQUE = $new_user->email;
 		$new_user->confirmado = false;
-		if ($new_user->validate()) {
+		if (!$new_user->validate()) {
 			return $this->responseJson([
 				'msg' => 'Error en validacion',
 				$new_user->getAttributes(),

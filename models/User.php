@@ -13,7 +13,6 @@ class User extends ActiveRecord implements IdentityInterface
 	public $password;
 	public $r_password;
 	public $email;
-	public $email_UNIQUE;
 	public $nick;
 	public $apellidos;
 	public $direccion;
