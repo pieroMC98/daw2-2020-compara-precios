@@ -27,17 +27,36 @@ class UserController extends Controller
 		$new_user = new User();
 		$new_user->scenario = User::SCENARIO_REGISTER;
 		$new_user->rool = User::$MODERADOR;
-		if (
-			$new_user->load(Yii::$app->request->post()) &&
-			$new_user->validate()
-		) {
-			$new_user->confirmado = true;
-			$new_user->save();
-			Yii::$app->response->statusCode = 201;
-			return $this->render('//site/index', ['model' => $new_user]);
-		} else {
-			return $this->render('create', ['model' => $new_user]);
+
+		if (!$new_user->load(Yii::$app->request->post())) {
+			/* return $this->responseJson([ */
+				/* 'msg' => 'Error en las entradas', */
+				/* $new_user->getAttributes(), */
+			/* ]); */
+			return $this->render('create', [
+				'model' => $new_user,
+				'msg' => 'Error de guardado',
+			]);
 		}
+
+		$new_user->email_UNIQUE = $new_user->email;
+		$new_user->confirmado = false;
+		if ($new_user->validate()) {
+			return $this->responseJson([
+				'msg' => 'Error en validacion',
+				$new_user->getAttributes(),
+			]);
+		}
+
+		if (!$new_user->save()) {
+			return $this->render('site.index', [
+				'model' => $new_user,
+				'msg' => 'Error de guardado',
+			]);
+		}
+
+		Yii::$app->response->statusCode = 201;
+		return $this->render('//site/index', ['model' => $new_user]);
 	}
 
 	function actionUpdate($id)
@@ -53,14 +72,13 @@ class UserController extends Controller
 	function actionDelete($id)
 	{
 		$delete = User::findOne($id);
-		if( $delete != null ) {
+		if ($delete != null) {
 			$delete->delete();
 			Yii::$app->response->statusCode = 202;
-			return $this->render('index',['msg'=>'Usuario Eliminado']);
+			return $this->render('index', ['msg' => 'Usuario Eliminado']);
 		} else {
 			Yii::$app->response->statusCode = 400;
-			return $this->render('index',['msg'=>'Error al eliminar']);
+			return $this->render('index', ['msg' => 'Error al eliminar']);
 		}
-
 	}
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
@@ -12,6 +13,7 @@ class User extends ActiveRecord implements IdentityInterface
 	public $password;
 	public $r_password;
 	public $email;
+	public $email_UNIQUE;
 	public $nick;
 	public $apellidos;
 	public $direccion;
@@ -45,7 +47,18 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return [
 			self::SCENARIO_LOGIN => ['email', 'password'],
-			self::SCENARIO_REGISTER => ['nombre', 'password', 'nick', 'email'],
+			self::SCENARIO_REGISTER => [
+				'nombre',
+				'password',
+				'nick',
+				'email',
+				'email_UNIQUE',
+				'apellidos',
+				'direccion',
+				'telefono_contacto',
+				'fecha_nacimiento',
+				'r_password',
+			],
 		];
 	}
 
@@ -87,10 +100,17 @@ class User extends ActiveRecord implements IdentityInterface
 		return self::$MODERADOR;
 	}
 
-	/* public function behaviors() */
-	/* { */
-	/* return TimestampBehavior::class; */
-	/* } */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => TimestampBehavior::class,
+				'createdAtAttribute' => 'fecha_registro',
+				'updatedAtAttribute' => false,
+				'value' => new Expression('NOW()'),
+			],
+		];
+	}
 
 	private static $users = [
 		'100' => [
