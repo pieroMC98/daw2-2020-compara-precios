@@ -51,7 +51,6 @@ class User extends ActiveRecord implements IdentityInterface
 				'password',
 				'nick',
 				'email',
-				'email_UNIQUE',
 				'apellidos',
 				'direccion',
 				'telefono_contacto',

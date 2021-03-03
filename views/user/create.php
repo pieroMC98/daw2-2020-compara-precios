@@ -5,6 +5,7 @@ use yii\jui\DatePicker;
 ?>
 <h1>Esto es la creacion del usuario</h1>
 <?php
+		//Yii::$app->request->enableCsrfValidation = false;
 $form = ActiveForm::begin();
 echo $form
 	->field($model, 'nombre')

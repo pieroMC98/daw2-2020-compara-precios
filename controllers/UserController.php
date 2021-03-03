@@ -28,12 +28,21 @@ class UserController extends Controller
 		$new_user->scenario = User::SCENARIO_REGISTER;
 		$new_user->rool = User::$MODERADOR;
 
+		/* $sql = "insert into usuarios(`nombre`, `password`, `nick`, `email`, `apellidos`, `direccion`, `telefono_contacto`, `fecha_nacimiento`,`confirmado` */
+		/* ) values('yo', '123234523423432', 'p2','prueba@localhost.com','apellidos','direccion falsa n 3', 234234234234, 'Mat, 1 2021', false)"; */
+		/* if( !Yii::$app->db->createCommand($sql)->execute()){ */
+		/* 	echo $sql; */
+		/* 	die(); */
+		/* } */
+
 		if (!$new_user->load(Yii::$app->request->post())) {
 			return $this->render('create', [
 				'model' => $new_user,
 				'msg' => 'Error de guardado',
 			]);
 		}
+
+		//return $this->responseJson($new_user->getAttributes());
 
 		$new_user->confirmado = false;
 		if (!$new_user->validate()) {
@@ -43,8 +52,9 @@ class UserController extends Controller
 			]);
 		}
 
+		//return $this->responseJson(User::getDb());
 		if (!$new_user->save()) {
-			return $this->render('site.index', [
+			return $this->render('//site/index', [
 				'model' => $new_user,
 				'msg' => 'Error de guardado',
 			]);
