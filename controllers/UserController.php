@@ -27,6 +27,14 @@ class UserController extends Controller
 		$new_user = new User();
 		$new_user->scenario = User::SCENARIO_REGISTER;
 		$new_user->rool = User::$MODERADOR;
+		$new_user->nombre = 'yp';
+		$new_user->nick = 'nick de prueba';
+		$new_user->apellidos = 'apellido de prueba';
+		$new_user->direccion = 'calle false, numero 123';
+		$new_user->email = 'yp@localhost.com';
+		$new_user->fecha_nacimiento = 'Mar 2, 2021';
+		$new_user->telefono_contacto = '3245344536';
+		$new_user->password = 'password random';
 
 		/* $sql = "insert into usuarios(`nombre`, `password`, `nick`, `email`, `apellidos`, `direccion`, `telefono_contacto`, `fecha_nacimiento`,`confirmado` */
 		/* ) values('yo', '123234523423432', 'p2','prueba@localhost.com','apellidos','direccion falsa n 3', 234234234234, 'Mat, 1 2021', false)"; */
@@ -42,8 +50,6 @@ class UserController extends Controller
 			]);
 		}
 
-		//return $this->responseJson($new_user->getAttributes());
-
 		$new_user->confirmado = false;
 		if (!$new_user->validate()) {
 			return $this->responseJson([
@@ -52,6 +58,10 @@ class UserController extends Controller
 			]);
 		}
 
+		/* return $this->responseJson([ */
+		/* 	'msg' => 'datos', */
+		/* 	$new_user->getAttributes(), */
+		/* ]); */
 		//return $this->responseJson(User::getDb());
 		if (!$new_user->save()) {
 			return $this->render('//site/index', [
