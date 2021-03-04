@@ -59,8 +59,8 @@ class UserController extends Controller
 		}
 
 		/* return $this->responseJson([ */
-		/* 	'msg' => 'datos', */
-		/* 	$new_user->getAttributes(), */
+			/* 'msg' => 'datos', */
+			/* $new_user->getAttributes(), */
 		/* ]); */
 		//return $this->responseJson(User::getDb());
 		if (!$new_user->save()) {

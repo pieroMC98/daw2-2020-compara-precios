@@ -38,7 +38,7 @@ echo $form->field($model, 'email')->input('email');
 echo $form->field($model, 'password')->passwordInput();
 echo $form->field($model, 'r_password')->passwordInput();
 
-echo Html::submitButton('enviar get', ['class' => 'btn btn-primary']);
+echo Html::submitButton('cargar', ['class' => 'btn btn-primary']);
 ActiveForm::end();
 
 

@@ -13,9 +13,7 @@ class User extends ActiveRecord implements IdentityInterface
 	public $nombre;
 	public $password;
 	public $r_password;
-	public $email;
-	public $nick;
-	public $apellidos;
+	public $email; public $nick; public $apellidos;
 	public $direccion;
 	public $region_id;
 	public $telefono_contacto;
@@ -106,7 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
 				'class' => TimestampBehavior::class,
 				'createdAtAttribute' => 'fecha_registro',
 				'updatedAtAttribute' => false,
-				'value' => new Expression('NOW()'),
+				'value' => new Expression('date()'),
 			],
 		];
 	}
