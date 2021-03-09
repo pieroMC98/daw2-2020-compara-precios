@@ -5,7 +5,12 @@ use yii\jui\DatePicker;
 ?>
 <h1>Esto es la creacion del usuario</h1>
 <?php
-$form = ActiveForm::begin();
+//Yii::$app->request->enableCsrfValidation = false;
+$form = ActiveForm::begin([
+	'action' => ['user/create'],
+	'id' => 'userform',
+	'method' => 'post',
+]);
 echo $form
 	->field($model, 'nombre')
 	->textInput()
@@ -33,7 +38,7 @@ echo $form->field($model, 'email')->input('email');
 echo $form->field($model, 'password')->passwordInput();
 echo $form->field($model, 'r_password')->passwordInput();
 
-echo Html::submitButton('enviar get', ['class' => 'btn btn-primary']);
+echo Html::submitButton('cargar', ['class' => 'btn btn-primary']);
 ActiveForm::end();
 
 

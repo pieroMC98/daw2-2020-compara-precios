@@ -7,53 +7,52 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = "Login";
-$this->params["breadcrumbs"][] = $this->title;
+$this->title = 'Login';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-	<?php if(isset($error)): ?>
+	<?php if (isset($error)): ?>
 		<div class="alert alert-danger">
 			<?= $error ?>
 		</div>
 	<?php endif; ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Nuevo Usuario:</p>
-
+    <p>Login</p> 
     <?php $form = ActiveForm::begin([
-    	"id" => "login-form",
-    	"layout" => "horizontal",
-    	"fieldConfig" => [
-    		"template" =>
+    	'id' => 'login-form',
+    	'layout' => 'horizontal',
+    	'fieldConfig' => [
+    		'template' =>
     			"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-    		"labelOptions" => ["class" => "col-lg-1 control-label"],
+    		'labelOptions' => ['class' => 'col-lg-1 control-label'],
     	],
     ]); ?>
 
         <?= $form
-        	->field($model, "username")
-        	->textInput(["autofocus" => true]) ?>
+        	->field($model, 'username')
+        	->textInput(['autofocus' => true]) ?>
 
-        <?= $form->field($model, "password")->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
 
-        <?= $form->field($model, "rememberMe")->checkbox([
-        	"template" =>
+        <?= $form->field($model, 'rememberMe')->checkbox([
+        	'template' =>
         		"<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
 
 		<div class="form-row">
 			<div class="col">
-				<?= Html::submitButton("Login", [
-    	"class" => "btn btn-primary",
-    	"name" => "login-button",
+				<?= Html::submitButton('Login', [
+    	'class' => 'btn btn-primary',
+    	'name' => 'login-button',
     ]) ?>
 			</div>
 		</div>
     <?php ActiveForm::end(); ?>
 
 	
-	<?= Html::beginForm(["user/create"], "get") ?>
-	<?= Html::submitButton("Crear Usuario", ["class" => "btn btn-primary"]) ?>
+	<?= Html::beginForm(['user/create'], 'get') ?>
+	<?= Html::submitButton('Crear Usuario', ['class' => 'btn btn-primary']) ?>
 	<?= Html::endForm() ?>
 	
 

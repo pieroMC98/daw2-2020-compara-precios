@@ -16,6 +16,9 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
+		$post = Yii::$app->request->post();
+		$login = User::findIdentity($post['id']);
+		return $this->responseJson($login);
 		return $this->render('login', [
 			'msg' => 'mensaje de prueba',
 			'model' => new User(),
@@ -26,7 +29,15 @@ class UserController extends Controller
 	{
 		$new_user = new User();
 		$new_user->scenario = User::SCENARIO_REGISTER;
-		$new_user->rool = User::$MODERADOR;
+		//$new_user->rool = User::$MODERADOR;
+		/* $new_user->nombre = 'yp'; */
+		/* $new_user->nick = 'nick de prueba'; */
+		/* $new_user->apellidos = 'apellido de prueba'; */
+		/* $new_user->direccion = 'calle false, numero 123'; */
+		/* $new_user->email = 'yp@localhost.com'; */
+		/* $new_user->fecha_nacimiento = 'Mar 2, 2021'; */
+		/* $new_user->telefono_contacto = '3245344536'; */
+		/* $new_user->password = 'password random'; */
 
 		if (!$new_user->load(Yii::$app->request->post())) {
 			return $this->render('create', [
@@ -44,7 +55,7 @@ class UserController extends Controller
 		}
 
 		if (!$new_user->save()) {
-			return $this->render('site.index', [
+			return $this->redirect('index', [
 				'model' => $new_user,
 				'msg' => 'Error de guardado',
 			]);
