@@ -10,10 +10,10 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 
-if (isset($_SESSION['block']) && $_SESSION['block'] == true) {
-	Yii::$app->session->set('count', 0);
-	die();
-}
+/* if (isset($_SESSION['block']) && $_SESSION['block'] == true) { */
+	/* Yii::$app->session->set('count', 0); */
+	/* die(); */
+/* } */
 
 ?>
 	<?php if (Yii::$app->session->get('count')): ?>

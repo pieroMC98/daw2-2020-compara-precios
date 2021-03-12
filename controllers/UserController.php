@@ -40,6 +40,9 @@ class UserController extends Controller
 			]);
 		}
 
+			return $this->responseJson(function () {
+				return ['Error' => 'error en la sesion'];
+			});
 		if ($login->validatePassword($post['User']['password']) == false) {
 			$session['count'] = $session['count'] + 1;
 			return $this->render('login', [
