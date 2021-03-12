@@ -16,13 +16,18 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
-		$post = Yii::$app->request->post();
-		$login = User::findIdentity($post['id']);
-		return $this->responseJson($login);
-		return $this->render('login', [
-			'msg' => 'mensaje de prueba',
-			'model' => new User(),
-		]);
+		if ($post = Yii::$app->request->post()) {
+			return $this->responseJson(function () use ($post) {
+				return User::find()
+					->where(['email' => $post['User']['email']])
+					->one();
+			});
+		} else {
+			return $this->render('login', [
+				'msg' => 'mensaje de prueba',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
 	}
 
 	function actionCreate()

@@ -13,6 +13,7 @@ class User extends ActiveRecord implements IdentityInterface
 	/* public $nombre; */
 	/* public $password; */
 	public $r_password;
+	public $rememberMe;
 	/* public $email; public $nick; public $apellidos; */
 	/* public $direccion; */
 	/* public $region_id; */
@@ -44,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_LOGIN => ['email', 'password'],
+			self::SCENARIO_LOGIN => ['id','email', 'password','rememberMe'],
 			self::SCENARIO_REGISTER => [
 				'nombre',
 				'password',
