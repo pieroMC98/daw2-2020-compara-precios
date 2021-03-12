@@ -9,7 +9,19 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+if (isset($_SESSION['block']) && $_SESSION['block'] == true) {
+	Yii::$app->session->set('count', 0);
+	die();
+}
+
 ?>
+	<?php if (Yii::$app->session->get('count')): ?>
+		<div class="alert alert-danger" role="alert">
+			<?= Yii::$app->session->get('count') ?>
+		</div>
+	<?php endif; ?>
+
 <div class="site-login">
 	<?php if (isset($error)): ?>
 		<div class="alert alert-danger">
@@ -29,9 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
     	],
     ]); ?>
 
-        <?= $form
-        	->field($model, 'email')
-        	->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
@@ -54,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= Html::beginForm(['user/create'], 'get') ?>
 	<?= Html::submitButton('Crear Usuario', ['class' => 'btn btn-primary']) ?>
 	<?= Html::endForm() ?>
+
 	
 
     <div class="col-lg-offset-1" style="color:#999;">
