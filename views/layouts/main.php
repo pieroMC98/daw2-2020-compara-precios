@@ -42,13 +42,19 @@ AppAsset::register($this);
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
+            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Usuarios', 'url' => ['/user']]
+            ) : (
+                ['label' => Yii::$app->user->identity->username , 'url' => ['/user']]
+            ),
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Cerrar Sesión',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
