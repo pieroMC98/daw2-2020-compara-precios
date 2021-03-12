@@ -10,23 +10,52 @@ use app\Traits\ApiResponse;
 class UserController extends Controller
 {
 	use ApiResponse;
-	function logout()
+	function actionLogout()
 	{
+		Yii::$app->user->logout();
+		return $this->redirect(['site/index']);
 	}
 
 	function actionLogin()
 	{
-		$post = Yii::$app->request->post();
-		if($post=="")
-		{
-			$login = User::findIdentity($post['id']);
-			return $this->responseJson($login);
+
+		if (($post = Yii::$app->request->post()) == null) {
+			return $this->render('login', [
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
 		}
-		
-		return $this->render('login', [
-			'msg' => 'mensaje de prueba',
-			'model' => new User(),
-		]);
+
+		$login = User::find()
+			->where(['email' => $post['User']['email']])
+			->one();
+
+		$session = Yii::$app->session;
+		if (!isset($session['count'])) {
+			$session->set('count', 0);
+		}
+
+		if ($login == null) {
+			return $this->render('login', [
+				'msg' => 'mensaje de prueba',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
+
+		if ($login->validatePassword($post['User']['password']) == false) {
+			$session['count'] = $session['count'] + 1;
+			return $this->render('login', [
+				'msg' => 'mensaje de prueba',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
+
+		if (!Yii::$app->user->login(User::findidentity($login->id))) {
+			return $this->responseJson(function () {
+				return ['Error' => 'error en la sesion'];
+			});
+		}
+
+		return $this->redirect(['site/index']);
 	}
 
 	function actionCreate()

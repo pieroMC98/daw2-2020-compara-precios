@@ -10,6 +10,6 @@ trait ApiResponse
 	}
 
 	protected function responseJson($array) {
-		return $this->asJson(['data'=>$array]);
+		return $this->asJson(['data'=>$array()]);
 	}
 }
