@@ -18,6 +18,7 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
+
 		if (($post = Yii::$app->request->post()) == null) {
 			return $this->render('login', [
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
@@ -122,4 +123,35 @@ class UserController extends Controller
 			return $this->render('index', ['msg' => 'Error al eliminar']);
 		}
 	}
+	public function actionAdmin()
+	{
+		return $this->render('admin'); 
+		
+	}
+	public function actionUpdateRol($id, $opcion, $rol)
+    {
+        //Se crea un array con los roles para ascender o descender mas facilmente 
+        $roles= array("usuario" , "moderador", "admin", "sysadmin" );
+
+
+        $auth = Yii::$app->authManager;
+
+        if ($opcion=='ascender') 
+        {
+            $authorRole = $auth->getRole($rol);
+			if($authorRole ==null)
+			{
+				//Aqui devuelvo una pagina de error. Excepcion de error de acceso
+			}
+			if($auth->getAssignment ( $rol, $id ) == null)
+			{
+				$auth->revokeAll ( $id );
+				$auth->assign($authorRole, $id);
+			}
+        }
+
+		//crear la GRUD 
+		
+         return $this->redirect(['user/admin']);
+    }
 }
