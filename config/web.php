@@ -48,6 +48,9 @@ $config = [
 			'showScriptName' => false,
 			'rules' => [],
 		],
+		'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
 	],
 	'params' => $params,
 ];
