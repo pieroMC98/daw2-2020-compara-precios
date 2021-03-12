@@ -99,6 +99,16 @@ class SiteController extends Controller
     }
 
     /**
+     * User action.
+     *
+     * @return Response
+     */
+    public function actionUser()
+    {
+        return $this->render('user');
+    }
+
+    /**
      * Displays contact page.
      *
      * @return Response|string
