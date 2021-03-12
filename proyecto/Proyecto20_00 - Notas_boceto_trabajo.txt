@@ -1,0 +1,356 @@
+-----------------------------------------------------------------------------
+Trabajo:
+-----------------------------------------------------------------------------
+  Comparador de Precios de Productos, Comentarios y Valoraciones.
+-----------------------------------------------------------------------------
+Perfiles/Roles:
+-----------------------------------------------------------------------------
+  - Invitado
+  - Usuario
+  - Tienda
+  - Moderador
+  - Administrador
+  - SuperAdmin
+
+-----------------------------------------------------------------------------
+Mantenimientos (Privado):
+-----------------------------------------------------------------------------
+
+  - Usuarios, Roles, Registro usuarios, ...
+  - Tiendas, Supermercados, ...
+  - Imágenes o Logotipos de Tiendas, ...
+  - Artículos, Productos, Servicios, ...
+  - Imágenes de Artículos, ...
+  - Histórico de Precios, Variación/Evolución, ...
+  - Categorias, Etiquetas, ...
+  - Comentarios, Valoraciones, ... 
+  - Avisos, Notificaciones, Incidencias, ...
+  - Ofertas, Promociones, seguimiento de usuarios, ...
+  - Moderadores, Ámbitos de Moderacion (tiendas asignadas), ...
+  - Configuraciones
+  - Registro de Accesos/Acciones/Seguridad
+  - Procesos de Limpieza de Datos "antiguos".
+  - Copias de Seguridad (BD y Archivos)
+  
+  
+-----------------------------------------------------------------------------
+Portal (Publico):
+-----------------------------------------------------------------------------
+  USUARIOS
+    - Registro - alta
+    - Login
+    - Logout
+    - Consultar perfil:
+      - Modificar perfil
+      - Cambio de Contraseña y/o cuenta de correo
+      - Solicitar Baja (si queremos)
+      - Comunicar incidencia de su perfil (enviar mensaje a moderador/administrador)
+        *** Para ello el usuario debe tener en su perfil seleccionada la región
+            a la que pertenece, al menos país y comunidad,opcionalmente la provincia.
+      - Mantener preferencias de tiendas: categorias, etiquetas, palabras clave, ...
+      
+      - Gestionar favoritos del usuario:
+        - Mantener seguimiento de tiendas favoritas
+        - Mantener seguimiento de artículos favoritos
+        - Mantener seguimiento de ofertas favoritas
+        - Consultar variaciones de precios
+        
+      - Gestionar valoraciones/comentarios del usuario:
+        - Gestionar valoraciones/comentarios de artículos
+        - Gestionar valoraciones/comentarios de tiendas
+        
+      - Gestionar mensajes del usuario:
+        - Gestionar mensajes de incidencia de su perfil
+        - Gestionar mensajes de incidencias reportadas de tiendas
+        - Gestionar mensajes de incidencias reportadas de artículos
+      
+        
+    - Navegación por las opciones de la web:
+      
+      - Ver Clasificaciones
+        - Tiendas por clasificación
+      
+      - Ver Categorias/Subcategorias
+        - Artículos por categoria
+        
+      - Ver Nube de Etiquetas
+        - Tiendas por etiqueta
+        - Artículos por etiqueta
+        
+      - Búsquedas de tiendas por diversos términos: clasificación, categoría, etiquetas, ...
+      - Consultar/Ver resultados de tiendas con ficha resumida
+      - Consultar/Ver tiendas (ficha detallada):
+        - Consultar detalle de una tienda, con su imágen o imágenes, su 
+          valoración media, sus comentarios, ...
+        - Valorar/Comentar tienda (si está conectado)
+        - Denunciar tienda (mensaje de incidencia, si está conectado)
+        - Activar/Desactivar seguimiento de tienda como favorita
+        
+      - Búsquedas de artículos por diversos términos: clasificación de tienda, categoría, etiquetas, ...
+      - Consultar/Ver resultados de artículos con ficha resumida
+      - Consultar/Ver artículo (ficha detallada):
+        - Consultar detalle de un artículo, con su imágen, su valoración media,
+          sus comentarios, ...
+        - Valorar/Comentar artículo (si está conectado)
+        - Denunciar artículo (mensaje de incidencia, si está conectado)
+        - Activar/Desactivar seguimiento de artículo como favorito
+        - Consultar variaciones de precios (gráfica o tabla de datos históricos)
+          *** Aquí se puede tener configurado un periódo de tiempo en el que se
+              mostrarán los precios, o por ejemplo los últimos N precios del
+              artículo.
+      
+      - Búsquedas de ofertas por diversos términos: clasificación de tienda, categoría, etiquetas, fechas, regiones, ...
+      - Consultar/Ver resultados de ofertas con ficha resumida (o detallada directamente)
+      - Consultar/Ver oferta (ficha detallada):
+        - Consultar detalle de la oferta, viendo la tienda, el artículo,
+        su imágen, su valoración media, sus comentarios de oferta, ...
+        *** Si el usuario está conectado, también podrá:
+          - Valorar/Comentar oferta
+          - Denunciar oferta (mensaje de incidencia)
+          - Activar/Desactivar seguimiento de oferta como favorita
+        
+-----------------------------------------------------------------------------
+  USUARIOS TIENDA
+    - Consultar, Modificar y Solocitar Baja del perfil como tienda / propietario
+    
+    - Mantener artículos de la tienda:
+      - Crear artículos propios de la tienda si no existen dentro de los 
+        comunes a toda la aplicación. Si existen se hace una vinculación del
+        artículo con la tienda para poder hacer seguimiento de precios.
+      - Modificar artículos propios de la tienda
+        *** Siempre que los artículos sean particulares de la tienda, es 
+            decir, que no sean comunes a toda la aplicación.
+        *** Solo detalles relativos al precio del artículo cuando el artículo 
+            es común a toda la aplicación.
+      - Eliminar artículos propios de la tienda o Desvincular artículos 
+        comunes de la tienda.
+        *** En este caso si el artículo tiene histórico de precios no se puede
+            eliminar, sólo se ocultaría.
+      - Ocultar artículos de la tienda para que no sean visibles en el catálogo
+        principal, pero se pueden seguir viendo sus históricos.
+        
+    - Gestionar ofertas y promociones de los artículos de la tienda:
+      *** Relacionar oferta con un artículo durante un tiempo determinado.
+      *** Las ofertas también se consideran como datos válidos para el 
+          histórico de precios.
+      - Gestionar relación de ofertas con categorias
+      - Gestionar relación de ofertas con etiquetas
+      - Gestionar relación de ofertas con regiones
+      
+    - Consultar histórico de precios de los artículos de la tienda
+        *** Cualquier modificación en el precio de un artículo, deberá 
+        reflejarse en el histórico de precios.
+        
+    - Gestionar mensajes del usuario:
+      - Gestionar mensajes de incidencia de su perfil
+      - Gestionar mensajes de incidencias reportadas de sus tiendas
+      - Gestionar mensajes de incidencias reportadas de sus artículos
+        
+-----------------------------------------------------------------------------
+  USUARIOS MODERADOR
+    - Consultar, Modificar y Solicitar Baja del perfil como moderador
+    - Mantener/Revisar tiendas de las regiones que modera
+      *** Las tiendas que modera serán aquellas que estén asociadas a su misma
+          región, o a regiones de nivel inferior si las hay y no hay definidos
+          moderadores en las regiones inferiores.
+    - Mantener/Revisar artículos y precios de tiendas que modera
+    - Mantener/Revisar comentarios de tiendas que modera
+    - Mantener/Revisar comentarios de artículos de las tiendas que modera
+    - Mantener/Revisar usuarios de las regiones que modera
+      *** Los usuarios que modera serán aquellos que estén asociados a su misma
+          región, o a regiones de nivel inferior si las hay y no hay definidos
+          moderadores en las regiones inferiores.
+    - Mantener/Revisar mensajes de incidencia de los usuarios de las regiones que modera
+      *** Las incidencias de usuario las puede mantener cualquier moderador 
+          asociado a la región a la que pertenece el usuario.
+      *** Si no hay moderadores asociados con una región, las incidencias 
+          podrán ser mantenidas por moderadores de la región superior, y así 
+          sucesivamente hasta que se encuentre alguno. Si se terminan los 
+          niveles en las regiones (se llega a algún nivel superior raíz), será
+          respondable de su mantenimiento el administrador general, o algún
+          moderador que sea de tipo general, es decir, sin región asociada.
+    
+-----------------------------------------------------------------------------
+  USUARIOS ADMINISTRADOR
+    - Mantener/Revisar Usuarios
+    - Mantener Moderadores
+    - Mantener/Revisar Clasificaciones, Categorías y Etiquetas
+    - Mantener/Revisar tiendas en general
+    - Mantener/Revisar artículos en general
+    - Mantenimiento de la configuración de la aplicación
+    - Mantenimiento/Revisión de procesos de la aplicacción
+      - Limpieza de Mensajes
+      - Limpieza de Históricos
+      - Copias de Seguridad
+      - Actualización de Precios, si hay entradas masivas de datos externos a la aplicaicón
+    - ...
+-----------------------------------------------------------------------------
+  USUARIOS SUPER-ADMINISTRADOR
+    - Todas las opciones posibles de la aplicación
+    - Activar el perfil o rol con el que quiere trabajar en la aplicación para
+      trabajar "en nombre" de otro usuario
+    - Otros procesos de la aplicación o del sistema donde se ejecuta
+    
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------
+Diccionario de Datos:
+-----------------------------------------------------------------------------
+
+  - Tiendas
+    id,
+    nombre tienda, descripcion tienda, lugar tienda, url tienda, 
+    direccion tienda, Región tienda, telefono tienda, 
+    Clasificación, Etiquetas*, Imagen Principal, 
+    sumaValoraciones, sumaVotos,
+    visible, cerrada,
+    denuncias, fecha/hora primera denuncia, motivo denuncia, 
+    bloqueada, fecha/hora bloqueo, motivo bloqueo, 
+    Comentarios*, cerrado comentar,
+    ----- Datos del propietario
+    Usuario (para el acceso a la aplicacion)
+    ----- Datos del contacto o propietario
+    nif/cif,
+    nombre, apellidos, razon social, 
+    direccion, Región, telefono contacto, 
+    Registro de usuario (fecha/hora creacion, Usuario creador,
+        fecha/hora modificacion, Usuario modificador,
+        notas administrador),
+    Artículos-Tienda*,
+    Seguimientos*
+    
+  - Artículos
+    id,
+    nombre, descripcion,
+    Categoria, Etiquetas*, Imagen Principal,
+    visible, cerrado, marcado común o particular,
+    Artículos-Tienda*,
+    Registro de usuario
+    
+  - Artículos-Tienda
+    id,
+    Artículo, Tienda, Imagen (opcional), url artículo en tienda (opcional), 
+    precio actual, Historico-Precios*, Ofertas*,
+    sumaValoraciones, sumaVotos,
+    visible, cerrado,
+    denuncias, fecha/hora primera denuncia, motivo denuncia, 
+    bloqueado, fecha/hora bloqueo, motivo bloqueo, 
+    Comentarios*, cerrado comentar,
+    Registro de usuario
+    
+  - Clasificaciones
+    id,
+    nombre, descripcion, icono
+    
+  - Categorias
+    id,
+    nombre, descripcion, icono,
+    Categoria padre
+    
+  - Etiquetas
+    id,
+    nombre, descripcion
+    
+  - Tiendas-Etiquetas
+    Tienda, Etiqueta
+    
+  - Artículo-Etiquetas
+    Artículo, Etiqueta
+    
+  - Regiones
+    id,
+    clase ("C"=Continente, "P"=Pais, "E"=Estado, "P"=Provincia),
+    nombre, 
+    Región padre (o CERO si es raiz)
+    
+  - Historico-Precios
+    id,
+    Artículo, Tienda, 
+    fecha/hora, precio
+    
+  - Ofertas (o Promociones)
+    id,
+    Artículo, Tienda, texto, 
+    fecha/hora inicio, fecha/hora fin, precio oferta, precio original, 
+    Registro de usuario
+    
+  - Comentarios (y Valoraciones)
+    id,
+    Tienda, Articulo (o CERO si es de tienda)
+    valoracion, texto, Comentario padre, cerrado
+    denuncias, fecha/hora primera denuncia, motivo denuncia, 
+    bloqueado, fecha/hora bloqueo, motivo bloqueo, 
+    Registro de usuario
+    
+  - Seguimientos-Usuario (Favoritos de Tienda, Artículos, Ofertas)
+    id,
+    Usuario, 
+    Tienda (o CERO si no es de tienda), 
+    Articulo (o CERO si no es de artículo), 
+    Oferta (o CERO si no es de oferta)
+    fecha/hora de alta del seguimiento
+    
+  - Avisos-Usuario (Mensajes de Aviso, Incidencia, ...)
+    id,
+    fecha/hora,
+    clase (Aviso, Denuncia, Consulta, Mensaje generico, Bloqueo, ...)
+    texto,
+    Usuario destino,
+    Usuario origen,
+    Tienda (si la incidencia es de una tienda o artículo o CERO si no),
+    Articulo (si la incidencia es de un artículo o CERO si no),
+    Comentario (si la incidencia es de un comentario o CERO si no),
+    fecha/hora lectura (para el usuario destino),
+    fecha/hora aceptado (para los moderadores o administadores)
+    
+  - Moderadores
+    id,
+    Usuario,
+    nif/cif,
+    nombre, apellidos, razon_social
+    direccion, Región, telefono contacto,
+    Regiones-Moderador* (todas las que modera),
+    Tiendas-Moderador* (todas las que modera),
+    
+  - Regiones-Moderador
+    Moderador, Región
+    
+  - Usuarios Registrados (de cualquier tipo)
+    id,
+    email (login 1), password, nick (login 2),
+    nombre, apellidos, direccion, Región, 
+    telefono contacto, fecha nacimiento, 
+    fecha/hora registro, registro confirmado,
+    ----- El registro es automático cuando se crea un usuario desde
+    ----- la gestión interna, es decir, cuando se refiere a usuarios
+    ----- de tipo Tienda, Moderador o Administrador.
+    ----- En los usuarios que se registran a traves de la web, se debe
+    ----- realizar el proceso de registro por el correo electrónico.
+    fecha/hora acceso, numero accesos fallidos
+    bloqueado, fecha/hora bloqueo, motivo bloqueo
+    
+  - Configuraciones
+    clave, valor
+    
+  - Registro de Aplicación (Accesos, Acciones, Seguridad, ...)
+    *** Sistema de Log adecuado a la web.
+    
+  - Procesos de Limpieza de Datos "antiguos"
+    *** Sistema de procesos adecuado a la web.
+    
+  - Copias de Seguridad (BD y Archivos)
+    *** Sistema de copias de seguridad adecuado a la web.
+    
+-----------------------------------------------------------------------------
+Sorteo de Tareas de los Grupos de Trabajo: 921
+-----------------------------------------------------------------------------
+
+
+
+
+

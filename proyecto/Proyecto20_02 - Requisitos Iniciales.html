@@ -1,0 +1,405 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Proyecto en Grupo 2020 - 2. Requisitos Iniciales</title>
+</head>
+<body>
+<div class="bloque" style="font-family:arial;font-size:1.25em;text-align:justify;border:1.5mm solid #508050;margin:0.25em;padding:1em;">
+
+<div class="titulo titulo1" style="margin:5mm;font-size:2.0em;font-weight:bold">Proyecto en Grupo 2020</div>
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">2. Requisitos Iniciales.</div>
+
+<br/>
+&nbsp;&nbsp;&nbsp;Se desea diseñar un portal y aplicación web que sirva como <strong>Comparador de Precios de Productos, Comentarios y Valoraciones.</strong>.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;La aplicación será un portal web en el que principalmente se podrán ver, buscar y consultar diferentes artículos, visualizando sus diversos precios en función del comercio que lo vende, ver un histórico con la variación de precios que ha tenido, ver posibles ofertas, etc. Además también se podrá ver, buscar y consultar los comercios, tiendas, supermercados, que tienen los artículos con sus precios. Por último, se podrán poner comentarios y valoraciones a los artículos, a los comercios, etc., con la intención de que los usuarios opinen sobre ellos y sobre todo hacer indicaciones o recomendaciones.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrán realizar búsquedas mediante un sistema de filtros por la clasificación de los comercios, por categorías de artículos, por etiquetas en los comercios o artículos, por ubicación o regiones, por los más valorados, etc., y el resultado se mostrará como una lista resumida de resultados (paginados si son muchos), que coincidan con el filtro de búsqueda seleccionado o introducido... 
+¡Eso sí! -siempre que sean visibles públicamente, es decir, que tengan activado el indicador de visibilidad, ni que el comercio o artículo esté bloqueado por algún motivo.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrá elegir un comercio para visualizar su ficha con detalle, con sus datos completos, su nombre comercial, descripción, clasificación, etiquetas, logotipo o foto principal, ubicación del mismo, url (si tiene página web propia), valoraciones y comentarios recibidos, ofertas que pueda tener, artículos relacionados, etc.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrá elegir un artículo para visualizar su ficha con detalle, con sus datos completos, su nombre o denominación, descripción, categoría, etiquetas, imagen principal, comercios donde está a la venta o las url de acceso, valoraciones y comentarios recibidos, ofertas que pueda tener, precio según comercio, histórico de precios, etc.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;La aplicación además permitirá a los usuarios registrados mantener su perfil, mantener sus preferencias de tiendas o artículos por clasificación, categorías y/o etiquetas, mantener el seguimiento de tiendas o artículos favoritos, consultar variaciones de precios, crear comentarios en las tiendas o artículos, revisar los comentarios creados (no se podrán editar ni borrar a menos que lo autorice un moderador o administrador),recibir avisos y notificaciones de las tiendas o artículos seguidos, comunicar incidencias a los moderadores/administradores del sitio, comunicar posibles incidencias a los administradores del sitio sobre su perfil, tiendas o artículos, etc.
+<br/>
+<br/>
+
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requerimientos para el Público en general:</div>
+<div style="text-align:justify;margin:0em">
+<ul>
+<li><strong>Portada &quot;Inicial&quot; sin filtro:</strong>
+  <ul class="guion" style="">
+  <li>Una página inicial con la presentación del portal en la que se mostrará el logotipo del mismo en la parte superior.
+  </li>
+  <li>Una zona a la derecha de la presentación superior con el acceso al sitio (Login / Registro / Usuario conectado+Logout).
+  </li>
+  <li>Una zona bajo la presentación superior con una barra de navegación para las diferentes opciones de la web.
+  </li>
+  <li>Una zona a la izquierda con cuatro posibles secciones o bloques:
+    <ul>
+      <li>El primero o superior con una lista o menú de selección/filtro de clasificaciones de los comercios/tiendas, visible según tamaño de pantalla o dispositivo.
+      </li>
+      <li>El segundo con una nube de etiquetas relacionada con los comercios/tiendas, que serán enlaces para selección de filtro directo, y visible si la pantalla es suficientemente amplia.
+      </li>
+      <li>El tercero con un árbol de selección de categorías de artículos, visible según tamaño de pantalla o dispositivo.
+      </li>
+      <li>Y el cuarto o inferior con una nube de etiquetas relacionada con los artículos, que serán enlaces para selección de filtro directo y visible si la pantalla es suficientemente amplia.
+      </li>
+    </ul>
+  </li>
+  <li>Una zona central con los resultados de las vistas según la opción, sección o acción que se haya realizado en el portal. En este caso, en relación con la portada, cuando no hay filtro activo, se mostrará un bloque con una serie de &quot;fichas resumen&quot; de los N comercios/tiendas más relevantes según su valoración, un bloque con las &quot;fichas resumen&quot; de los N artículos más relevantes por su valoración, otros posibles bloques con los comercios más visitados, los más buscados, según ubicación del navegador del cliente del usuario conectado, ... Las mismas ideas de bloques para artículos, ... Y en general cualquier otro tipo de bloque que sea interesante para el portal de cara a atraer a los usuarios. 
+  </li>
+  <li>Notas:
+  <br/>
+  <strong>***</strong> En la zona derecha dentro de la barra de navegación, o en la zona central de la vista de resultados, se tendrá un enlace o un botón para acceder a un formulario de &quot;búsqueda avanzada&quot; en el que se podrán indicar filtros con todos los posibles datos de búsqueda de comercios o artículos, siempre que sean visibles y/o aprovechables desde el punto de vista de un usuario invitado.  
+  <br/>
+  <br/><strong>***</strong> Opcionalmente puede haber una zona derecha para un posible menú lateral donde se mostrarán una serie de anuncios u ofertas resumidas, de los posibles comercios/tiendas, etc.
+  <br/>
+  <br/><strong>***</strong> Se tendrá en cuenta que algunas de las zonas o bloques aquí indicados pueden ser parte de la plantilla pública principal de la aplicación.
+  </li>
+  </ul>
+</li>
+<br/>
+<li><strong>Portada &quot;Inicial&quot; con filtro:</strong>
+  Misma página inicial con la presentación del portal, comentada arriba, pero en este caso si se ha activado cualquier filtro de búsqueda, bien sea por enlaces directos por clasificación, categoría, o etiqueta, o bien por el formulario de búsqueda avanzado, se deberán mostrar los resultados en la zona central de la página. En este caso, la lista de comercios o artículos resultantes deberá salir paginada con unas 20 &quot;fichas resumen&quot; por página, intentando que cada línea tenga unas 4 fichas, y permitiendo movernos entre las posibles páginas resultantes. Se debe poder cambiar el número de resultados por página mediante un desplegable predefinido en el que se tendrán las opciones &quot;20&quot;, &quot;40&quot;, &quot;60&quot;, &quot;80&quot;, y &quot;100&quot;, nunca &quot;Todas&quot; porque no se sabe la cantidad de resultados que pueden obtenerse. El límite de 20 será un parámetro configurable en la aplicación.
+  <br/>
+  <strong>***</strong> Si se desactiva cualquier filtro activo, se volverá a mostrar la vista inicial o página principal sin filtrar. Para desactivar el filtro se puede incluir en la parte de arriba de la zona izquierda un botón/enlace para &quot;quitar filtro&quot; visible sólo cuando haya alguno activo.
+</li>
+<br/>
+<li><strong>Ver Comercio/Tienda:</strong>
+  Si se selecciona una de las &quot;fichas resumen de comercio&quot; se accederá a la ficha detalle del comercio o tienda, pudiéndose volver hacia atrás para continuar con el filtro que está activo en ese momento, para lo cual se deberá recordar dicha selección de alguna forma (por ejemplo manteniendo los parámetros de filtrado vía &quot;GET&quot; en los enlaces de vuelta atrás) para volver a aplicarlos al mostrar la página principal.
+  <br/>
+  <br/>
+  <ul>
+  <li>Si el usuario que está visitando un comercio es un usuario registrado, se podrá <strong>activar el seguimiento</strong> del mismo, es decir, que se hará seguidor y cualquier cambio, actualización o actividad relativa al mismo hará que se agregue una notificación para el usuario avisándole de ello. Así mismo, un usuario registrado que tenga activado el seguimiento podrá <strong>desactivarlo</strong> en cualquier momento, bien sea visitando de nuevo el comercio en cuestión, o desde una opción que tendrá en su perfil para ver todos los comercios de los que es seguidor.
+  </li>
+  <li>El comercio/tienda tendrá una opción desde la que podrá ser denunciado/censurado por otros usuarios en caso de que consideren que su información/contenido no es apropiado o adecuado para el sitio. Para el control de las denuncias del comercio se almacenará al menos un contador de denuncias (inicialmente a cero) y la fecha/hora de la primera denuncia. En caso de que se alcance un mínimo de denuncias (configurado en el sistema), pasará a estar bloqueado temporalmente hasta que sea resuelto (desbloqueado) por un moderador o administrador.
+  <br/>
+  <strong>***</strong> Se almacenará la denuncia como una incidencia en forma de aviso para los moderadores o administradores del sitio en el que se relacionará la clase de alerta, el comercio, el momento, el usuario que hace la denuncia y opcionalmente una nota acerca del motivo de la denuncia, por tanto, para que un usuario pueda denunciar, deberá haber accedido al sitio como usuario registrado.
+  </li>
+  <li>Se ofrecerá la posibilidad de <strong>valorar el comercio/tienda</strong> para usarlo en las recomendaciones, para lo que se mantendrán dos contadores para poder hacer la media, uno con el número de votos y otro con la suma de las valoraciones. Además se tendrán las valoraciones almacenadas con el usuario que la hace, el comercio que valora, la puntuación o valoración que le da, la fecha/hora del voto y el comentario de su valoración. Con esto se podrá mostrar tanto el recuento de valoraciones en la ficha del comercio o en las fichas resumidas, como los comentarios a cada valoración.
+  <br/>
+  <strong>***</strong> Se dispondrá de enlaces o botones para poder realizar la acción de valorar un comercio tanto si el usuario está conectado como sino, lo que en éste caso se pasará antes por la página de accedo para que el usuario se conecte antes de realizar su valoración.
+  <br/>
+  <strong>***</strong> En los textos de los comentarios no se deberá permitir crear elementos HTML potencialmente dañinos para la página, es decir, que lo que escriba el usuario no debe afectar a la visualización del comentario ni a su edición en el formulario.
+  </li>
+  <li>Las valoraciones y sobre todo los comentarios estarán moderados, con lo que aunque se publique inmediatamente tras su creación, podrá ser denunciado/censurado por otros usuarios, o corregidos y/o anulados por los administradores si los textos no son adecuados.
+  <br/>
+  <strong>***</strong> Para poder denunciar un comentario en cada entrada reciente (de menos de un tiempo preestablecido/configurado) aparecerá una opción para que otros usuarios registrados lo puedan hacer, en ese caso se almacenará un aviso para los administradores del sitio en el que se relacionará la clase de alerta, la valoración/comentario, el momento y el usuario que lo denuncia, y una nota opcional acerca del motivo de la denuncia.
+  </li>
+  <br/>
+      
+  <li>En general la vista completa del comercio/tienda tendrá:
+    <ul type="none" style="padding-left:1.25em">
+    <li>- Título o Nombre, Descripción, Notas del lugar, ...</li>
+    <li>- Ubicación y contacto del comercio: dirección + población, región (provincia, estado, país) &rarr; muy importante para los filtros, teléfono.</li>
+    <li>- Logotipo o Foto Principal del comercio.</li>
+    <li>- Clasificación y/o Imagen/Icono asociado a la Clasificación del comercio.</li>
+    <li>- Etiquetas asociadas al comercio.</li>
+    <li>- Valoración Media.</li>
+    <li>- Fecha de alta (algo como &quot;en la página desde... DD-MM-AAAA&quot;), </li>
+    <li>- URL externa relacionada con el comercio (en caso de tener web externa)</li>
+    <li>- Estado del comercio (esto sólo lo verá un administrador, moderador o usuario propietario, porque define la situación interna del comercio: activado, visible, cerrado, denunciado, bloqueado, ...)
+    </li>
+    <li>- Datos del comercio (esto sólo lo verá un administrador, moderador o usuario propietario: nif/cif, nombre, apellidos, dirección, región, teléfono contacto, ...
+    </li>
+    <li>- Estado del administrador (accesible a administradores o moderadores) con los detalles de denuncias y bloqueos.
+    </li>
+    <li>- Enlace a visualizar los Comentarios y Valoraciones del comercio.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener la acción o acciones necesarias para poder ver la &quot;Lista de Comentarios y Valoraciones&quot;. Estas acciones sólo serán accesibles a los usuarios propietarios del comercio, a administradores o moderadores.
+    </li>
+    <li>- Enlace al Mantenimiento de Artículos del comercio.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener las acciones necesarias para poder &quot;Administrar artículos del comercio&quot;. Estas acciones sólo serán accesibles a los usuarios propietarios del comercio, a administradores o moderadores.
+    </li>
+    <li>- Enlace al Mantenimiento de Ofertas del comercio.&quot;
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener las acciones necesarias para poder &quot;Administrar ofertas del comercio&quot;. Estas acciones sólo serán accesibles a los usuarios propietarios del comercio, a administradores o moderadores.
+    </li>
+    <li>- ...</li>
+    </ul>
+  </li>
+  </ul>
+</li>
+<br/>
+<li><strong>Ver Artículos de Comercios/Tiendas:</strong>
+  Si se selecciona una de las &quot;fichas resumen de artículo&quot; se accederá a la ficha detalle del artículo, pudiéndose volver hacia atrás para continuar con el filtro que está activo en ese momento, para lo cual se deberá recordar dicha selección de alguna forma (por ejemplo manteniendo los parámetros de filtrado vía &quot;GET&quot; en los enlaces de vuelta atrás) para volver a aplicarlos al mostrar la página principal.
+  <br/>
+  <br/>
+  <ul>
+  <li>Se mostrará en la ficha del artículo una parte o bloque con su información detallada, otra parte o bloque con la comparativa de ese artículo en N diferentes comercios o tiendas, con la posibilidad de que el usuario pueda acceder a una vista en la que se muestren toda la lista de comercios donde aparece ese artículo con el precio actual en cada uno. Además se puede mostrar otra parte con el resumen o histórico de precios que ha tenido ese artículo en los últimos N días, por ejemplo.
+  </li>
+  <li>Si el usuario que está visitando un artículo es un usuario registrado, se podrá <strong>activar el seguimiento</strong> del mismo, es decir, que se hará seguidor y cualquier cambio, actualización o actividad relativa al mismo hará que se agregue una notificación para el usuario avisándole de ello. Así mismo, un usuario registrado que tenga activado el seguimiento podrá <strong>desactivarlo</strong> en cualquier momento, bien sea visitando de nuevo el artículo en cuestión, o desde una opción que tendrá en su perfil para ver todos los artículos de los que es seguidor.
+  </li>
+  <li>Cada posible artículo/tienda tendrá una opción desde la que podrá ser denunciado/censurado por otros usuarios en caso de que consideren que su información/contenido no es apropiado o adecuado para el sitio. Para el control de las denuncias del artículo/tienda se almacenará al menos un contador de denuncias (inicialmente a cero) y la fecha/hora de la primera denuncia. En caso de que se alcance un mínimo de denuncias (configurado en el sistema), pasará a estar bloqueado temporalmente hasta que sea resuelto (desbloqueado) por un moderador o administrador.
+  <br/>
+  <strong>***</strong> Se almacenará la denuncia como una incidencia en forma de aviso para los moderadores o administradores del sitio en el que se relacionará la clase de alerta, el comercio, el artículo, el momento, el usuario que hace la denuncia y opcionalmente una nota acerca del motivo de la denuncia, por tanto, para que un usuario pueda denunciar, deberá haber accedido al sitio como usuario registrado.
+  </li>
+  <li>Se ofrecerá la posibilidad de <strong>valorar el artículo/tienda</strong> para usarlo en las recomendaciones, para lo que se mantendrán dos contadores para poder hacer la media, uno con el número de votos y otro con la suma de las valoraciones. Además se tendrán las valoraciones almacenadas con el usuario que la hace, el artículo/tienda que valora, la puntuación o valoración que le da, la fecha/hora del voto y el comentario de su valoración. Con esto se podrá mostrar tanto el recuento de valoraciones en la ficha del artículo/tienda o en las fichas resumidas, como los comentarios a cada valoración.
+  <br/>
+  <strong>***</strong> Se dispondrá de enlaces o botones para poder realizar la acción de valorar un artículo/tienda tanto si el usuario está conectado como sino, lo que en éste caso se pasará antes por la página de accedo para que el usuario se conecte antes de realizar su valoración.
+  <br/>
+  <strong>***</strong> En los textos de los comentarios no se deberá permitir crear elementos HTML potencialmente dañinos para la página, es decir, que lo que escriba el usuario no debe afectar a la visualización del comentario ni a su edición en el formulario.
+  </li>
+  <li>Las valoraciones y sobre todo los comentarios estarán moderados, con lo que aunque se publique inmediatamente tras su creación, podrá ser denunciado/censurado por otros usuarios, o corregidos y/o anulados por los administradores si los textos no son adecuados.
+  <br/>
+  <strong>***</strong> Para poder denunciar un comentario en cada entrada reciente (de menos de un tiempo preestablecido/configurado) aparecerá una opción para que otros usuarios registrados lo puedan hacer, en ese caso se almacenará un aviso para los administradores del sitio en el que se relacionará la clase de alerta, la valoración/comentario, el momento y el usuario que lo denuncia, y una nota opcional acerca del motivo de la denuncia.
+  </li>
+  <br/>
+      
+  <li>En general la vista completa del artículo/tienda tendrá:
+    <ul type="none" style="padding-left:1.25em">
+    <li>- Título o Nombre, Descripción, ...</li>
+    <li>- Logotipo o Foto Principal del artículo.</li>
+    <li>- Categoría y/o Imagen/Icono asociado a la misma del artículo.</li>
+    <li>- Etiquetas asociadas al artículo.</li>
+    <li>- Precios actuales: menor, mayor y medio que saldrán de los precios actuales del artículo en los comercios donde está relacionado.</li>
+    <li>- Valoración Media, que saldrá de las valoraciones medias del artículo en los comercios donde está relacionado.</li>
+    <li>- Fecha de alta (algo como &quot;en la página desde... DD-MM-AAAA&quot;), </li>
+    <li>- Estado del artículo (esto sólo lo verá un administrador o moderador: activado, visible, cerrado, marcado común, denunciado, bloqueado, ...).
+    </li>
+    <li>- Datos del artículo en los N comercios mejor valorados, o la opción siguiente...
+    </li>
+    <li>- Lista de comercios donde está disponible el artículo, con sus datos principales del estado, precio, valoración, ofertas, histórico de precios, url del artículo en la tienda, imagen alternativa, comentarios, etc.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Esta lista generaría una &quot;ficha resumida&quot; del artículo en el comercio relacionado, con la posibilidad de ir a ver los detalles del mismo (ver opción siguiente).
+    </li>
+    <li>- Enlace a visualizar los detalles de un artículo en un comercio.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener la acción o acciones necesarias para poder ver los &quot;Detalles de Artículo en Comercio&quot;. Siendo esos detalles los indicados en la opción anterior.
+    </li>
+    <li>- Estado del administrador con los detalles de denuncias y bloqueos por cada comercio donde está relacionado el artículo.
+    </li>
+    <li>- Enlace a visualizar los Comentarios y Valoraciones del artículo por comercio.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener la acción o acciones necesarias para poder ver la &quot;Lista de Comentarios y Valoraciones&quot; que saldrá filtrada por artículo.
+    </li>
+    <li>- Enlace a visualizar las Ofertas del artículo por comercio.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener la acción o acciones necesarias para poder ver la &quot;Lista de Ofertas&quot; que saldrá filtrada por artículo.
+    </li>
+    <li>- Enlace a visualizar el Histórico de precios del artículo por comercio. Puede ser interesante mostrar el histórico como una gráfica en lugar de una tabla de datos, o ambas opciones.
+      <br/>
+      <strong>&nbsp;&nbsp;&nbsp;***</strong> Será necesario tener la acción o acciones necesarias para poder ver la &quot;Lista de Precios&quot; que saldrá filtrada por artículo.
+    </li>
+    <li>- ...</li>
+    </ul>
+  </li>
+  </ul>
+</li>
+<br/>
+<li><strong>Agrupaciones por Clasificación:</strong>
+  Se dispondrá de una sección que mostrará los comercios según su clasificación, para poder centrarse en un tipo concreto, como por ejemplo:
+  <strong>&quot;Grandes Superficies&quot;, &quot;Supermercados&quot;, &quot;Comercio menor&quot;, &quot;Tienda Virtual&quot;</strong>, ...</strong>
+  <br/>*** Es importante tener una clasificación predefinida para organizar los comercios adecuadamente.
+</li>
+<br/>
+<li><strong>Agrupaciones por Categorías:</strong>
+  Se dispondrá de una sección que mostrará los artículos según un posible árbol de categorías, para poder centrarse en un tipo concreto, como por ejemplo:
+  <strong>&quot;Alimentación&quot; &rarr; &quot;Lácteos&quot; &rarr; &quot;Queso&quot;</strong>, o <strong>&quot;Ropa&quot; &rarr; &quot;Niños/as&quot; &rarr; &quot;Calcetines&quot;</strong>.
+  <br/>*** Es importante tener las categorías predefinidas y jerarquizadas para organizar los artículos adecuadamente.
+</li>
+<br/>
+<li><strong>Nube de Etiquetas de Comercios:</strong>
+  Apartado donde poder mostrar la nube de palabras clave o etiquetas más utilizadas en los comercios, pudiendo usar la etiqueta como enlace y filtro de búsqueda específico de los comercios relacionados. La nube puede ser un componente externo adicional a la aplicación que se inicia con enlaces a las N etiquetas que aparecen con mayor frecuencia en la descripción de los comercios.
+</li>
+<br/>
+<li><strong>Nube de Etiquetas de Artículos:</strong>
+  Lo mismo que la nube de etiquetas de comercios, pero adaptado a los artículos.
+</li>
+<br/>
+<li><strong>Ofertas de comercios/artículos:</strong>
+  Para que el portal tenga un sentido algo más <em>&quot;comercial&quot;</em>, se introduce la idea de las ofertas que pueden tener los comercios sobre sus artículos. Esta sección o zona con los posibles anuncios se pueden mostrar en función de las búsquedas que vaya haciendo el usuario, o de la región más cercana a la que pertenece el usuario conectado, por algún tipo de patrocinio o nivel de importancia, etc. Según se decida, se mostrarán más frecuentemente los establecimientos relacionados en la parte derecha de las páginas generadas.
+  <ul type="none" style="padding-left:1.25em">
+    <li>* Ofertas globales del portal.</li>
+    <li>* Ofertas por la clasificación del comercio.</li>
+    <li>* Ofertas por las etiquetas del comercio.</li>
+    <li>* Ofertas por la categoría del artículo.</li>
+    <li>* Ofertas por las etiquetas del artículo.</li>
+    <li>* Ofertas por una región de influencia.</li>
+  </ul>
+</li>
+<br/>
+<li><strong>Registro y Acceso de Usuarios:</strong>
+  Para que un usuario pueda colaborar en la web proporcionando valoraciones, comentarios, etc., deberá estar registrado y haber accedido a la aplicación como tal. 
+  Para ello se dispondrá de una gestión de usuarios y de un registro de cara al público para que puedan introducir sus datos de acceso y crearse como usuarios del sistema, pero no podrán acceder hasta que no hayan confirmado su registro mediante una validación por correo electrónico y/o un administrador así lo considere.
+  <br/>
+  *** En el acceso de usuarios existirá un control de intentos fallidos el cual servirá para bloquear a los usuarios que fallan el acceso un número predeterminado de intentos durante un intervalo de tiempo prefijado, para ello se tendrá al menos una fecha/hora del acceso y un contador de intentos fallidos. Cuando hay un acceso válido se almacenará la fecha/hora del momento y se establece el contador a cero. Cuando hay un acceso no válido, el contador se incrementa y si es el primer fallo, se almacenará la fecha/hora del momento, pero si no lo es, se comprueba el número de intentos frente al límite de fallos predeterminado, el cual, si se supera, se bloquerá el acceso del usuario durante un intervalo de tiempo prefijado (configuración del sistema), el cual debe transcurrir antes de volver a permitir el acceso, para ello se calcula la diferencia de tiempo desde el primer acceso fallido hasta el momento del acceso actual y si se supera el intervalo configurado, se reinicia el contador a cero antes de seguir con el proceso de comprobación. De cada situación fallida se informará con una incidencia a los administradores, se guardará un registro en un archivo de &quot;Log&quot; (o tabla en la base de datos) y se informará al usuario debidamente con los intentos pendientes antes de ser bloqueado o del tiempo restante antes de ser desbloqueado automáticamente.
+</li>
+<br/>
+  
+<li><strong>Perfil de Usuario:</strong>
+  Un usuario registrado pasa a ser automáticamente colaborador del sitio, con lo que aparte de poder consultar todos los comercios/tiendas y artículos disponibles, puede establecer sus preferencias, agregar valoraciones y comentarios, gestionarlos (según restricciones de administración), etc.
+  <ul>
+  <li><strong>Mi Perfil:</strong>
+    Podrá mantener su propia ficha de registro de usuario, tanto de los datos básicos de acceso (cambio de contraseña, de cuenta de correo), los datos del perfil del usuario (identificación, localización, contacto, ...).
+    <br/>
+    *** El usuario tendrá la opción de poder solicitar la baja de su perfil enviando una incidencia al moderador o administrador del sitio con la solicitud. Este tipo de notas se gestionarán como cualquier aviso o incidencia del sistema, pero con un indicador de &quot;baja&quot;.
+    <br/>
+    *** El usuario tendrá la opción de poder enviar una nota (como una clase de alerta) al moderador o administrador del sitio para comentarle cualquier cuestión que le surja. Este tipo de notas se gestionarán como cualquier aviso o incidencia del sistema, pero con un indicador de &quot;nota&quot; o &quot;consulta&quot;.
+  </li>
+  <li><strong>Avisos y Notificaciones:</strong>
+    Será una sección donde el usuario podrá visualizar y gestionar (marcar/desmarcar como leídos) todos y cada uno de los avisos/notificaciones que le lleguen en función de los comercios/tiendas o artículos que tenga en seguimiento u otro tipo de avisos del sistema.
+  </li>
+  <li><strong>Valoraciones/Comentarios en Comercios y/o Artículos:</strong>
+    Sección desde donde el usuario podrá navegar/ver de una forma rápida aquellos comercios y/o artículos a los que ha añadido alguna valoración/comentario. Un comentario no podrá ser modificado una vez creado a menos que sea solicitado/activado por un moderador u administrador del sitio, ya que de lo contrario se podrían estar cambiando los comentarios sin control alguno. Además, para su correcta gestión, los comentarios almacenarán como mínimo la relación con el comercio, el artículo, la fecha/hora de creación, el usuario que lo ha creado, la fecha/hora de la última modificación, el usuario que lo ha modificado (habitualmente el mismo que la crea), la valoración o puntuación y el texto del comentario.
+  </li>
+  <li><strong>Comercios Propios:</strong>
+    Esta opción se mostrará cuando el usuario sea propietario de algún comercio.
+    Será una sección donde el usuario podrá navegar/ver y/o gestionar los comercios que tenga relacionados como propietario. La lista de comercios se visualizará de la forma más cómoda posible para poder filtrar en función del estado, de la fecha de creación, nombre, ubicación, etc.
+    <br/>
+    *** En la gestión de un comercio, se podrán hacer cambios en el mismo siempre que no afecte al funcionamiento del sitio, es decir, se puede cambiar la información o eliminarlo mientras está en modo invisible o en activo (si no tiene otros datos relacionados), o también se podrá suspender la actividad del comercio indicando el motivo, almacenando también la fecha/hora de la cancelación, y por supuesto, avisando a los usuarios que lo siguen si los hubiera. También se podrá bloquear temporalmente o desbloquear por parte de los moderadores o administradores indicando el motivo del bloqueo (habitualmente por denuncia).
+    <br/>
+    *** Si un comercio propio fuera bloqueado, se debería poder ver el momento y el motivo del bloqueo, permitiéndole al usuario propietario subsanar el problema en un plazo de tiempo determinado y, posteriormente, poder avisar al moderador o administrador de que ya ha sido corregido para que se desbloquee.
+  </li>
+  <li><strong>Comercios o Artículos en Seguimiento:</strong>
+    Será una sección donde cualquier usuario podrá navegar/ver de una forma rápida por los comercios y/o artículos en los que está interesado y ha activado el seguimiento (sobre los que recibirá avisos y notificaciones). Podrá desactivar el seguimiento en cualquier momento que lo desee, aunque de forma automática se desactivará cuando un comercio o artículo se marque como eliminado tras haber notificado al usuario adecuadamente.
+  </li>
+  <li><strong>Alertas y Notas:</strong>
+    Esta opción se mostrará cuando el usuario sea administrador o esté activado como moderador de una o varias zonas.
+    Será una sección donde se podrá navegar/ver y gestionar todos los avisos de denuncias recibidos de comercios o artículos, o denuncias de comentarios introducidos, o notas que los usuarios envían directamente a la administración del sitio, pero solamente de la zona o zonas que modera.
+    En caso de que el usuario sea de tipo administrador del sitio, podrá ver todos los avisos.
+    <br/>
+    *** Esta sección quizá se deba separar en dos, una para la gestión de alertas sobre comercios, artículos, y comentarios en general, y otra para la gestión de notas de los usuarios, pero quizá se pueda mantener en una única vista si se gestionan adecuadamente las relaciones entre las diferentes alertas y notas.
+  </li>
+  </ul>
+</li>
+<br/>
+
+<li><strong>Servicios Web:</strong> Todas las opciones que se puedan realizar desde el interfaz web deberían poderse realizar mediante un API propio, el cual pueda ser usado desde aplicaciones externas o desde una aplicación web tipo SPI (Single Page Interface) compilada para dispositivos móviles. Dicho API debe servir para poder realizar las tareas propias de cualquier tipo de usuario registrado en el portal, a excepción del usuario administrador del sistema.
+</li>
+<br/>
+
+</ul>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requerimientos para las partes privadas (Usuarios Normales, Usuarios Moderadores, Usuarios Propietarios, Usuarios Administradores):</div>
+<div style="text-align:justify;margin:0em">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** En general se tendrán funciones básicas de Alta, Modificación, Baja, Consulta, Búsquedas/Filtrado.
+<ul>
+<li><strong>Mantenimiento de Usuarios:</strong>
+  Crear usuarios bajo demanda por petición para ser propietarios o para ser moderadores o administradores. El resto serán usuarios que se registran ellos mismos. Se podrán revisar los nuevos usuarios registrados automáticamente, bloquear usuarios por exceso de comercios, artículos, o de comentarios denunciados, desbloquear usuarios que han fallado el límite de intentos de acceso al sitio, ver el registro de fallos de acceso, eliminar registros antiguos de fallos de acceso, etc.
+  <br/>
+  *** En la gestión de usuarios colaboradores (Moderadores) se deberá tener en cuenta la opción de moderador de región y la región o regiones asignadas, es decir, la relación de un usuario registrado con las regiones que se permite gestionar o moderar. Las regiones son las propias ubicaciones (países, estados, provincias) en las que se localizan los usuarios (opcionalmente) y los comercios con sus artículos.
+  <br/>
+  *** En el detalle de la gestión de un usuario concreto, un administrador podrá ver la ficha con todas las opciones vinculadas con ese usuario, más o menos como se indica en el apartado &quot;Perfil de Usuario&quot;.
+  <br/>
+  *** Los roles disponibles estarán predefinidos de entre los indicados inicialmente.
+</li>
+<br/>
+<li><strong>Mantenimiento de Regiones:</strong>
+  Servirá a los administradores para gestionar las regiones de localización (o de influencia) de los comercios/tiendas, opcionalmente de los usuarios registrados, y por tanto de los moderadores/administradores que tengan asignadas dichas regiones. En concreto se mantendrán desde esta sección, los <strong>Países</strong>, posiblemente <strong>Estados</strong> o <strong>Comunidades</strong> dentro de un país, y <strong>Provincias</strong>.
+  <br/>
+  *** Los usuarios moderadores podrán estar asociados a diferentes regiones de influencia. Una región de influencia puede ser cualquiera de las áreas indicadas (una provincia, un estado, o un país, ...), y dependiendo de las asignaciones del usuario, éste podrá moderar todos los comercios, artículos y comentarios relacionados, del conjunto o unión de las regiones asignadas.
+</li>
+<br/>
+  
+<li><strong>Mantenimiento de Clasificaciones:</strong>
+  Poder gestionar la lista de clasificaciones que sirven para agrupar los comercios. No se debería eliminar una clasificación que esté siendo usada por algún comercio. Se debería poder unificar clasificaciones que se consideren como duplicadas o sean muy parecidas en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan una clasificación por la buena.
+</li>
+<br/>
+<li><strong>Mantenimiento de Categorías:</strong>
+  Poder gestionar la lista de categorías que sirven para agrupar los artículos. No se debería eliminar una categoría que esté siendo usada por algún artículo. Se debería poder unificar categorías que se consideren como duplicadas o sean muy parecidas en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan una categoría por la buena.
+  <br/>
+  *** A la hora de crear artículos, un usuario propietario podrá proponer categorías nuevas si de entre las existentes no existe la adecuada. 
+  Con esto se deberá tener un control de revisión de categorías nuevas para que los moderadores o administradores puedan detectarlas, revisarlas y actuar en consecuencia. Lo más oportuno es que al crear una categoría nueva, se genere un aviso de notificación para los moderadores o administradores de la región de influencia avisando de lo ocurrido.
+</li>
+<br/>
+<li><strong>Mantenimiento de Etiquetas:</strong>
+  Poder gestionar la lista de etiquetas que sirven para identificar los comercios o artículos. No se debería eliminar una etiqueta que esté siendo usada por algún registro (comercio o artículo). Se debería poder unificar etiquetas que se consideren como duplicadas o sean muy parecidas en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan una etiqueta por la buena.
+  <br/>
+  *** A la hora de crear comercios o artículos dentro de ellos, las etiquetas inicialmente se intentarán extraer de las palabras contenidas en el título y en la descripción, se limpiarán de caracteres no alfabéticos, se pasarán a minúscula y se ignorarán las palabras no significativas como artículos, conjunciones, etc. Si no fuera factible, se crearán las etiquetas manualmente, pudiendo un usuario propietario proponer etiquetas nuevas si de entre las existentes no son adecuadas para etiquetar el comercio o artículo en cuestión.
+  Con esto se deberá tener un control de revisión de etiquetas nuevas para que los moderadores o administradores puedan detectarlas, revisarlas y actuar en consecuencia. Lo más oportuno es que al crear una etiqueta nueva, se genere un aviso de notificación para los moderadores o administradores de la región de influencia avisando de lo ocurrido.
+</li>
+<br/>
+
+<li><strong>Mantenimiento de Comercios/Tiendas:</strong>
+  Un mantenimiento generalizado de los comercios o tiendas a nivel administrador, en la que se podrán ver y gestionar todos los existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha concreta se podrán ver los datos del comercio, tal y como se pueden gestionar desde un usuario normal, a excepción de algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo la gestión de denuncias o el bloqueo/desbloqueo del comercio, etc.
+  <br/>
+  El mantenimiento de un comercio incluirá la posible vinculación con un usuario propietario, la revisión y gestión de los usuarios que están siguiéndolo actualmente, la revisión / gestión de las valoraciones y comentarios creados, la revisión / gestión de las ofertas creadas, las posibles alertas de ese comercio, etc.
+</li>
+<br/>
+<li><strong>Mantenimiento de Artículos:</strong>
+  Un mantenimiento generalizado de los artículos a nivel administrador, en la que se podrán ver y gestionar todos los existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha concreta se podrán ver los datos principales del artículo, y tener un enlace u opción para acceder al mantenimiento de los artículos en cada comercio.
+</li>
+<br/>
+<li><strong>Mantenimiento de Artículos-Tienda:</strong>
+  Un mantenimiento generalizado de los artículos por cada comercio a nivel administrador, en la que se podrán ver y gestionar todas las relaciones existentes entre comercios y artículos, incluso dar de alta o baja según se considere oportuno. En cada ficha concreta se podrán ver los datos concretos del artículo en un comercio.
+  <br/>
+  El mantenimiento de un artículo-tienda incluirá la revisión y gestión de los usuarios que están siguiéndolos actualmente, la revisión / gestión de las valoraciones y comentarios creados, la revisión / gestión de las ofertas creadas, las posibles alertas de ese artículo en un comercio, las denuncias, los bloqueos, etc.
+  <br/>
+  La vista será similar a como se vería desde un usuario normal, a excepción de algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo la gestión de denuncias o el bloqueo/desbloqueo del artículo-tienda, etc.
+  <br/>
+</li>
+<br/>
+
+<li><strong>Mantenimiento de Precios de Artículos-Tienda:</strong>
+  Un mantenimiento generalizado de los artículos por cada comercio a nivel administrador, en la que se podrán ver y gestionar todos los precios que ha tenido un artículo por cada comercio al que esté relacionado a lo largo del tiempo, incluso dar de alta o baja según se considere oportuno.
+</li>
+<br/>
+
+<li><strong>Mantenimiento de Comentarios y Valoraciones de Comercios o Artículos:</strong>
+  Un mantenimiento generalizado de los comentarios hechos a los comercios o artículos a nivel administrador, en la que se podrán ver y gestionar todos los existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de comentario se podrán ver/mantener todos sus detalles y algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo el control de denuncias, el bloqueo/desbloqueo del comentario, etc.
+  <br/>
+  El mantenimiento de un comentario incluirá la posible vinculación con el comercio y el artículo (en su caso) al que se refiere el comentario, al comentario &quot;padre&quot; al que responde, a los comentarios &quot;hijo&quot; que tiene como respuesta, las posibles alertas del comentario, etc.
+</li>
+<br/>
+  
+<li><strong>Mantenimiento de Usuarios Propietarios:</strong>
+  Un mantenimiento de los usuarios que se registran o solicitan ser propietarios de un comercio o varios y tienen interés en gestionarlos por su cuenta.
+  Se crearán los propietarios a partir de usuarios registrados que hacen la solicitud de ser propietario de un comercio rellenando la ficha de solicitud con sus datos adicionales. Los administradores realizarán la aceptación del usuario como propietario asignando el comercio y el privilegio (Rol) asociado al usuario para que pueda realizar las acciones propias de dicho perfil.
+  <br/>
+  *** Se deberá permitir realizar una gestión más o menos completa de los artículos que den de alta estos usuarios &quot;propietario&quot; y la información relacionada con ellos.
+</li>
+<br/>
+<li><strong>Mantenimiento de Ofertas:</strong> 
+  El mantenimiento generalizado a nivel administrador de las ofertas que se hacen en un comercio, en la que se podrán ver y gestionar todos los datos existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de oferta se podrán ver los datos de al menos las fechas/horas de inicio y fin de la oferta, el comercio y artículo relacionado, su texto descriptivo, los precios de la oferta, y algunas acciones adicionales para cerrarlas manualmente antes de que pase la fecha/hora de finalización.
+</li>
+<br/>
+<li><strong>Mantenimiento de Avisos / Incidencias:</strong>
+  El mantenimiento generalizado de los avisos e incidencias a nivel administrador, en el que se podrán ver y gestionar todos los avisos existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de aviso se podrán ver los datos del mismo y algunas acciones adicionales para permitir revisar y dar respuesta al aviso desde el punto de vista de moderador/administrador. En el caso de la vista con la versión para otros usuarios registrados, se podrá responder al mismo.
+  <br/>
+  El mantenimiento de un aviso incluirá la posible vinculación con el usuario origen y destino del mismo, con el anuncio y/o comentario relacionado (si lo hay), la fecha/hora de lectura por el usuario destino, y la fecha/hora de aceptación por un moderador/administrador.
+</li>
+<br/>
+<li><strong>Mantenimiento de Registros (LOG): </strong>
+  Mantenimiento y visualización de los registro de LOG que se generen en el sistema, con posibilidad de poder exportar los registros en archivo de texto o de eliminar los registros que cumplan un filtro establecido. Además se deberá tener un proceso que permita eliminar automáticamente los registros &quot;anticuados&quot;.
+</li>
+<br/>
+<li><strong>Utilidades: </strong>
+  <ul>
+    <li>Procesos de limpieza de datos antiguos.
+    </li>
+    <li>Configuración de parámetros del sistema.
+    </li>
+    <li>Copias de Seguridad y Restauración de los datos y archivos de imágenes de la aplicación.
+    </li>
+  </ul>
+</li>
+<br/>
+  
+</ul>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requisitos de Información / Datos:
+<p>
+*** Ver estructura de la base de datos.
+</p>
+</div>
+
+
+</div>
+
+</body>
+</html>
