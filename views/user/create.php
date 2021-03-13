@@ -3,9 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 ?>
-<h1>Esto es la creacion del usuario</h1>
+<h1>Nuevo usuario</h1>
 <?php
-//Yii::$app->request->enableCsrfValidation = false;
 $form = ActiveForm::begin([
 	'action' => ['user/create'],
 	'id' => 'userform',
