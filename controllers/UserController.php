@@ -3,8 +3,6 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\User;
-use app\models\LoginForm;
-use yii\web\Request;
 use app\Traits\ApiResponse;
 
 class UserController extends Controller
@@ -18,7 +16,6 @@ class UserController extends Controller
 
 	function actionLogin()
 	{
-
 		if (($post = Yii::$app->request->post()) == null) {
 			return $this->render('login', [
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
@@ -30,7 +27,7 @@ class UserController extends Controller
 			->one();
 
 		$session = Yii::$app->session;
-		if (!isset($session['count'])) {
+		if (!isset($session['count']) || $session['count'] == 3) {
 			$session->set('count', 0);
 		}
 
@@ -41,9 +38,6 @@ class UserController extends Controller
 			]);
 		}
 
-			return $this->responseJson(function () {
-				return ['Error' => 'error en la sesion'];
-			});
 		if ($login->validatePassword($post['User']['password']) == false) {
 			$session['count'] = $session['count'] + 1;
 			return $this->render('login', [
@@ -65,15 +59,6 @@ class UserController extends Controller
 	{
 		$new_user = new User();
 		$new_user->scenario = User::SCENARIO_REGISTER;
-		//$new_user->rool = User::$MODERADOR;
-		/* $new_user->nombre = 'yp'; */
-		/* $new_user->nick = 'nick de prueba'; */
-		/* $new_user->apellidos = 'apellido de prueba'; */
-		/* $new_user->direccion = 'calle false, numero 123'; */
-		/* $new_user->email = 'yp@localhost.com'; */
-		/* $new_user->fecha_nacimiento = 'Mar 2, 2021'; */
-		/* $new_user->telefono_contacto = '3245344536'; */
-		/* $new_user->password = 'password random'; */
 
 		if (!$new_user->load(Yii::$app->request->post())) {
 			return $this->render('create', [
@@ -98,18 +83,20 @@ class UserController extends Controller
 		}
 
 		Yii::$app->response->statusCode = 201;
-		return $this->render('//site/index', ['model' => $new_user]);
+		$_POST['User'] = $new_user;
+		$this->actionLogin();
+	}
+
+	function actionGet()
+	{
+		return $this->render('view', ['model' => Yii::$app->user]);
 	}
 
 	function actionUpdate($id)
 	{
-		return $this->render('create', ['user' => User::findIdentity($id)]);
+		return $this->render('create', ['model' => User::findIdentity($id)]);
 	}
 
-	function actionGet($id)
-	{
-		return $this->render('get', ['user' => User::findIdentity($id)]);
-	}
 
 	function actionDelete($id)
 	{
@@ -125,33 +112,29 @@ class UserController extends Controller
 	}
 	public function actionAdmin()
 	{
-		return $this->render('admin'); 
-		
+		return $this->render('admin');
 	}
+
 	public function actionUpdateRol($id, $opcion, $rol)
-    {
-        //Se crea un array con los roles para ascender o descender mas facilmente 
-        $roles= array("usuario" , "moderador", "admin", "sysadmin" );
+	{
+		//Se crea un array con los roles para ascender o descender mas facilmente
+		$roles = ['usuario', 'moderador', 'admin', 'sysadmin'];
 
+		$auth = Yii::$app->authManager;
 
-        $auth = Yii::$app->authManager;
-
-        if ($opcion=='ascender') 
-        {
-            $authorRole = $auth->getRole($rol);
-			if($authorRole ==null)
-			{
+		if ($opcion == 'ascender') {
+			$authorRole = $auth->getRole($rol);
+			if ($authorRole == null) {
 				//Aqui devuelvo una pagina de error. Excepcion de error de acceso
 			}
-			if($auth->getAssignment ( $rol, $id ) == null)
-			{
-				$auth->revokeAll ( $id );
+			if ($auth->getAssignment($rol, $id) == null) {
+				$auth->revokeAll($id);
 				$auth->assign($authorRole, $id);
 			}
-        }
+		}
 
-		//crear la GRUD 
-		
-         return $this->redirect(['user/admin']);
-    }
+		//crear la GRUD
+
+		return $this->redirect(['user/admin']);
+	}
 }
