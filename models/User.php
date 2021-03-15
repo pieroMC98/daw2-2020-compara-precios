@@ -124,7 +124,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
-		foreach (self::$users as $user) {
+		foreach (self::find()->all() as $user) {
 			if ($user['accessToken'] === $token) {
 				return new static($user);
 			}
@@ -141,7 +141,7 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public static function findByUsername($username)
 	{
-		foreach (self::$users as $user) {
+		foreach (self::find()->all() as $user) {
 			if (strcasecmp($user['username'], $username) === 0) {
 				return new static($user);
 			}
