@@ -12,6 +12,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
+
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -41,14 +42,17 @@ AppAsset::register($this);
     		['label' => 'Contact', 'url' => ['/site/contact']],
     		['label' => 'Categorías', 'url' => ['/categorias']],
     		Yii::$app->user->isGuest
-    			? ['label' => 'Login', 'url' => ['/user/login']]
+    			? [
+    				'label' => 'Login',
+    				'url' => ['/user/login'],
+    			]
     			: [
     				'label' => Yii::$app->user->identity->nick,
     				'items' => [
     					[
     						'label' => 'Cuenta',
-    						'url' =>
-    							'/user/get?id=' . Yii::$app->user->identity->id,
+    						'url' => ['/user/get'],
+    						'id' => Yii::$app->user->identity->id,
     					],
     					['label' => 'logout', 'url' => '/user/logout'],
     				],

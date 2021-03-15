@@ -11,14 +11,19 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 
 /* if (isset($_SESSION['block']) && $_SESSION['block'] == true) { */
-	/* Yii::$app->session->set('count', 0); */
-	/* die(); */
+/* Yii::$app->session->set('count', 0); */
+/* die(); */
 /* } */
-
 ?>
-	<?php if (Yii::$app->session->get('count')): ?>
+	<?php if (isset($msg)): ?>
 		<div class="alert alert-danger" role="alert">
-			<?= Yii::$app->session->get('count') ?>
+			<?= $msg ?>
+		</div>
+	<?php endif; ?>
+
+	<?php if ($model->num_accesos): ?>
+		<div class="alert alert-danger" role="alert">
+			<?= $model->num_accesos ?>
 		</div>
 	<?php endif; ?>
 

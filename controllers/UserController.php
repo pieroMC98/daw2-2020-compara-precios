@@ -25,24 +25,31 @@ class UserController extends Controller
 		$login = User::find()
 			->where(['email' => $post['User']['email']])
 			->one();
+		$login->scenario = User::SCENARIO_LOGIN;
 
-		$session = Yii::$app->session;
-		if (!isset($session['count']) || $session['count'] == 3) {
-			$session->set('count', 0);
+		if ($login->num_accesos == 3) {
+			$login->num_accesos = 0;
+			$login->bloqueado = true;
+			$login->update();
+			return $this->render('login', [
+				'msg' => 'Usuario bloqueado',
+				'model' => $login
+			]);
 		}
 
 		if ($login == null) {
 			return $this->render('login', [
-				'msg' => 'mensaje de prueba',
-				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+				'msg' => '',
+				'model' => $login
 			]);
 		}
 
 		if ($login->validatePassword($post['User']['password']) == false) {
-			$session['count'] = $session['count'] + 1;
+			$login->num_accesos += 1;
+			$login->update();
 			return $this->render('login', [
-				'msg' => 'mensaje de prueba',
-				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+				'msg' => 'Contraseña incorrecta',
+				'model' => $login
 			]);
 		}
 
@@ -89,14 +96,13 @@ class UserController extends Controller
 
 	function actionGet()
 	{
-		return $this->render('view', ['model' => Yii::$app->user]);
+		return $this->render('view', ['model' => Yii::$app->user->identity]);
 	}
 
 	function actionUpdate($id)
 	{
 		return $this->render('create', ['model' => User::findIdentity($id)]);
 	}
-
 
 	function actionDelete($id)
 	{

@@ -45,7 +45,14 @@ class User extends ActiveRecord implements IdentityInterface
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_LOGIN => ['id','email', 'password','rememberMe'],
+			self::SCENARIO_LOGIN => [
+				'id',
+				'email',
+				'password',
+				'rememberMe',
+				'bloqueado',
+				'num_accesos',
+			],
 			self::SCENARIO_REGISTER => [
 				'nombre',
 				'password',
@@ -83,21 +90,6 @@ class User extends ActiveRecord implements IdentityInterface
 		];
 	}
 
-	/* function isAdmin() */
-	/* { */
-	/* 	return self::$ADMINISTRADOR; */
-	/* } */
-
-	/* function isPropietario() */
-	/* { */
-	/* 	return self::$PROPIETARIO; */
-	/* } */
-
-	/* function isModerador() */
-	/* { */
-	/* 	return self::$MODERADOR; */
-	/* } */
-
 	public function behaviors()
 	{
 		return [
@@ -109,7 +101,6 @@ class User extends ActiveRecord implements IdentityInterface
 			],
 		];
 	}
-
 
 	/**
 	 * {@inheritdoc}
