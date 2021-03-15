@@ -38,11 +38,24 @@ class CategoriasController extends Controller
         $searchModel = new CategoriasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $query = Categoria::find()->where(['status' => 1]);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count]);
+
+        // limit the query using the pagination and retrieve the articles
+        $categorias = $query->offset($pagination->offset)
+
+        ->limit($pagination->limit)
+        ->$pageSize(10);
         return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
         ]);
     }
+    
 
     /**
      * Displays a single Categorias model.

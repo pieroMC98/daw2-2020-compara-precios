@@ -133,7 +133,6 @@ class UserController extends Controller
         //Se crea un array con los roles para ascender o descender mas facilmente 
         $roles= array("usuario" , "moderador", "admin", "sysadmin" );
 
-
         $auth = Yii::$app->authManager;
 
         if ($opcion=='ascender') 

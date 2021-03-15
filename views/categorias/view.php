@@ -35,6 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'icono',
             'categoria_id',
         ],
-    ]) ?>
+    ]) 
+    ?>
+    <?= LinkPager::widget([
+    'pagination' => $pagination,
+    ?>
+]);
+
+   
 
 </div>
