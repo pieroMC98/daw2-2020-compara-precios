@@ -25,23 +25,49 @@ class UserController extends Controller
 		$login = User::find()
 			->where(['email' => $post['User']['email']])
 			->one();
+                $login->scenario = User::SCENARIO_LOGIN;
 
 		$session = Yii::$app->session;
-		if (!isset($session['count']) || $session['count'] == 3) {
+		if (!isset($session['count'])) {
 			$session->set('count', 0);
-		}
+                }
+                
+                if ($session['count'] >= 3 && $login->bloqueado != 1) {
+                    $time = new \DateTime('now', new \DateTimeZone('+1'));
+                    $login->bloqueado = 1;
+                    $login->fecha_bloqueo = $time->format("Y-m-d H:i:s");
+                    $login->save();
+                }
+                
+                if ($login->bloqueado == 1) {
+                    $time = new \DateTime('now', new \DateTimeZone('+1'));
+                    $fecha_bloqueo = new \DateTime($login->fecha_bloqueo, new \DateTimeZone('+1'));
+                    $fecha_bloqueo->modify("+5 minutes");
+                    if ($time->format("Y-m-d H:i:s") > $fecha_bloqueo->format("Y-m-d H:i:s")) {
+                        $session['count'] = 0;
+                        $login->bloqueado = 0;
+                        $login->save();
+                    }
+                    
+                    return $this->render('login', [
+                            'error' => 'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
+                            'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+                    ]);
+                }
 
 		if ($login == null) {
 			return $this->render('login', [
-				'msg' => 'mensaje de prueba',
+				'msg' => 'No ha funcionado',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
 
 		if ($login->validatePassword($post['User']['password']) == false) {
 			$session['count'] = $session['count'] + 1;
+                        $login->num_accesos = $session['count'];
+                        $login->save();
 			return $this->render('login', [
-				'msg' => 'mensaje de prueba',
+				'msg' => 'Invalido',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
@@ -51,10 +77,10 @@ class UserController extends Controller
 				return ['Error' => 'error en la sesion'];
 			});
 		}
-
+                
 		return $this->redirect(['site/index']);
 	}
-
+	
 	function actionCreate()
 	{
 		$new_user = new User();
@@ -122,7 +148,6 @@ class UserController extends Controller
 
 		$auth = Yii::$app->authManager;
 
-		if ($opcion == 'ascender') {
 			$authorRole = $auth->getRole($rol);
 			if ($authorRole == null) {
 				//Aqui devuelvo una pagina de error. Excepcion de error de acceso
@@ -130,10 +155,8 @@ class UserController extends Controller
 			if ($auth->getAssignment($rol, $id) == null) {
 				$auth->revokeAll($id);
 				$auth->assign($authorRole, $id);
-			}
+			
 		}
-
-		//crear la GRUD
 
 		return $this->redirect(['user/admin']);
 	}

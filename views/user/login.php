@@ -12,15 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 /* if (isset($_SESSION['block']) && $_SESSION['block'] == true) { */
 	/* Yii::$app->session->set('count', 0); */
-	/* die(); */
-/* } */
-
-?>
+	/* die();
 	<?php if (Yii::$app->session->get('count')): ?>
 		<div class="alert alert-danger" role="alert">
 			<?= Yii::$app->session->get('count') ?>
 		</div>
-	<?php endif; ?>
+	<?php endif;?> */
+/* } */
+
+?>
+	
 
 <div class="site-login">
 	<?php if (isset($error)): ?>

@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -184,4 +184,22 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->password === $password;
 	}
+	
+	public function getRol()
+	{
+		$auth = Yii::$app->authManager;
+		$roles = $auth->getAssignments ( $this->id );
+		if(count($roles)>0)
+		{
+			
+			return array_keys($roles)[0];
+		}else{
+			return NULL;
+		}
+	}
+	//atributo virtual para rescribir
+	//Set roles
+	//comparar si lo que escribe es un role valido
+	//si es valido implementarlo
+	//revocar el anterior.
 }
