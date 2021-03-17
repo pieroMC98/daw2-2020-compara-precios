@@ -35,6 +35,7 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
+        $login = Yii::$app->user->identity;
         $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		$dataProvider->pagination = ['pageSize' => 10,];
@@ -51,6 +52,11 @@ class UsuariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    function actionGet()
+	{
+		return $this->render('view', ['model' => Yii::$app->user->identity]);
+	}
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -96,7 +102,6 @@ class UsuariosController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
      * Deletes an existing user model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

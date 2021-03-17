@@ -115,14 +115,13 @@ class UserController extends Controller
 
 	function actionGet()
 	{
-		return $this->render('view', ['model' => Yii::$app->user]);
+		return $this->render('view', ['model' => Yii::$app->user->identity]);
 	}
 
 	function actionUpdate($id)
 	{
 		return $this->render('create', ['model' => User::findIdentity($id)]);
 	}
-
 
 	function actionDelete($id)
 	{
