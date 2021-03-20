@@ -26,7 +26,6 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody(); ?>
-
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -42,10 +41,7 @@ AppAsset::register($this);
     		['label' => 'Contact', 'url' => ['/site/contact']],
     		['label' => 'Categorías', 'url' => ['/categorias']],
     		Yii::$app->user->isGuest
-    			? [
-    				'label' => 'Login',
-    				'url' => ['/user/login'],
-    			]
+    			? ['label' => 'Login', 'url' => ['/user/login']]
     			: [
     				'label' => Yii::$app->user->identity->nick,
     				'items' => [
@@ -61,6 +57,16 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
+	<?php if (isset($this->params['msg']) && $this->params['msg'] != ''): ?>
+		<div class="container">
+				<div class="alert alert-warning " role="alert">
+<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert"> -->
+					<strong>
+						<?= $this->params['msg'] ?>
+					</strong>
+				</div>
+		</div>
+	<?php endif; ?>
     <div class="container">
         <?= Breadcrumbs::widget([
         	'links' => isset($this->params['breadcrumbs'])
