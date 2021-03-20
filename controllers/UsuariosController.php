@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Categorias;
-use app\models\CategoriasSearch;
+use app\models\Usuarios;
+use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoriasController implements the CRUD actions for Categorias model.
+ * UsuariosController implements the CRUD actions for user model.
  */
-class CategoriasController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,29 +30,33 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Lists all Categorias models.
+     * Lists all user models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriasSearch();
+        $login = Yii::$app->user->identity;
+        $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination = ['pageSize' => 10,];
+		$dataProvider->pagination = ['pageSize' => 10,];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
         ]);
     }
-    
 
     /**
-     * Displays a single Categorias model.
+     * Displays a single user model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    function actionGet()
+	{
+		return $this->render('view', ['model' => Yii::$app->user->identity]);
+	}
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -61,15 +65,16 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Creates a new Categorias model.
+     * Creates a new user model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Categorias();
+        $model = new Usuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -79,7 +84,7 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Updates an existing Categorias model.
+     * Updates an existing user model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,7 +93,7 @@ class CategoriasController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -97,9 +102,8 @@ class CategoriasController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
-     * Deletes an existing Categorias model.
+     * Deletes an existing user model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,15 +117,15 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Finds the Categorias model based on its primary key value.
+     * Finds the user model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Categorias the loaded model
+     * @return user the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Categorias::findOne($id)) !== null) {
+        if (($model = Usuarios::findOne($id)) !== null) {
             return $model;
         }
 

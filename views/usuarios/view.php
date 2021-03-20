@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Categorias */
+/* @var $model app\models\user */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="categorias-view">
+<div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,18 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'email:email',
+            'password',
+            'nick',
             'nombre',
-            'descripcion:ntext',
-            'icono',
-            'categoria_id',
-        ],
-    ]) 
-    ?>
-    <?= LinkPager::widget([
-    'pagination' => $pagination,
-    ?>
-]);
+            'apellidos',
+            'direccion:ntext',
+            'telefono_contacto',
+            'fecha_registro',
+            'num_accesos',
+            'bloqueado',
 
-   
+			'rol',
+        ],
+    ]) ?>
 
 </div>
