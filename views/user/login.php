@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php endif;?> */
 /* } */
 ?>
-	
 
 <div class="site-login">
 	<?php if (isset($error)): ?>

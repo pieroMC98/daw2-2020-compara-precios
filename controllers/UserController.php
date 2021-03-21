@@ -27,7 +27,8 @@ class UserController extends Controller
 			->where(['email' => $post['User']['email']])
 			->one();
 		$login->scenario = User::SCENARIO_LOGIN;
-		if ($post->confirmado == false) {
+
+		if ($login->confirmado == false) {
 			$this->view->params['msg'] = 'El usuario aun no ha sido confirmado';
 			return $this->render('login', [
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),

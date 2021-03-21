@@ -87,6 +87,7 @@ class User extends ActiveRecord implements IdentityInterface
 				'on' => 'register',
 				'message' => 'contrasena no coinciden',
 			],
+			['fecha_nacimiento', 'date', 'format' => 'yyyy-MM-dd'],
 		];
 	}
 
@@ -175,17 +176,15 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->password === $password;
 	}
-	
+
 	public function getRol()
 	{
 		$auth = Yii::$app->authManager;
-		$roles = $auth->getAssignments ( $this->id );
-		if(count($roles)>0)
-		{
-			
+		$roles = $auth->getAssignments($this->id);
+		if (count($roles) > 0) {
 			return array_keys($roles)[0];
-		}else{
-			return NULL;
+		} else {
+			return null;
 		}
 	}
 	//atributo virtual para rescribir

@@ -59,8 +59,7 @@ AppAsset::register($this);
     ?>
 	<?php if (isset($this->params['msg']) && $this->params['msg'] != ''): ?>
 		<div class="container">
-				<div class="alert alert-warning " role="alert">
-<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert"> -->
+				<div class="alert alert-warning" role="alert">
 					<strong>
 						<?= $this->params['msg'] ?>
 					</strong>
