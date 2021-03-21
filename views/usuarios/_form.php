@@ -21,9 +21,8 @@ use app\models\Usuarios
 
     <?= $form->field($model, 'nick')->textInput(['maxlength' => true]) ?>
 	
-	<?= $form->field($model, 'rol')->textInput(['maxlength' => true]) //dropDownList(Usuarios::lista_roles() ?>
+	<?= $form->field($model, 'rol')->dropDownList(Usuarios::lista_roles()) ?>
 	
-
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>

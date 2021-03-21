@@ -64,7 +64,7 @@ class Usuarios extends \yii\db\ActiveRecord
      */
 	public static function lista_roles()
 	{
-		return ['usuario', 'proprietario','moderador', 'admin', 'sysadmin',];
+		return ['usuario' => 'usuario', 'propietario' => 'propietario','moderador' => 'moderador', 'admin' => 'admin', 'sysadmin' => 'sysadmin'];
 		
 	}
     public function attributeLabels()
