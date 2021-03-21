@@ -9,19 +9,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
-
-/* if (isset($_SESSION['block']) && $_SESSION['block'] == true) { */
-	/* Yii::$app->session->set('count', 0); */
-	/* die();
-	<?php if (Yii::$app->session->get('count')): ?>
-		<div class="alert alert-danger" role="alert">
-			<?= $model->num_accesos ?>
-		</div>
-	<?php endif;?> */
-/* } */
-
 ?>
-	
 
 <div class="site-login">
 	<?php if (isset($error)): ?>

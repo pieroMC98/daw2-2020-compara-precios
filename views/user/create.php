@@ -27,7 +27,10 @@ echo $form
 	->textInput()
 	->hint('telefono de usuario');
 echo $form->field($model, 'fecha_nacimiento')->widget(DatePicker::class, [
-	'options' => ['class' => 'form-control'],
+	'dateFormat' => 'yyyy-MM-dd',
+	'options' => [
+		'class' => 'form-control',
+	],
 ]);
 echo $form
 	->field($model, 'nick')
