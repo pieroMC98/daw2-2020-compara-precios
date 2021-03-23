@@ -192,4 +192,28 @@ class User extends ActiveRecord implements IdentityInterface
 	//comparar si lo que escribe es un role valido
 	//si es valido implementarlo
 	//revocar el anterior.
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'email' => 'Email',
+            'password' => 'Password',
+            'r_password' => 'Repetir password',
+            'nick' => 'Nick',
+            'nombre' => 'Nombre',
+            'apellidos' => 'Apellidos',
+            'direccion' => 'Direccion',
+            'region_id' => 'Region ID',
+            'telefono_contacto' => 'Telefono Contacto',
+            'fecha_nacimiento' => 'Fecha Nacimiento',
+            'fecha_registro' => 'Fecha Registro',
+            'confirmado' => 'Confirmado',
+            'fecha_acceso' => 'Fecha Acceso',
+            'num_accesos' => 'Num Accesos',
+            'bloqueado' => 'Bloqueado',
+            'fecha_bloqueo' => 'Fecha Bloqueo',
+            'notas_bloqueo' => 'Notas Bloqueo',
+        ];
+    }
 }

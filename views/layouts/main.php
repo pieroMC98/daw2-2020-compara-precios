@@ -47,12 +47,13 @@ AppAsset::register($this);
     				'items' => [
     					[
     						'label' => 'Cuenta',
-    						'url' => ['/user/get'],
+    						'url' => ['user/get'],
     						'id' => Yii::$app->user->identity->id,
     					],
     					['label' => 'logout', 'url' => '../user/logout'],
 						Yii::$app->user->identity->rol == 'admin' ? 
     					['label' => 'Mantenimiento', 'url' => '../usuarios'] : ['label'=>'Mantenimiento'],
+
     				],
     			],
     	],
