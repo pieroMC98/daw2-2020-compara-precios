@@ -10,7 +10,7 @@ echo DetailView::widget([
 
 ]); ?>
 
-<?php $form = ActiveForm::begin(['action' => '../usuarios/update?id='. $model->id]);?>
+<?php $form = ActiveForm::begin(['action' => ['update', 'id'=> $model->id]]);?>
       <?= Html::submitButton('Editar', ['class' => 'btn btn-primary']) ?>
     </div>
 

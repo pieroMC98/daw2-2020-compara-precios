@@ -158,7 +158,9 @@ class UserController extends Controller
 
 	function actionUpdate($id)
 	{
-		return $this->render('create', ['model' => User::findIdentity($id)]);
+	  $user = User::findIdentity($id);
+	  $user->scenario = User::SCENARIO_REGISTER;
+		return $this->render('create', ['model' => $user]);
 	}
 
 	function actionDelete($id)
@@ -187,7 +189,7 @@ class UserController extends Controller
 
 		$authorRole = $auth->getRole($rol);
 		if ($authorRole == null) {
-			
+			//Aqui devuelvo una pagina de error. Excepcion de error de acceso
 		}
 		if ($auth->getAssignment($rol, $id) == null) {
 			$auth->revokeAll($id);
