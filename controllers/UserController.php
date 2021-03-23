@@ -187,7 +187,7 @@ class UserController extends Controller
 
 		$authorRole = $auth->getRole($rol);
 		if ($authorRole == null) {
-			//Aqui devuelvo una pagina de error. Excepcion de error de acceso
+			
 		}
 		if ($auth->getAssignment($rol, $id) == null) {
 			$auth->revokeAll($id);

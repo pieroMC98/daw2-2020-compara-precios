@@ -50,9 +50,9 @@ AppAsset::register($this);
     						'url' => ['/user/get'],
     						'id' => Yii::$app->user->identity->id,
     					],
-    					['label' => 'logout', 'url' => '/user/logout'],
+    					['label' => 'logout', 'url' => '../user/logout'],
 						Yii::$app->user->identity->rol == 'admin' ? 
-    					['label' => 'Mantenimiento', 'url' => '/usuarios/index'] : ['label'=>'Mantenimiento'],
+    					['label' => 'Mantenimiento', 'url' => '../usuarios'] : ['label'=>'Mantenimiento'],
     				],
     			],
     	],
