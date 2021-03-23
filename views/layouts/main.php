@@ -52,7 +52,7 @@ AppAsset::register($this);
     					],
     					['label' => 'logout', 'url' => '/user/logout'],
 						Yii::$app->user->identity->rol == 'admin' ? 
-    					['label' => 'Mantenimiento', 'url' => '/usuarios/index'] : ['label'=>'Mantenimiento'],
+    					['label' => 'Mantenimiento', 'url' => 'usuarios'] : ['label'=>'Mantenimiento'],
     				],
     			],
     	],
