@@ -46,10 +46,11 @@ AppAsset::register($this);
                 ],
                 'url' => ['/tiendas']
             ],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
             ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'About', 'url' => ['/site/about']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Usuarios', 'url' => ['/user']]
             ) : (
