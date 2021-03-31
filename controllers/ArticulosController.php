@@ -71,7 +71,7 @@ class ArticulosController extends Controller
             $model->modi_usuario_id= 0;
             $model->crea_fecha = date('Y-m-d h:i:s');
             $model->modi_fecha = NULL;
-             $model->save();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
 
         }

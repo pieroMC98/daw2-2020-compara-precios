@@ -49,21 +49,21 @@ class Articulos extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
     public function attributeLabels()
-    {
+    {   // aqui hay que poner un if o algo para sacar el texto no el intger
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripción breve',
             'categoria_id' => 'Categoria ',
             'imagen_id' => 'imagen',
-            'visible' => 'Indicador de artículo visible',
-            'cerrado' => 'Indicador de artículo cerrado',
-            'comun' => 'Indicador de artículo común ',
+            'visible' => 'Vesibilidad del artículo',
+            'cerrado' => 'Estado del artículo',
+            'comun' => 'Artículo común o particular',
             'crea_usuario_id' => 'Usuario propietario',
             'crea_fecha' => 'Fecha y Hora de creación',
             'modi_usuario_id' => 'Usuario que ha modificado ',
             'modi_fecha' => 'Fecha y Hora de la última modificación ',
-            'notas_admin' => 'Notas adicionales q',
+            'notas_admin' => 'Notas adicionales',
         ];
     }
 
@@ -77,6 +77,23 @@ class Articulos extends \yii\db\ActiveRecord
     }
 }
 
+/*
+Switch(cerrado){
+    case '0': text= 'Activo';break;
+    case '1': text= 'Eliminado';break;
+    case '2': text= 'Suspendido';break;
+    case '3': text= 'Cancelado po inadecuado';break;
+}
+
+Switch(comun){
+    case '0': text='Particular';break
+    case '1': text='Comun';break;
+}
+
+Switch(visible){
+    case '0': text='invisible';break;
+    case '1': text='Visible';break;
+}
 
 /* Toda la informacion de los campos con los comentarios
 'id' => 'ID',
