@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulos */
 
-$this->title = 'Update Articulos: ' . $model->id;
+// Aquí modifiqué, en vez de sacar el id, saqué el nombre
+$this->title = 'Actualizar el articulo : ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Articulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

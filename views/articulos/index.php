@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ArticulosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articulos';
+$this->title = 'Tabla de Articulos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articulos-index">
@@ -18,13 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Articulos', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             'nombre:ntext',
