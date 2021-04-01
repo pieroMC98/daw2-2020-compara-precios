@@ -56,7 +56,7 @@ class Articulos extends \yii\db\ActiveRecord
             'descripcion' => 'Descripción breve',
             'categoria_id' => 'Categoria ',
             'imagen_id' => 'imagen',
-            'visible' => 'Vesibilidad del artículo',
+            'visible' => 'Visibilidad',
             'cerrado' => 'Estado del artículo',
             'comun' => 'Artículo común o particular',
             'crea_usuario_id' => 'Usuario propietario',
@@ -75,6 +75,26 @@ class Articulos extends \yii\db\ActiveRecord
     {
         return new ArticulosQuery(get_called_class());
     }
+
+    public static function get_estados(){
+
+       return [ 0 => 'Activo', 1 => 'Suspendido',  2 => 'Eliminado', 3 => 'Cancelado por inadecuado'];
+        
+    }
+
+    public static function get_comun(){
+
+        return [ 0 => 'Particular', 1 => 'Común'];
+         
+     }
+
+     public function get_nombre_categoria(){
+
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+
+        return $cargarCategorias[$this->categoria_id]; 
+     }
+
 }
 
 /*

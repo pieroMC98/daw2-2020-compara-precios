@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Categorias;
+use app\models\Articulos;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -14,12 +14,7 @@ use yii\widgets\ActiveForm;
      new instance of model (new data not saved yet)
     }
         */
-        
-
-
-        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
-        $opcionesIndiArti = [ 0 => 'Activo', 1 => 'Suspendido',  2 => 'Eliminado', 3 => 'Cancelado por inadecuado'];
-        $indicadorArticulocomun = [ 0 => 'Particular', 1 => 'Común'];
+         
 
 ?>
 
@@ -31,15 +26,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descripcion')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'categoria_id')->dropDownList($cargarCategorias)->label("Elije una categoría")?>
+    <?= $form->field($model, 'categoria_id')->dropDownList($categorias)->label("Elije una categoría")?>
 
     <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'visible')->dropdownList(array('0'=>'Invisbile','1'=>'Visible'))->label("Elije un estado")?>
+    <?= $form->field($model, 'visible')->checkBox()?>
 
-    <?= $form->field($model, 'cerrado')->dropDownList($opcionesIndiArti)->label("Estado Artículo")?>
+    <?= $form->field($model, 'cerrado')->dropDownList(Articulos::get_estados())->label("Estado Artículo")?>
 
-    <?= $form->field($model, 'comun')->dropDownList($indicadorArticulocomun) ?>
+    <?= $form->field($model, 'comun')->dropDownList(Articulos::get_comun()) ?>
 
     <?= $form->field($model, 'crea_usuario_id')->hiddenInput()->label(false) ?>
 
