@@ -32,7 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre:ntext',
             'descripcion:ntext',
-            'categoria_id',
+            [
+                'label' => 'categorias',
+                'value' => function ($model) {
+                    return $model->get_nombre_categoria();
+                }
+              ],
             'imagen_id',
             'visible',
             'cerrado',

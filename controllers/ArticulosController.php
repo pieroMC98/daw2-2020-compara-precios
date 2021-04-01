@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+use app\models\Categorias;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,10 +38,10 @@ class ArticulosController extends Controller
     {
         $searchModel = new ArticulosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+       
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -75,9 +76,9 @@ class ArticulosController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
-
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model,'categorias'=>$cargarCategorias
         ]);
     }
 
@@ -98,9 +99,9 @@ class ArticulosController extends Controller
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model,'categorias'=>$cargarCategorias
         ]);
     }
 
