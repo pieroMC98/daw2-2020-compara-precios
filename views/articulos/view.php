@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Articulos;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -14,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="articulos-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Borrar', ['delete', 'id' => $model->id], [
@@ -38,10 +38,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->get_nombre_categoria();
                 }
               ],
-            'imagen_id',
-            'visible',
-            'cerrado',
-            'comun',
+              [
+
+                'attribute'=>'photo','label'=>'Imagen del articulo',
+
+                'value'=>'../../web/iconos/articulos/'.$model->imagen_id,
+
+                'format' => ['image',['width'=>'50','height'=>'50']],
+
+            ],
+            [
+                'label'=>'visibilidad',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_visibilidad();
+                    return $estados[$model->visible];
+                }
+              ],
+            [
+                'label'=>'Estado del artículo',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_estados();
+                    return $estados[$model->cerrado];
+                }
+              ],
+              [
+                'label'=>'Artículo común o particular',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_comun();
+                    return $estados[$model->comun];
+                }
+              ],
             'crea_usuario_id',
             'crea_fecha',
             'modi_usuario_id',
