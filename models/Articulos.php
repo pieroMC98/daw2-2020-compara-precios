@@ -100,6 +100,9 @@ class Articulos extends \yii\db\ActiveRecord
 
         return $cargarCategorias[$this->categoria_id]; 
      }
+     public static function get_categorias_de_una_vez(){
+       return \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+     }
 
 
 
