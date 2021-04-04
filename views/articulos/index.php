@@ -4,6 +4,7 @@ use app\models\Articulos;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticulosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -62,15 +63,26 @@ $this->params['breadcrumbs'][] = $this->title;
 				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
 			],
             //'comun',
+            ['attribute'=>'comun',
+            'value' => function ($model) {
+                $comun=  Articulos::get_comun();
+                return $comun[$model->comun];
+            }
+				
+				, 'filter'=>array(Articulos::get_comun())
+				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
+			],
            // 'crea_usuario_id',
-            'crea_fecha',
+           // 'crea_fecha',
+           'crea_fecha',
+            // if you are using bootstrap, the following line will set the correct style of the input field
             //'modi_usuario_id',
             //'modi_fecha',
             //'notas_admin:ntext',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    
 
 
 </div>
