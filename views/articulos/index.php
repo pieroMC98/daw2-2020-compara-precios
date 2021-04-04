@@ -43,8 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'imagen_id',
             ['attribute'=>'visible',
             'value' => function ($model) {
-                $estados =  Articulos::get_visibilidad();
-                return $estados[$model->visible];
+                $visible =  Articulos::get_visibilidad();
+                return $visible[$model->visible];
             }
 				
 				, 'filter'=>[0=>'Invisible',1=>'Visible']
@@ -52,6 +52,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
            // 'visible',
             //'cerrado',
+            ['attribute'=>'cerrado',
+            'value' => function ($model) {
+                $estados =  Articulos::get_estados();
+                return $estados[$model->cerrado];
+            }
+				
+				, 'filter'=>array(Articulos::get_estados())
+				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
+			],
             //'comun',
            // 'crea_usuario_id',
             'crea_fecha',
