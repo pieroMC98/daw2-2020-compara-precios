@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) {
                     return $model->get_nombre_categoria();
                 },
-                'filter'=>array(Articulos::get_categorias_de_una_vez())
+                'filter'=>Articulos::get_categorias_de_una_vez()
 				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
               ],
             //'imagen_id',
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $estados[$model->cerrado];
             }
 				
-				, 'filter'=>array(Articulos::get_estados())
+				, 'filter'=>Articulos::get_estados()
 				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
 			],
             //'comun',
@@ -69,12 +69,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $comun[$model->comun];
             }
 				
-				, 'filter'=>array(Articulos::get_comun())
+				, 'filter'=>Articulos::get_comun()
 				, 'filterInputOptions'=>['prompt'=>'Todos', 'class'=>'form-control']
 			],
            // 'crea_usuario_id',
            // 'crea_fecha',
-           'crea_fecha',
+           [
+            'attribute' => 'crea_fecha',
+            'value' => 'crea_fecha',
+            'filter' => \yii\jui\DatePicker::widget(['language' => 'es', 'dateFormat' => 'dd-MM-yyyy']),
+            //'filterInputOptions'=>[ 'class'=>'form-control'],
+            //'format' => 'html',
+        ],
             // if you are using bootstrap, the following line will set the correct style of the input field
             //'modi_usuario_id',
             //'modi_fecha',
