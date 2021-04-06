@@ -6,9 +6,13 @@ use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
 use app\models\Categorias;
+use app\models\Etiquetas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+
 
 /**
  * ArticulosController implements the CRUD actions for Articulos model.
@@ -53,8 +57,10 @@ class ArticulosController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model
         ]);
     }
 
@@ -66,19 +72,31 @@ class ArticulosController extends Controller
     public function actionCreate()
     {
         $model = new Articulos();
+        $imagen = new UploadForm();
         //Si venimos del submit del formulario 
         if ($model->load(Yii::$app->request->post())) {
+             // añadi todo eso 
+        //     $model->imagen_id = $imagen->imageFile;
+             $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+             if ($imagen->upload()) {
+                 //$extension = //substr($imagen->imageFile->name,-4);
+                 $extension = substr($imagen->imageFile->name,strrpos($imagen->imageFile->name,"."));
+                 rename("../web/uploads/".$imagen->imageFile->name,"../web/iconos/articulos/".$model->nombre.$extension);
+                  $model->imagen_id = $model->nombre.$extension;
+                }
+            
             $model->crea_usuario_id = 0;
             $model->modi_usuario_id= 0;
             $model->crea_fecha = date('Y-m-d h:i:s');
             $model->modi_fecha = NULL;
-            $model->save();
+
+           if($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
         $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
-        return $this->render('create', [
-            'model' => $model,'categorias'=>$cargarCategorias
+        return $this->render('create', [ 
+            'model' => $model,'categorias'=>$cargarCategorias,'imagen'=>$imagen
         ]);
     }
 
@@ -92,8 +110,18 @@ class ArticulosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $imagen = new UploadForm();
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
+            // añadi todo eso 
+       //     $model->imagen_id = $imagen->imageFile;
+            $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+            if ($imagen->upload()) {
+                //$extension = //substr($imagen->imageFile->name,-4);
+                $extension = substr($imagen->imageFile->name,strrpos($imagen->imageFile->name,"."));
+                rename("../web/uploads/".$imagen->imageFile->name,"../web/iconos/articulos/".$model->nombre.$extension);
+                 $model->imagen_id = $model->nombre.$extension;
+               }
 
             $model->modi_fecha = date('Y-m-d h:i:s');
             $model->save();
@@ -101,7 +129,7 @@ class ArticulosController extends Controller
         }
         $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
         return $this->render('update', [
-            'model' => $model,'categorias'=>$cargarCategorias
+            'model' => $model,'categorias'=>$cargarCategorias,'imagen'=>$imagen
         ]);
     }
 

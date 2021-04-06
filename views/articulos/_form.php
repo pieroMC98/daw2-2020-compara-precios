@@ -28,11 +28,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'categoria_id')->dropDownList($categorias)->label("Elije una categoría")?>
 
-    <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($imagen, 'imageFile')->fileInput() ?>
 
     <?= $form->field($model, 'visible')->checkBox()?>
 
-    <?= $form->field($model, 'cerrado')->dropDownList(Articulos::get_estados())->label("Estado Artículo")?>
+    <?= $form->field($model, 'cerrado')->dropDownList(Articulos::get_estados())->label("Estado del Artículo")?>
 
     <?= $form->field($model, 'comun')->dropDownList(Articulos::get_comun()) ?>
 

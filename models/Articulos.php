@@ -88,12 +88,23 @@ class Articulos extends \yii\db\ActiveRecord
          
      }
 
+     public static function get_visibilidad(){
+
+        return [ 0 => 'Invisible', 1 => 'visible'];
+         
+     }
+
      public function get_nombre_categoria(){
 
         $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
 
         return $cargarCategorias[$this->categoria_id]; 
      }
+     public static function get_categorias_de_una_vez(){
+       return \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+     }
+
+
 
 }
 
