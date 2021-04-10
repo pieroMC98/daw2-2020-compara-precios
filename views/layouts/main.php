@@ -35,30 +35,39 @@ AppAsset::register($this);
     	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     echo Nav::widget([
-    	'options' => ['class' => 'navbar-nav navbar-right'],
-    	'items' => [
-    		['label' => 'Home', 'url' => ['/site/index']],
-    		['label' => 'About', 'url' => ['/site/about']],
-    		['label' => 'Contact', 'url' => ['/site/contact']],
-    		['label' => 'Categorías', 'url' => ['/categorias']],
-			['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-    		Yii::$app->user->isGuest
-    			? [
-    				'label' => 'Login',
-    				'url' => ['/user/login'],
-    			]
-    			: [
-    				'label' => Yii::$app->user->identity->nick,
-    				'items' => [
-    					[
-    						'label' => 'Cuenta',
-    						'url' => ['/user/get'],
-    						'id' => Yii::$app->user->identity->id,
-    					],
-    					['label' => 'logout', 'url' => '/user/logout'],
-    				],
-    			],
-    	],
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Tiendas',
+                'items' => [
+                     ['label' => 'Listado', 'url' => ['/tiendas']],
+                     ['label' => 'Mi tienda', 'url' => ['/tiendas']]
+                ],
+                'url' => ['/tiendas']
+            ],
+            ['label' => 'Artículos', 'url' => ['/articulos']],
+            ['label' => 'Categorías', 'url' => ['/categorias']],
+            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Usuarios', 'url' => ['/user']]
+            ) : (
+                ['label' => Yii::$app->user->identity->username , 'url' => ['/user']]
+            ),
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
+            ) : (
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    'Cerrar Sesión',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+            )
+        ],
     ]);
     NavBar::end();
     ?>
