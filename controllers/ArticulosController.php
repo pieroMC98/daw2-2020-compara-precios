@@ -6,12 +6,12 @@ use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
 use app\models\Categorias;
-use app\models\Etiquetas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 
 /**
@@ -31,6 +31,22 @@ class ArticulosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'delete','view_public'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view'],
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -43,10 +59,17 @@ class ArticulosController extends Controller
         $searchModel = new ArticulosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
        
-        return $this->render('index', [
+        if (Yii::$app->user->isGuest) {
+        return $this->render('public', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
+        }
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider
+            ]);
+        
     }
 
     /**
@@ -59,9 +82,16 @@ class ArticulosController extends Controller
     {
         $model = $this->findModel($id);
 
+        if (Yii::$app->user->isGuest) {
+        return $this->render('view_public', [
+            'model' => $model
+        ]);
+        }
+        
         return $this->render('view', [
             'model' => $model
         ]);
+        
     }
 
     /**

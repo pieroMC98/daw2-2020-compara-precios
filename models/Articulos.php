@@ -100,31 +100,17 @@ class Articulos extends \yii\db\ActiveRecord
 
         return $cargarCategorias[$this->categoria_id]; 
      }
+
      public static function get_categorias_de_una_vez(){
        return \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
      }
 
 
 
+
+
 }
 
-/*
-Switch(cerrado){
-    case '0': text= 'Activo';break;
-    case '1': text= 'Eliminado';break;
-    case '2': text= 'Suspendido';break;
-    case '3': text= 'Cancelado po inadecuado';break;
-}
-
-Switch(comun){
-    case '0': text='Particular';break
-    case '1': text='Comun';break;
-}
-
-Switch(visible){
-    case '0': text='invisible';break;
-    case '1': text='Visible';break;
-}
 
 /* Toda la informacion de los campos con los comentarios
 'id' => 'ID',
