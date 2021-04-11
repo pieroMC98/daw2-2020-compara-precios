@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulos */
 
-$this->title = 'Ficha del artículo ['.$model->nombre.']';
+$this->title = 'Ficha detallada de ['.$model->nombre.']';
 $this->params['breadcrumbs'][] = ['label' => 'Articulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
