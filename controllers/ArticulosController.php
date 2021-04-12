@@ -33,11 +33,11 @@ class ArticulosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'create', 'delete','view_public'],
+                'only' => ['view', 'create', 'delete','update'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'create', 'delete'],
+                        'actions' => ['view', 'create', 'delete','update'],
                         'roles' => ['admin', 'sysadmin'],
                     ],
                     [
@@ -59,12 +59,6 @@ class ArticulosController extends Controller
         $searchModel = new ArticulosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
        
-        if (Yii::$app->user->isGuest) {
-        return $this->render('public', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
-        ]);
-        }
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider
@@ -81,12 +75,6 @@ class ArticulosController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-
-        if (Yii::$app->user->isGuest) {
-        return $this->render('view_public', [
-            'model' => $model
-        ]);
-        }
         
         return $this->render('view', [
             'model' => $model
