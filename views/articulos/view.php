@@ -16,6 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
+    <?php // Simplemente compruebo si el user puede modificar, porque son acciones del sysadmin o admin
+         // entonces le muestro los botones
+     if (Yii::$app->user->can('update')){?>
+
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Borrar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -24,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+     //   <?php } ?>
     </p>
 
     <?= DetailView::widget([

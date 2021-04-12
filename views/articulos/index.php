@@ -17,8 +17,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+    <?php if (Yii::$app->user->can('update')){?>
         <?= Html::a('Create Articulos', ['create'], ['class' => 'btn btn-success']) ?>
-        <?php //var_dump($categorias) ?>
+  
+        <?php }
+        $view_use = '';
+        if(!Yii::$app->user->can('update')){ 
+            $view_use = '{view}' ;
+        } else{
+            $view_use = '{update}{view}{delete}';
+           }
+        ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
@@ -78,14 +87,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'crea_fecha',
             'value' => 'crea_fecha',
             'filter' => \yii\jui\DatePicker::widget(['language' => 'es', 'dateFormat' => 'dd-MM-yyyy']),
-            //'filterInputOptions'=>[ 'class'=>'form-control'],
-            //'format' => 'html',
+
         ],
-            // if you are using bootstrap, the following line will set the correct style of the input field
-            //'modi_usuario_id',
-            //'modi_fecha',
-            //'notas_admin:ntext',
-            ['class' => 'yii\grid\ActionColumn'],
+        ['class' => 'yii\grid\ActionColumn', 'template' => $view_use],
+           
         ],
     ]); ?>
     
