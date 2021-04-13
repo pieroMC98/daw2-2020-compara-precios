@@ -11,7 +11,7 @@ $this->title = 'My Yii Application';
 
         <p class="lead">Bienvenidos al mejor comparador de precios</p>
 
-        <p><p><img src="../web/iconos/logo.png" width="200"></p></p>
+        <p><p><img src="../../web/iconos/logo.png" width="200"></p></p>
     </div>
 
     <div class="body-content">
