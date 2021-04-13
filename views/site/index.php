@@ -11,9 +11,9 @@ $this->title = 'My Yii Application';
 
         <p class="lead">Bienvenidos al mejor comparador de precios</p>
 
-        <p><p><img src="../../web/iconos/logo.png" width="200"></p></p>
+    <?php //$ruta = $_SERVER["DOCUMENT_ROOT"].'/daw2-2020-compara-precios/web/iconos/logo.png'?>
+        <p><p><img src="http://localhost/daw2-2020-compara-precios/web/iconos/logo.png" width="200"> </p></p>
     </div>
-
     <div class="body-content">
 
         <div class="row">
