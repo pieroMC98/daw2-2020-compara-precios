@@ -8,6 +8,9 @@ use app\models\AvisosUsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * AvisosUsuariosController implements the CRUD actions for AvisosUsuarios model.
@@ -24,6 +27,22 @@ class AvisosUsuariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'create', 'delete','update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete','update'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view'],
+                        'roles' => ['?', '@'],
+                    ],
                 ],
             ],
         ];

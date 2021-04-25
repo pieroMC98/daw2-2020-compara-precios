@@ -12,28 +12,27 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+
+<?php $this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
+    <?php $this->registerCsrfMetaTags(); ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php $this->head(); ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); ?>
 
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+    	'brandLabel' => Yii::$app->name,
+    	'brandUrl' => Yii::$app->homeUrl,
+    	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -72,10 +71,11 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        	'links' => isset($this->params['breadcrumbs'])
+        		? $this->params['breadcrumbs']
+        		: [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
@@ -90,7 +90,7 @@ AppAsset::register($this);
     </div>
 </footer>
 
-<?php $this->endBody() ?>
+<?php $this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>

@@ -14,11 +14,14 @@ class AvisosUsuariosSearch extends AvisosUsuarios
     /**
      * {@inheritdoc}
      */
+
+    public $nombre;
+
     public function rules()
     {
         return [
             [['id', 'destino_usuario_id', 'origen_usuario_id', 'tienda_id', 'articulo_id', 'comentario_id'], 'integer'],
-            [['fecha_aviso', 'clase_aviso', 'texto', 'fecha_lectura', 'fecha_aceptado'], 'safe'],
+            [['fecha_aviso', 'clase_aviso', 'texto', 'fecha_lectura', 'fecha_aceptado', 'nombre'], 'safe'],
         ];
     }
 
@@ -41,11 +44,15 @@ class AvisosUsuariosSearch extends AvisosUsuarios
     public function search($params)
     {
         $query = AvisosUsuarios::find();
+        $query->joinWith(['nombre_tienda']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5
+            ],
         ]);
 
         $this->load($params);
