@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AvisosUsuarios */
@@ -12,9 +13,18 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fecha_aviso')->textInput() ?>
+    <?= $form->field($model, 'fecha_aviso')->widget(DatePicker::className(),['clientOptions' => ['dateFormat' => 'dd-mm-YY', 'defaultDate' => '01-01-2021', 'language' => 'es-ES','changeMonth'=> true, 'changeYear'=> true,], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
 
-    <?= $form->field($model, 'clase_aviso')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'clase_aviso')->dropdownList([
+            'A' => 'Aviso', 
+            'N' => 'Notificación',
+            'D' => 'Denuncia',
+            'C' => 'Consulta',
+            'B' => 'Bloqueo',
+            'M' => 'Mensaje'
+        ],
+        ['options' => ['A' => ['Selected' => true]]]
+    ); ?>
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6]) ?>
 
@@ -28,9 +38,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'comentario_id')->textInput() ?>
 
-    <?= $form->field($model, 'fecha_lectura')->textInput() ?>
+    <?= $form->field($model, 'fecha_lectura')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2021-01-01'], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
 
-    <?= $form->field($model, 'fecha_aceptado')->textInput() ?>
+    <?= $form->field($model, 'fecha_aceptado')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2021-01-01'], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

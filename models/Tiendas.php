@@ -112,4 +112,9 @@ class Tiendas extends \yii\db\ActiveRecord
             'notas_admin' => 'Notas Admin',
         ];
     }
+
+    public function getNombre_tienda()
+    {
+        return $this->nombre_tienda;
+    }
 }

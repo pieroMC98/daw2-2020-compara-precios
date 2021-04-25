@@ -36,7 +36,7 @@ class AvisosUsuarios extends \yii\db\ActiveRecord
     {
         return [
             [['fecha_aviso'], 'required'],
-            [['fecha_aviso', 'fecha_lectura', 'fecha_aceptado'], 'safe'],
+            [['fecha_aviso', 'fecha_lectura', 'fecha_aceptado', 'nombre_tienda'], 'safe'],
             [['texto'], 'string'],
             [['destino_usuario_id', 'origen_usuario_id', 'tienda_id', 'articulo_id', 'comentario_id'], 'integer'],
             [['clase_aviso'], 'string', 'max' => 1],
@@ -50,16 +50,55 @@ class AvisosUsuarios extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fecha_aviso' => 'Fecha Aviso',
-            'clase_aviso' => 'Clase Aviso',
+            'fecha_aviso' => 'Fecha de aviso',
+            'clase_aviso' => 'Clase de aviso',
             'texto' => 'Texto',
-            'destino_usuario_id' => 'Destino Usuario ID',
-            'origen_usuario_id' => 'Origen Usuario ID',
-            'tienda_id' => 'Tienda ID',
-            'articulo_id' => 'Articulo ID',
-            'comentario_id' => 'Comentario ID',
-            'fecha_lectura' => 'Fecha Lectura',
-            'fecha_aceptado' => 'Fecha Aceptado',
+            'destino_usuario_id' => 'Usuario destino',
+            'origen_usuario_id' => 'Usuario origen',
+            'tienda_id' => 'Tienda',
+            'articulo_id' => 'Artículo',
+            'comentario_id' => 'Comentario',
+            'fecha_lectura' => 'Fecha de lectura',
+            'fecha_aceptado' => 'Fecha de aceptación',
         ];
+    }
+
+    public static function getClaseAviso()
+    {
+        return [
+            'A' => 'Aviso', 
+            'N' => 'Notificación', 
+            'D' => 'Denuncia', 
+            'C' => 'Consulta', 
+            'B' => 'Bloqueo', 
+            'M' => 'Mensaje'
+    ];
+    }
+
+    public static function getClaseAvisoIcono()
+    {
+        return [ 
+            'A' => \yii\helpers\Html::a('<i class="bi bi-exclamation-circle-fill"></i>'), 
+            'N' => \yii\helpers\Html::a('<i class="bi bi-bell-fill"></i>'), 
+            'D' => \yii\helpers\Html::a('<i class="bi bi-exclamation-triangle-fill"></i>'), 
+            'C' => \yii\helpers\Html::a('<i class="bi bi-question-circle-fill"></i>'), 
+            'B' => \yii\helpers\Html::a('<i class="bi bi-x-octagon-fill"></i>'), 
+            'M' => \yii\helpers\Html::a('<i class="bi bi-chat-left-text-fill"></i>'), 
+        ];
+    }
+
+    public function getNombreUsuarioDestino()
+    {
+        return $this->hasOne(User::className(), ['id' => 'destino_usuario_id']);
+    }
+
+    public function getNombreUsuarioOrigen()
+    {
+        return $this->hasOne(User::className(), ['id' => 'origen_usuario_id']);
+    }
+
+    public function getNombre_tienda()
+    {
+        return $this->hasOne(Tiendas::className(), ['id' => 'tienda_id']);
     }
 }
