@@ -12,48 +12,58 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+
+<?php $this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
-    <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>chosen/chosen.css">
-    <link rel="stylesheet" href="css/grupo-4.css">
+    <?php $this->registerCsrfMetaTags(); ?>
 
-    <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php $this->head(); ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); ?>
 
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+    	'brandLabel' => Yii::$app->name,
+    	'brandUrl' => Yii::$app->homeUrl,
+    	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Tiendas',
+                'items' => [
+                     ['label' => 'Listado', 'url' => ['/tiendas']],
+                     ['label' => 'Mi tienda', 'url' => ['/tiendas']]
+                ],
+                'url' => ['/tiendas']
+            ],
+            ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
-            ['label' => 'Copias de Seguridad', 'url' => ['/copias-seg']],
+
+            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'About', 'url' => ['/site/about']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Usuarios', 'url' => ['/user']]
+            ) : (
+                ['label' => Yii::$app->user->identity->username , 'url' => ['/user']]
+            ),
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Cerrar Sesión',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -63,10 +73,11 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        	'links' => isset($this->params['breadcrumbs'])
+        		? $this->params['breadcrumbs']
+        		: [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
@@ -81,7 +92,7 @@ AppAsset::register($this);
     </div>
 </footer>
 
-<?php $this->endBody() ?>
+<?php $this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>

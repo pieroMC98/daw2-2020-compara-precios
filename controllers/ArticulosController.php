@@ -5,11 +5,17 @@ namespace app\controllers;
 use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+
+use app\models\Categorias;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 use app\controllers\OfertaController;
 use yii\db\Query;
+
 
 /**
  * ArticulosController implements the CRUD actions for Articulos model.
@@ -26,6 +32,22 @@ class ArticulosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'create', 'delete','update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete','update'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view'],
+                        'roles' => ['?', '@'],
+                    ],
                 ],
             ],
         ];
@@ -119,12 +141,32 @@ class ArticulosController extends Controller
     {
         $model = new Articulos();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $imagen = new UploadForm();
+        //Si venimos del submit del formulario 
+        if ($model->load(Yii::$app->request->post())) {
+             // añadi todo eso 
+        //     $model->imagen_id = $imagen->imageFile;
+             $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+             if ($imagen->upload()) {
+                 //$extension = //substr($imagen->imageFile->name,-4);
+                 $extension = substr($imagen->imageFile->name,strrpos($imagen->imageFile->name,"."));
+                 rename("../web/uploads/".$imagen->imageFile->name,"../web/iconos/articulos/".$model->nombre.$extension);
+                  $model->imagen_id = $model->nombre.$extension;
+                }
+            
+            $model->crea_usuario_id = 0;
+            $model->modi_usuario_id= 0;
+            $model->crea_fecha = date('Y-m-d h:i:s');
+            $model->modi_fecha = NULL;
 
-        return $this->render('create', [
-            'model' => $model,
+           if($model->save())
+            return $this->redirect(['view', 'id' => $model->id]);
+
+        }
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+        return $this->render('create', [ 
+            'model' => $model,'categorias'=>$cargarCategorias,'imagen'=>$imagen
+
         ]);
     }
 
@@ -139,12 +181,26 @@ class ArticulosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $imagen = new UploadForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            // añadi todo eso 
+       //     $model->imagen_id = $imagen->imageFile;
+            $imagen->imageFile = UploadedFile::getInstance($imagen, 'imageFile');
+            if ($imagen->upload()) {
+                //$extension = //substr($imagen->imageFile->name,-4);
+                $extension = substr($imagen->imageFile->name,strrpos($imagen->imageFile->name,"."));
+                rename("../web/uploads/".$imagen->imageFile->name,"../web/iconos/articulos/".$model->nombre.$extension);
+                 $model->imagen_id = $model->nombre.$extension;
+               }
+
+            $model->modi_fecha = date('Y-m-d h:i:s');
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model,'categorias'=>$cargarCategorias,'imagen'=>$imagen
         ]);
     }
 
@@ -161,7 +217,7 @@ class ArticulosController extends Controller
 
         return $this->redirect(['index']);
     }
-    
+
     /**
      * Finds the Articulos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -205,4 +261,5 @@ class ArticulosController extends Controller
             return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
         }
     }
+
 }

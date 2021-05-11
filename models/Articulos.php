@@ -81,25 +81,84 @@ class Articulos extends \yii\db\ActiveRecord
     }
 
 
+    
+
     /**
      * {@inheritdoc}
      */
     public function attributeLabels()
-    {
+    {   // aqui hay que poner un if o algo para sacar el texto no el intger
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
-            'categoria_id' => 'Categoria ID',
-            'imagen_id' => 'Imagen ID',
-            'visible' => 'Visible',
-            'cerrado' => 'Cerrado',
-            'comun' => 'Comun',
-            'crea_usuario_id' => 'Crea Usuario ID',
-            'crea_fecha' => 'Crea Fecha',
-            'modi_usuario_id' => 'Modi Usuario ID',
-            'modi_fecha' => 'Modi Fecha',
-            'notas_admin' => 'Notas Admin',
+            'descripcion' => 'Descripción breve',
+            'categoria_id' => 'Categoria ',
+            'imagen_id' => 'imagen',
+            'visible' => 'Visibilidad',
+            'cerrado' => 'Estado del artículo',
+            'comun' => 'Artículo común o particular',
+            'crea_usuario_id' => 'Usuario propietario',
+            'crea_fecha' => 'Fecha y Hora de creación',
+            'modi_usuario_id' => 'Usuario que ha modificado ',
+            'modi_fecha' => 'Fecha y Hora de la última modificación ',
+            'notas_admin' => 'Notas adicionales',
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     * @return ArticulosQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ArticulosQuery(get_called_class());
+    }
+
+    public static function get_estados(){
+
+       return [ 0 => 'Activo', 1 => 'Suspendido',  2 => 'Eliminado', 3 => 'Cancelado por inadecuado'];
+        
+    }
+
+    public static function get_comun(){
+
+        return [ 0 => 'Particular', 1 => 'Común'];
+         
+     }
+
+     public static function get_visibilidad(){
+
+        return [ 0 => 'Invisible', 1 => 'visible'];
+         
+     }
+
+     public function get_nombre_categoria(){
+
+        $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+
+        return $cargarCategorias[$this->categoria_id]; 
+     }
+
+     public static function get_categorias_de_una_vez(){
+       return \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
+     }
 }
+
+
+/* Toda la informacion de los campos con los comentarios
+'id' => 'ID',
+            'nombre' => 'Nombre o denominación para el artículo.',
+            'descripcion' => 'Descripción breve del artículo o NULL si no es necesaria.',
+            'categoria_id' => 'Categoria de clasificación del artículo o CERO si no existe o aún no está indicada (como si fuera NULL).',
+            'imagen_id' => 'Nombre identificativo (fichero interno) con la imagen principal o \"de presentación\" del artículo, o NULL si no hay.',
+            'visible' => 'Indicador de artículo visible a los usuarios o invisible (se está manteniendo o está desactivado por otras causas): 0=Invisible, 1=Visible.',
+            'cerrado' => 'Indicador de artículo cancelado, eliminado o suspendido: 0=No (activo), 1=Eliminado por solicitud de baja, 2=Suspendido, 3=Cancelado por Inadecuado, ...',
+            'comun' => 'Indicador de artículo común a cualquier tienda que lo relacione o particular de una tienda, creado o marcado así por un moderador/administrador: 0=Particular, 1=Comun. Habrá un proceso que pueda convertir un artículo particular en común.',
+            'crea_usuario_id' => 'Usuario que ha creado el registro o CERO (como si fuera NULL) si no existe o se hizo por un administrador de sistema.',
+            'crea_fecha' => 'Fecha y Hora de creación del registro o NULL si no se conoce por algún motivo.',
+            'modi_usuario_id' => 'Usuario que ha modificado el registro por última vez o CERO (como si fuera NULL) si no existe o se hizo por un administrador de sistema.',
+            'modi_fecha' => 'Fecha y Hora de la última modificación del registro o NULL si no se conoce por algún motivo.',
+            'notas_admin' => 'Notas adicionales que solo ven/modifican los moderadores/administradores sobre los datos del regsitro o NULL si no hay.',
+
+        */
+

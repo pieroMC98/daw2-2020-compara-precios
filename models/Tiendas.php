@@ -90,6 +90,7 @@ class Tiendas extends \yii\db\ActiveRecord
         return $this->hasMany(Oferta::className(), ['tienda_id' => 'id'])->inverseOf('tiendas');
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -131,5 +132,10 @@ class Tiendas extends \yii\db\ActiveRecord
             'modi_fecha' => 'Modi Fecha',
             'notas_admin' => 'Notas Admin',
         ];
+    }
+
+    public function getNombre_tienda()
+    {
+        return $this->nombre_tienda;
     }
 }

@@ -44,8 +44,8 @@ class ArticulosEtiquetas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'articulo_id' => 'Articulo ID',
-            'etiqueta_id' => 'Etiqueta ID',
+            'articulo_id' => 'Artículo relacionado.',
+            'etiqueta_id' => 'Etiqueta relacionada.',
         ];
     }
 

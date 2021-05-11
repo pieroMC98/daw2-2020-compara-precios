@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
 
+
 /**
  * TiendasController implements the CRUD actions for Tiendas model.
  */
@@ -202,7 +203,7 @@ class TiendasController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
+  
     /**
      * Creates a new Seguimiento usuarios model from the articulo.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -230,4 +231,5 @@ class TiendasController extends Controller
             return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
         }
     }
+
 }

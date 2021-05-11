@@ -10,9 +10,10 @@ use app\models\Articulos;
  * ArticulosSearch represents the model behind the search form of `app\models\Articulos`.
  */
 class ArticulosSearch extends Articulos
-{
+
     public $etiquetaId;
     public $categoriaNombre;
+
     /**
      * {@inheritdoc}
      */
@@ -21,6 +22,7 @@ class ArticulosSearch extends Articulos
         return [
             [['id', 'categoria_id', 'visible', 'cerrado', 'comun', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
             [['nombre', 'descripcion', 'imagen_id', 'crea_fecha', 'modi_fecha', 'notas_admin', 'etiquetaId', 'categoriaNombre'], 'safe'],
+
         ];
     }
 
@@ -79,6 +81,7 @@ class ArticulosSearch extends Articulos
             ->andFilterWhere(['like', 'articulos.notas_admin', $this->notas_admin])
             ->andFilterWhere(['like', 'articulos_etiquetas.etiqueta_id', $this->etiquetaId])
             ->andFilterWhere(['like', 'categorias.nombre', $this->categoriaNombre]);
+
 
         return $dataProvider;
     }
