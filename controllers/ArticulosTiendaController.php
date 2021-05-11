@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use yii\db\Expression;
 use app\models\Avisosusuarios;
+use app\models\Oferta;
+use app\models\OfertaSearch;
 use app\models\Articulostienda;
 use app\models\ArticulostiendaSearch;
 use yii\web\Controller;
@@ -130,6 +132,36 @@ class ArticulostiendaController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Creates a new Oferta model from articulos.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionOferta($articulo_id,$tienda_id,$precio_original,$crea_usuario_id)
+    {
+        if(Yii::$app->user->getId()!=NULL){
+            $model = new Oferta();
+        
+            $model['articulo_id'] =$articulo_id;
+            $model['tienda_id'] =$tienda_id;
+            $model['precio_original']=$precio_original;
+            $model['crea_fecha']=date('Y-m-d');
+            $model['crea_usuario_id']=Yii::$app->user->getId();
+
+            
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['oferta/view', 'id' => $model->id]);
+            }
+            return $this->render('../oferta/create', [
+                'model' => $model,
+            ]);
+        }
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede crear una oferta si no has iniciado sesión']);
+        }
     }
 
     /**

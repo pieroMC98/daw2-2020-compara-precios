@@ -1,0 +1,192 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Proyecto en Grupo 2020 - 3. Analisis Inicial de Funciones y Tareas</title>
+</head>
+<body>
+<div class="bloque" style="font-family:arial;font-size:1.25em;text-align:justify;border:1.5mm solid #508050;margin:0.25em;padding:1em;">
+
+<div class="titulo titulo1" style="margin:5mm;font-size:2.0em;font-weight:bold">Proyecto en Grupo 2020</div>
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">3. Descripción Inicial de Funciones y Tareas.</div>
+
+<br/>
+&nbsp;&nbsp;&nbsp;De los requisitos iniciales planteados, se extraen una serie de funciones básicas a implementar, además de una serie de tareas adicionales a desarrollar dentro del sistema.
+<br/>
+<br/>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Funcionalidades Privadas:</div>
+<div style="text-align:justify;margin:0em">
+<!--
+<table style="background:red">
+<thead>
+<tr>
+<th>#</th>
+<th>Funcionalidad</th>
+<th>Grupo</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+-->
+
+<ul type="disc">
+  <li><strong>F1</strong> &rarr; Mantenimiento de Usuarios,
+    Asignación de Roles a los usuarios,
+    Lista fija de clases de Perfiles o Roles, 
+    Proceso de revisión del registro de nuevos usuarios,
+    Ampliación de Usuario registrado a ... (Propietario, Moderador, Administrador),
+    Mantenimiento de Clasificaciones,
+    Mantenimiento de la Configuración.
+  </li>
+  <li><strong>F2</strong> &rarr; Mantenimiento de Tiendas, 
+    Mantenimiento de la relación de Tiendas con Clasificaciones,
+    Lista fija de clases de Bloqueo (ver comentario en archivo SQL),
+    Lista fija de clases de Estados de Terminación (ver comentario en archivo SQL), 
+    Mantenimiento de Etiquetas, Proceso de extracción de etiquetas, Proceso de unificación de etiquetas,
+    Mantenimiento de la relación de Tiendas con Etiquetas,
+  </li>
+  <li><strong>F3</strong> &rarr; Mantenimiento de Artículos base, 
+    Mantenimiento de la relación de Artículos con Categorías,
+    Mantenimiento de la relación de Artículos con Etiquetas,
+    Mantenimiento de Regiones, 
+    Lista fija de clases de Región (ver comentario en archivo SQL),
+    Relación jerárquica entre regiones, 
+    Mantenimiento de Regiones de moderación para los usuarios de tipo moderador/administrador.
+  </li>
+  <li><strong>F4</strong> &rarr; Mantenimiento de Categorías,
+    Relación jerárquica de categorías con categoría padre, Proceso de unificación de categorías,
+    Mantenimiento de preferencias/seguimientos de Usuario con Tiendas.
+    Mantenimiento de preferencias/seguimientos de Usuario con Artículos.
+    Mantenimiento de preferencias/seguimientos de Usuario con Ofertas.
+    Mantenimiento de Ofertas,
+    Copias de Seguridad.
+  </li>
+  <li><strong>F5</strong> &rarr; Mantenimiento de Valoraciones/Comentarios,
+    Control de denuncias y bloqueos en los comercios y artículos-tienda,
+    Control de denuncias y bloqueos en los comentarios,
+    Mantenimiento de Artículos-Tienda, 
+    Mantenimiento de Propietarios y relación con usuario registrado.
+    
+  </li>
+  <li><strong>F6</strong> &rarr; Mantenimiento del Histórico de Precios, 
+    Mantenimiento de Avisos/Incidencias, 
+    Lista fija de clases de Aviso (ver comentario en archivo SQL),
+    Relación con usuario origen, usuario destino, con tienda, y/o artículo, y/o comentario, 
+    Mantenimiento de Moderadores y Regiones de moderación relacionadas,
+    Mantenimiento de Logs y proceso de limpieza,
+    Lista fija de clases de mensajes de Log (ver comentario en archivo SQL), 
+  </li>
+</ul>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Funcionalidades/Tareas Públicas:</div>
+<div style="text-align:justify;margin:0em">
+<ul>
+  <li><strong>T1</strong> &rarr;
+      Partes públicas de visualización y Acciones del <strong>formulario de Acceso </strong> (login, logout) y del <strong>formulario de Registro</strong> de Usuarios.
+      
+      Parte pública de visualización de la sección de <strong>&quot;Perfil de Usuario&quot;</strong> con sus datos o bloques de datos vinculados:
+          Piezas de visualización / modificación de &quot;Mi Perfil&quot;, 
+          Piezas de &quot;Cambio de Contraseña&quot;, 
+          Piezas de &quot;Solicitud de Baja&quot;, 
+          Creación y Revisión de Avisos e Incidencias (enviadas y recibidas), 
+          Tiendas/Comercios Propios (posiblemente aprovechando parte de lo creado en F2 y F5), 
+          Tiendas y/o Artículos en Seguimiento (F2), 
+          Comentarios propios en Establecimientos/Locales (F2, F5).
+      *** Y en general, todas las acciones para cumplir las funcionalidades indicadas para los usuarios registrados según los perfiles de cada uno.
+  
+  </li>
+  <li><strong>T2</strong> &rarr; 
+      Pieza pública de visualización de una <strong>lista de Tiendas con una &quot;ficha resumida&quot;</strong> la cual se debe poder reutilizar desde diferentes vistas o usar varias veces en la misma página para mostrar la lista de resultados recibida como argumento (obtenida según los filtros de datos aplicados en cada uso).
+      
+      Parte pública de visualización de una Tienda específica, con <strong>&quot;ficha detallada&quot;</strong> usando las piezas necesarias (propias o de otros compañeros) para mostrar todo lo necesario: 
+        Piezas para ver el estado de la tienda (y poder denunciar), 
+        ver la media de las valoraciones (y poder valorar/comentar), 
+        ver el detalle de las valoraciones y comentarios por fecha/hora de creación más reciente (y poder denunciar) paginados debidamente, ...
+      Acciones para cumplir con las funcionalidades indicadas para las tiendas según los perfiles de los usuarios.
+      
+      Pieza pública de visualización del formulario de <strong>búsqueda avanzada</strong> de Tiendas con la acción para el filtrado de resultados según los datos del formulario, y visualización de resultados usando la pieza realizada de la lista de Tiendas con &quot;ficha resumida&quot;,
+  </li>
+  <li><strong>T3</strong> &rarr; 
+      Pieza pública de visualización de una <strong>lista de Artículos con una &quot;ficha resumida&quot;</strong> la cual se debe poder reutilizar desde diferentes vistas o usar varias veces en la misma página para mostrar la lista de resultados recibida como argumento (obtenida según los filtros de datos aplicados en cada uso).
+      
+      Parte pública de visualización de una Artículo específico, con <strong>&quot;ficha detallada&quot;</strong> usando las piezas necesarias (propias o de otros compañeros) para mostrar todo lo necesario: 
+        Piezas para ver el estado del artículo (y poder denunciar), 
+        ver la media de las valoraciones (y poder valorar/comentar), 
+        ver el detalle de las valoraciones y comentarios por fecha/hora de creación más reciente (y poder denunciar) paginados debidamente, ...
+      Acciones para cumplir con las funcionalidades indicadas para los artículos según los perfiles de los usuarios.
+  
+      Pieza pública de visualización del formulario de <strong>búsqueda avanzada</strong> de Artículos con la acción para el filtrado de resultados según los datos del formulario, y visualización de resultados usando la pieza realizada de la lista de Artículos con &quot;ficha resumida&quot;,
+  </li>
+  <li><strong>T4</strong> &rarr; 
+      Pieza pública de visualización de la lista o menú de Clasificaciones para poder realizar la <strong>búsqueda simple por clasificación</strong> de Tiendas, con la acción para el filtrado de resultados según la clasificación seleccionada o elegida, y visualización de resultados usando la pieza realizada de la lista de Tiendas con &quot;ficha resumida&quot;.
+  
+      Pieza pública de visualización del árbol de categorías para poder realizar la <strong>búsqueda simple por categoría</strong> de Artículos con la acción para el filtrado de resultados según la categoría seleccionada o elegida, y visualización de resultados usando la pieza realizada de la lista de Tiendas con &quot;ficha resumida&quot;.
+  
+      Pieza pública de visualización de la nube de etiquetas de tiendas para poder realizar la <strong>búsqueda simple de tiendas por etiqueta</strong>, con la acción para el filtrado de resultados según la etiqueta seleccionada o elegida, y visualización de resultados usando la pieza realizada de la lista de Tiendas con &quot;ficha resumida&quot;.
+  
+      Pieza pública de visualización de la nube de etiquetas de artículos para poder realizar la <strong>búsqueda simple de artículos por etiqueta</strong>, con la acción para el filtrado de resultados según la etiqueta seleccionada o elegida, y visualización de resultados usando la pieza realizada de la lista de Artículos con &quot;ficha resumida&quot;.
+  </li>
+  <li><strong>T5</strong> &rarr;
+      Parte pública de visualización de la Portada inicial creando la plantilla pública principal del Portal aplicando alguna de las plantillas/temas públicos creados en <a href="https://yii2.themefactory.net" target="_blank">https://yii2.themefactory.net</a>, y usando las piezas necesarias (propias o de otros compañeros) para mostrar en la misma.
+      
+      Pieza pública de visualización del menú general de opciones que puede ejecutar el usuario según los perfiles de acceso.
+      
+      Filtrado y visualización de Tiendas según las preferencias del usuario (*).
+      
+      Filtrado y visualización de Artículos según las preferencias del usuario (*).
+      
+      Filtrado y visualización de Ofertas según las preferencias del usuario (*).
+      
+      (*) Todos los resultados se deberán visualizar utilizando las piezas públicas (realizada en otras tareas) que muestran la lista de Tiendas con &quot;ficha resumida&quot;, o la lista de Artículos con &quot;ficha resumida&quot;, o la lista de Ofertas.
+  </li>
+  <li><strong>T6</strong> &rarr;
+      Parte pública de visualización de Ofertas de una Tienda y acciones correspondientes para su correcto funcionamiento (activar/quitar seguimiento, ...).
+      
+      Pieza pública con formulario de búsqueda y/o visualización del árbol de regiones geográficas para poder realizar la <strong>búsqueda por región</strong> de Tiendas o Artículos en Tiendas, con la acción para el filtrado de resultados según la región seleccionada o elegida, y visualización de resultados usando la pieza realizada de la lista de Tiendas con &quot;ficha resumida&quot;.
+      
+      Pieza pública de acceso al mantenimiento del sistema como moderadores y administradores.
+      
+      Pieza pública de acceso al mantenimiento de Alertas y Notas desde el punto de vista de los moderadores y administradores.
+  </li>
+</ul>
+<hr/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** Los grupos que se formen deberán diseñar, implementar y documentar dos de los bloques trabajo, uno de funciones de mantenimiento privado &quot;Fx&quot; y otro de tareas públicas &quot;Tx&quot;, de entre las indicadas anteriormente.
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** Una combinación de bloques de trabajo más o menos apropiada para esta aplicación es:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(F1,T1), (F2,T2), (F3,T3), (F4,T4), (F5,T5), (F6,T6)
+<br/>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Roles / Perfiles:</div>
+<div style="text-align:justify;margin:0em">
+<ul>
+  <li>
+  <strong>Usuario Invitado (guest): </strong>Cualquier usuario que navega por las partes públicas del portal, sin necesidad de estar registrado o validado en la aplicación.
+  </li>
+  <li>
+  <strong>Usuario Registrado (normal): </strong>Pensado para los usuarios que quieren utilizar la web a la hora de buscar, consultar / visualizar los comercios/tiendas de su interés, gestionar su perfil, gestionar sus avisos, notificaciones y mensajes con moderadores o administradores, gestionar sus propios locales (si es propietario), las tiendas, artículos u ofertas de las que es seguidor, las valoraciones y comentarios creados, etc.
+  </li>
+  <li>
+  <strong>Usuario Moderador (moderador): </strong>Pensado para los usuarios que además deseen colaborar con la web a la hora de moderar los datos que se manejan, como son las tiendas, artículos, valoraciones y comentarios de una o varias regiones geográficas.
+  </li>
+  <li>
+  <strong>Usuario Propietario: </strong>Pensado para los usuarios que deseen gestionar sus propios comercios/tiendas. Podrán gestionar sus tiendas, artículos dentro de ellas, ofertas, etc. Estos usuarios se registran de la misma forma que los demás, pero deberán solicitar su activación como propietarios mediante un aviso/incidencia especial, para que los administradores le den el permiso en la aplicación.
+  </li>
+  <li>
+  <strong>Administrador del Portal (admin): </strong>Pensado para aquellos usuarios que realizan las tareas de mantenimiento de los datos del sistema, pueden gestionar cualquier cosa de la parte privada como usuarios, tiendas, artículos y datos asociados, valoraciones/comentarios, categorías, regiones geográficas, propietarios, configuración, hacer copias de seguridad o restaurarlas.
+  </li>
+  <li>
+  <strong>Administrador del Sistema (sysadmin): </strong>Pensado para los programadores de la aplicación y/o administradores generales del sistema donde se instale, tendrá acceso a todas las funciones de la aplicación sin restricciones, y opcionalmente deberá poder activar el rol que desee para trabajar como un usuario de ese tipo.
+  </li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -10,6 +10,7 @@ use app\assets\AppAsset;
 $this->title = 'Comparador de precios';
 ?>
 
+
 <div class="site-index">
 	<?php
 	?>
@@ -33,12 +34,14 @@ $this->title = 'Comparador de precios';
                 <p>Pieza con el nombre de las tiendas.</p>
 
             </div>
+
             <div style="float:right" class="col-12 col-sm-6 col-md-8 item-box">
                 <h2>Ofertas recomendadas</h2>
 
                 <p>Pieza con las ofertas recomendadas para un usuario.</p>
 
             </div>
+          
             <div style="float:right" class="col-12 col-sm-6 col-md-8 item-box">
                 <h2>Artículos recomendados según el usuario</h2>
 

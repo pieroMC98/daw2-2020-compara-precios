@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Articulos', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nube de etiquetas', ['etiquetas'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre:ntext',
             'descripcion:ntext',
             'categoria_id',
+            'categoriaNombre',
             'imagen_id',
             //'visible',
             //'cerrado',
