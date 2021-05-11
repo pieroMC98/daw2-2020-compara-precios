@@ -32,6 +32,11 @@ class ArticulosEtiquetas extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getArticulos()
+    {
+        return $this->hasMany(ArticulosEtiquetas::className(), [ 'id' => 'articulo_id'])->inverseOf('etiquetas');
+    }
+
     /**
      * {@inheritdoc}
      */

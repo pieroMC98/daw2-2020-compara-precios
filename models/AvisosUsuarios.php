@@ -36,7 +36,9 @@ class AvisosUsuarios extends \yii\db\ActiveRecord
     {
         return [
             [['fecha_aviso'], 'required'],
+
             [['fecha_aviso', 'fecha_lectura', 'fecha_aceptado', 'nombre_tienda'], 'safe'],
+
             [['texto'], 'string'],
             [['destino_usuario_id', 'origen_usuario_id', 'tienda_id', 'articulo_id', 'comentario_id'], 'integer'],
             [['clase_aviso'], 'string', 'max' => 1],
@@ -50,6 +52,7 @@ class AvisosUsuarios extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+
             'fecha_aviso' => 'Fecha de aviso',
             'clase_aviso' => 'Clase de aviso',
             'texto' => 'Texto',

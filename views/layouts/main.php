@@ -21,6 +21,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags(); ?>
+
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head(); ?>
 </head>
@@ -47,6 +48,7 @@ AppAsset::register($this);
             ],
             ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
+
             ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'About', 'url' => ['/site/about']],
