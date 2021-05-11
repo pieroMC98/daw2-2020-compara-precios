@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "articulos_tienda".
@@ -32,6 +34,8 @@ use Yii;
  */
 class ArticulosTienda extends \yii\db\ActiveRecord
 {
+	public $imagen;
+	
     /**
      * {@inheritdoc}
      */
@@ -49,10 +53,28 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             [['articulo_id', 'tienda_id', 'sumaValores', 'totalVotos', 'visible', 'cerrado', 'num_denuncias', 'bloqueado', 'cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
             [['url_articulo', 'notas_denuncia', 'notas_bloqueo', 'notas_admin'], 'string'],
             [['precio'], 'number'],
+			[['imagen'], 'image', 'extensions' => 'png, jpg'],
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
             [['imagen_id'], 'string', 'max' => 25],
+			[['articulo_id', 'tienda_id','precio','sumaValores', 'totalVotos','visible', 'cerrado','num_denuncias','bloqueado','cerrado_comentar', 'crea_usuario_id', 'modi_usuario_id'], 'default','value' => 0],
+			['tienda_id', 'exist', 'targetClass' => '\app\models\Tiendas','targetAttribute' => 'id','on'=>'crear'],
+			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
+			[['tienda_id','articulo_id'],'unique','targetAttribute' => ['tienda_id','articulo_id'], 'on' => 'crear'],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
         ];
     }
+	
+	public function behaviors()
+	{
+		return [
+					[
+						'class' => TimestampBehavior::className(),
+						'createdAtAttribute' => 'crea_fecha',
+						'updatedAtAttribute' => 'modi_fecha',
+						'value' => new Expression('NOW()'),
+					],
+				];
+	}
 
     /**
      * {@inheritdoc}
@@ -86,6 +108,9 @@ class ArticulosTienda extends \yii\db\ActiveRecord
             'nomArticulo' => 'Nombre Articulo',
             'artBloqueado' => 'Bloqueado',
             'artVisible' => 'Visible',
+			'imagen' => 'Imagen',
+            'artCerradoCom' => 'Cerrado Comentar',
+            'artCerrado' => 'Cerrado',
         ];
     }
 
@@ -96,8 +121,13 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     }
 
     public function getNomTienda(){
+		
+		if($this->tiendas!==null){
 
-    	return $this->tiendas->nombre_tienda;
+            return $this->tiendas->nombre_tienda;
+        }
+
+        return null;	
 
     }
 
@@ -109,7 +139,12 @@ class ArticulosTienda extends \yii\db\ActiveRecord
 
     public function getNomArticulo(){
 
-		return $this->articulos->nombre;
+        if($this->articulos!==null){
+
+            return $this->articulos->nombre;
+        }
+
+        return null;		
 
     }
 
@@ -138,5 +173,44 @@ class ArticulosTienda extends \yii\db\ActiveRecord
     		return 'Bloqueado por Administrador';
     	}	
 
+    }
+
+    public function getArtCerrado(){
+
+        if($this->cerrado==0){
+            return 'Activo';
+        }
+        if($this->cerrado==1){
+            return 'Eliminado por solicitud de baja';
+        }
+        if($this->cerrado==2){
+            return 'Suspendido';
+        }
+
+        return 'Cancelado por inadecuado';
+
+
+    }
+
+    public function getArtCerradoCom(){
+
+        if($this->cerrado_comentar==0){
+            return 'No';
+        }
+        return 'Si';
+
+
+    }
+	
+	public function actualizarVotos(){
+		
+		$query = new \yii\db\Query();
+		
+		$numVotos=$query->from('comentarios')->where(['tienda_id' => $this->tienda_id,'articulo_id'=>$this->articulo_id])->count('valoracion');
+		$sumVotos=$query->from('comentarios')->where(['tienda_id' => $this->tienda_id,'articulo_id'=>$this->articulo_id])->sum('valoracion');
+
+        $this->totalVotos=$numVotos;
+        $this->sumaValores=$sumVotos;
+        $this->save();
     }
 }

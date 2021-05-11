@@ -74,14 +74,13 @@ class ArticulosSearch extends Articulos
             'articulos.modi_usuario_id' => $this->modi_usuario_id,
             'articulos.modi_fecha' => $this->modi_fecha,
         ]);
-
+      
         $query->andFilterWhere(['like', 'articulos.nombre', $this->nombre])
             ->andFilterWhere(['like', 'articulos.descripcion', $this->descripcion])
             ->andFilterWhere(['like', 'articulos.imagen_id', $this->imagen_id])
             ->andFilterWhere(['like', 'articulos.notas_admin', $this->notas_admin])
             ->andFilterWhere(['like', 'articulos_etiquetas.etiqueta_id', $this->etiquetaId])
             ->andFilterWhere(['like', 'categorias.nombre', $this->categoriaNombre]);
-
 
         return $dataProvider;
     }

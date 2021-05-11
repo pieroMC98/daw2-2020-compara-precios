@@ -10,6 +10,8 @@ use app\models\Categorias;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Tiendas;
+use app\models\TiendasSearch;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
@@ -233,6 +235,46 @@ class ArticulosController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+	
+	public function actionElegir_articulo($modo=0,$id_tienda=null)
+    {
+		$modo=(int)$modo;
+		
+        if (Tiendas::findOne($id_tienda) === null) {
+            $dev=null;
+			($modo===0) ? $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>2]) : $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>1]);
+            return $dev;
+
+        }
+		
+		if($modo===1)
+        {
+			$searchModel = new ArticulosSearch();
+			$searchModel->visible = 1;
+			$searchModel->cerrado = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			return $this->render('elegir_articulo_com', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
+
+		if($modo===0)
+        {
+			$searchModel = new ArticulosSearch();
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			return $this->render('elegir_articulo', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
+		
+		return $this->goHome();
+    }
 
     /**
      * Creates a new Seguimiento usuarios model from the articulo.
@@ -261,5 +303,4 @@ class ArticulosController extends Controller
             return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
         }
     }
-
 }

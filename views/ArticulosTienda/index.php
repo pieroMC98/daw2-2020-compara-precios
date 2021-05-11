@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articulostienda', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Elegir tienda y articulo a crear', ['tiendas/elegir_tienda','modo'=>2], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -32,8 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
             //'tienda_id',
             'nomTienda',
             //'imagen_id',
-            'url_articulo:ntext',
-            'precio',
+            'url_articulo:url',
+            //'precio',
+            ['attribute'=>'precio'
+                , 'filter'=>
+                            Html::activeTextInput($searchModel, 'precioDesde', ['class'=>'form-control', 'size'=>4])
+                            .Html::activeTextInput($searchModel, 'precioHasta', ['class'=>'form-control', 'size'=>4])
+                ,'value' => function ($model) {
+                    return Yii::$app->formatter->asCurrency($model->precio);
+                },
+            ],
+			/*[
+				'attribute' => 'precio',
+				//'format' => 'Currency',
+				'value' => function ($model) {
+					return Yii::$app->formatter->asCurrency($model->precio);
+				},
+			],*/
             //'sumaValores',
             //'totalVotos',
             //'visible',

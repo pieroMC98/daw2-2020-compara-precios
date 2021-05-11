@@ -1,68 +1,52 @@
 <?php
 
 /* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
+use app\widgets\Alert;
+use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap;
+use yii\widgets\Breadcrumbs;
+use app\assets\AppAsset;
+$this->title = 'Comparador de precios';
 ?>
+
+
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>ComparaPrecios 2021</h1>
-
-        <p class="lead">Bienvenidos al mejor comparador de precios</p>
-
-    <?php //$ruta = $_SERVER["DOCUMENT_ROOT"].'/daw2-2020-compara-precios/web/iconos/logo.png'?>
-        <p><p><img src="http://localhost/daw2-2020-compara-precios/web/iconos/logo.png" width="200"> </p></p>
+	<?php
+	?>
+	<p>*Barra con el nombre de las categorias*</p>
+    <div class="barra">
+            <a class="btn elemento" onmouseover="" href='index.php?r=copias-seg'>Categoria 1</a>
+            <a class="btn elemento" href='#'>Categoría 2</a>
+            <a class="btn elemento" href='#'>Categoría 3</a>
+            <a class="btn elemento" href='#'>Categoría 4</a>
+            <a class="btn elemento" href='#'>Categoría 5</a>
+            <a class="btn elemento" href='#'>Categoría 6</a>
+            <a class="btn elemento" href='#'>Categoría 7</a>
     </div>
+  
+</div>
+<br/>
     <div class="body-content">
 
-        <div>
-            <h2>Partes</h2>
-            <a class="btn btn-default" href='index.php?r=copias-seg'>Copias de seguridad &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=categorias'>Categorias &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=oferta'>Ofertas &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=articulos'>Articulos &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=articulostienda'>articulosTienda &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=tiendas'>Tiendas &raquo;</a>
-            <a class="btn btn-default" href='index.php?r=seguimientos-usuario'>Seguimientos &raquo;</a>
-        </div>
+            <div style="float:left" class="lateral item-box col-3 col-sm-3 col-md-3">
+                <h2>Tiendas</h2>
+                <p>Pieza con el nombre de las tiendas.</p>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Sección1</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
             </div>
-            <div class="col-lg-4">
-                <h2>Sección2</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <div style="float:right" class="col-12 col-sm-6 col-md-8 item-box">
+                <h2>Ofertas recomendadas</h2>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <p>Pieza con las ofertas recomendadas para un usuario.</p>
+
             </div>
-            <div class="col-lg-4">
-                <h2>Sección3</h2>
+          
+            <div style="float:right" class="col-12 col-sm-6 col-md-8 item-box">
+                <h2>Artículos recomendados según el usuario</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Pieza con los articulos recomendados para un usuario.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
         </div>
-
-        
-
-
-
-    </div>
 </div>

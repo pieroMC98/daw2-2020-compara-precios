@@ -1,8 +1,9 @@
 <?php
 
 namespace app\models;
-
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "comentarios".
@@ -42,12 +43,31 @@ class Comentarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tienda_id', 'texto'], 'required'],
+            [['tienda_id', 'texto', 'valoracion'], 'required'],
             [['tienda_id', 'articulo_id', 'valoracion', 'comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
             [['texto', 'notas_denuncia', 'notas_bloqueo', 'notas_admin'], 'string'],
             [['fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
+            [['fecha_denuncia1','notas_denuncia', 'fecha_bloqueo', 'notas_bloqueo', 'modi_usuario_id', 'modi_fecha','notas_admin'], 'default', 'value' => NULL],
+			['tienda_id', 'exist', 'targetClass' => '\app\models\Tiendas','targetAttribute' => 'id','on'=>'crear'],
+			['articulo_id', 'exist', 'targetClass' => '\app\models\Articulos','targetAttribute' => 'id','on'=>'crear'],
+			['comentario_id', 'exist', 'targetClass' => '\app\models\Comentarios','targetAttribute' => 'id','on'=>'crear'],
+			[['articulo_id','comentario_id', 'cerrado', 'num_denuncias', 'bloqueado', 'crea_usuario_id'], 'default', 'value' => 0],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
         ];
     }
+	
+	public function behaviors()
+	{
+		return [
+					[
+						'class' => TimestampBehavior::className(),
+						'createdAtAttribute' => 'crea_fecha',
+						'updatedAtAttribute' => 'modi_fecha',
+						'value' => new Expression('NOW()'),
+					],
+				];
+	}
+	
 
     /**
      * {@inheritdoc}
@@ -77,6 +97,8 @@ class Comentarios extends \yii\db\ActiveRecord
             'nomArticulo' => 'Nombre Articulo',
             'nickCreador' => 'Nick Usuario Creador',
             'nickModificador' => 'Nick Usuario Modificador',
+            'comBloqueado' => 'Bloqueado',
+            'comentariosCerrado' => 'Cerrado',
         ];
     }
 
@@ -88,7 +110,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNomTienda(){
 
-    	return $this->tiendas->nombre_tienda;
+		if($this->tiendas!==null){
+
+            return $this->tiendas->nombre_tienda;
+        }
+
+        return null;	
 
     }
 
@@ -100,7 +127,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNomArticulo(){
 
-		return $this->articulos->nombre;
+		if($this->articulos!==null){
+
+            return $this->articulos->nombre;
+        }
+
+        return null;	
 
     }
 
@@ -112,7 +144,12 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNickCreador(){
 
-		return $this->usuarios->nick;
+		if($this->usuarios!==null){
+
+            return $this->usuarios->nick;
+        }
+
+        return null;	
 
     }
 
@@ -124,7 +161,42 @@ class Comentarios extends \yii\db\ActiveRecord
 
     public function getNickModif(){
 
-		return $this->usuariosModif->nick;
+		if($this->usuariosModif!==null){
+
+            return $this->usuariosModif->nick;
+        }
+
+        return null;	
+
+    }
+
+    public function deleteComentario(){
+
+        $this->valoracion=0;
+        $this->texto = "Este comentario ha sido eliminado.";
+        $this->cerrado = 1;
+        $this->save();
+    }
+
+    public function getComentariosCerrado(){
+
+        if($this->cerrado==0){
+            return 'No';
+        }else{
+            return 'Si';
+        }
+
+    }
+
+    public function getComBloqueado(){
+
+        if($this->bloqueado==0){
+            return 'No';
+        }else if($this->bloqueado==1){
+            return 'Bloqueado por denuncias';
+        }else{
+            return 'Bloqueado por Administrador';
+        }   
 
     }
 }

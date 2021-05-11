@@ -19,7 +19,7 @@ function enSeguimiento($model_id){
 /* @var $this yii\web\View */
 /* @var $model app\models\Tiendas */
 
-$this->title = $model->id;
+$this->title = $model->nombre_tienda;
 $this->params['breadcrumbs'][] = ['label' => 'Tiendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,6 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Modificar datos', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        if($model->bloqueada===0){
+
+            echo Html::a('Bloquear', ['bloqueo', 'id' => $model->id], ['class' => 'btn btn-warning']); 
+        }
+
+        if($model->bloqueada!==0){
+
+            echo Html::a('Quitar bloqueo', ['quitabloqueo', 'id' => $model->id], ['class' => 'btn btn-warning']); 
+        }
+
+        ?>
+        <?= Html::a('Eliminar tienda', ['delete', 'id' => $model->id], [ 'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         
         <?php
@@ -54,6 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+
+        <?php /*Boton para probar la denuncia publica echo Html::a('Denuncia?', ['denuncia', 'id' => $model->id], ['class' => 'btn btn-primary'])*/?>
     </p>
 
     <?= DetailView::widget([
@@ -63,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre_tienda:ntext',
             'descripcion_tienda:ntext',
             'lugar_tienda:ntext',
-            'url_tienda:ntext',
+            'url_tienda:url',
             'direccion_tienda:ntext',
             'region_id_tienda',
             'telefono_tienda',

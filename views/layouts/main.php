@@ -20,7 +20,12 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags(); ?>
+
+    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+
+    <link rel="stylesheet" href="css/prueba.css">
+
+    <?php $this->registerCsrfMetaTags() ?>
 
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head(); ?>
@@ -31,14 +36,23 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-    	'brandLabel' => Yii::$app->name,
-    	'brandUrl' => Yii::$app->homeUrl,
-    	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
+
+        'brandLabel' => "COMPARADOR DE PRECIOS - DAW2",
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-inverse navbar-fixed-top',
+        ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+          
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Administración', 'url' => ['/site/menu_admin']],
+            
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]
+
             ['label' => 'Tiendas',
                 'items' => [
                      ['label' => 'Listado', 'url' => ['/tiendas']],
@@ -59,6 +73,7 @@ AppAsset::register($this);
             ),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
+
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -73,6 +88,7 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
+  
     <div class="container">
         <?= Breadcrumbs::widget([
         	'links' => isset($this->params['breadcrumbs'])

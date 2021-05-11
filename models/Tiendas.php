@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "tiendas".
@@ -67,6 +69,7 @@ class Tiendas extends \yii\db\ActiveRecord
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
             [['razon_social'], 'string', 'max' => 250],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
         ];
     }
 
@@ -131,11 +134,75 @@ class Tiendas extends \yii\db\ActiveRecord
             'modi_usuario_id' => 'Modi Usuario ID',
             'modi_fecha' => 'Modi Fecha',
             'notas_admin' => 'Notas Admin',
+            'nombreCompleto' => 'Nombre Completo',
+            'nickPropietario' => 'Nick Propietario',
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+                    [
+                        'class' => TimestampBehavior::className(),
+                        'createdAtAttribute' => 'crea_fecha',
+                        'updatedAtAttribute' => 'modi_fecha',
+                        'value' => new Expression('NOW()'),
+                    ],
+                ];
+    }
+
+    public function getNombreCompleto()
+    {
+        return $this->nombre.' '.$this->apellidos;
+    }
+
+    public function getUsuarios(){
+
+        return $this->hasOne(Usuarios::className(),['id' => 'usuario_id']);
+
+    }
+
+    public function getNickPropietario(){
+
+        if($this->usuarios!==null){
+
+            return $this->usuarios->nick;
+        }
+
+        return null;
+
+    }
+
+    public function deletePropietario(){
+
+        $this->usuario_id =0;
+        $this->nif_cif='NULO';
+        $this->nombre = NULL;
+        $this->apellidos = NULL;
+        $this->razon_social = NULL;
+        $this->direccion = NULL;
+        $this->region_id = 0;
+        $this->telefono_contacto = NULL;
+
+        $this->save();
+    }
+	
+	public function actualizarVotos(){
+		
+		$query = new \yii\db\Query();
+		
+		$numVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->count('valoracion');
+		$sumVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->sum('valoracion');
+
+        $this->totalVotos=$numVotos;
+        $this->sumaValores=$sumVotos;
+        $this->save();
+    }
+
 
     public function getNombre_tienda()
     {
         return $this->nombre_tienda;
     }
+  
 }

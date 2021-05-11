@@ -7,17 +7,11 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TiendasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tiendas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Elige una tienda a la que añadir un articulo';
 ?>
 <div class="tiendas-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Crear una tienda', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Ver propietarios', ['propietarios'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -31,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre_tienda:ntext',
             'descripcion_tienda:ntext',
             'lugar_tienda:ntext',
-            'url_tienda:url',
+            'url_tienda:ntext',
             //'direccion_tienda:ntext',
             //'region_id_tienda',
             //'telefono_tienda',
@@ -61,9 +55,30 @@ $this->params['breadcrumbs'][] = $this->title;
             //'modi_usuario_id',
             //'modi_fecha',
             //'notas_admin:ntext',
-            'nombreCompleto',
+            //'nombreCompleto',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template' => '{elegir_articulo}',
+            'buttons'  => ['elegir_articulo' => function($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-arrow-right"></span>', $url, [ 'title' => Yii::t('app', 'Elegir_articulo'),]);
+
+                            }
+
+                        ],
+
+            'urlCreator' => function ($action, $model, $key, $index) {
+
+                if ($action === 'elegir_articulo') {
+
+                    $url = 'index.php?r=articulos/elegir_articulo&id_tienda='.$model['id'];
+
+                    return $url;
+
+                }
+             }
+
+        ]
         ],
     ]); ?>
 
