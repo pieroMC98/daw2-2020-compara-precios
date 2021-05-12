@@ -5,13 +5,18 @@ namespace app\controllers;
 use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+
 use app\models\Categorias;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Tiendas;
+use app\models\TiendasSearch;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use app\controllers\OfertaController;
+use yii\db\Query;
 
 
 /**
@@ -58,12 +63,62 @@ class ArticulosController extends Controller
     {
         $searchModel = new ArticulosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider
-            ]);
-        
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all etiquetas.
+     * @return mixed
+     */
+    public function actionEtiquetas()
+    {
+        $etiquetas= array();
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'articulos_etiquetas', 'etiquetas.id = articulos_etiquetas.etiqueta_id');
+
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('etiquetas', [
+            'etiquetas' => $etiquetas,
+        ]);
+    }
+
+    /**
+     * Lists all Articulos models filter by etiqueta.
+     * @return mixed
+     */
+    public function actionBusqetiquetas()
+    {
+        $searchModel = new ArticulosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query = new Query;
+        // compose the query
+        $query->select('etiquetas.id, etiquetas.nombre')
+            ->from('etiquetas')
+            ->join('INNER JOIN', 'articulos_etiquetas', 'etiquetas.id = articulos_etiquetas.etiqueta_id');
+        // build and execute the query
+        $listaEtiquetas = $query->all();
+        for($i=0; $i<count($listaEtiquetas); $i++){
+            $etiquetas[$listaEtiquetas[$i]['id']]=$listaEtiquetas[$i]['nombre'];
+        }
+
+        return $this->render('busEtiquetas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'etiquetas' => $etiquetas,
+        ]);
     }
 
     /**
@@ -74,12 +129,9 @@ class ArticulosController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        
         return $this->render('view', [
-            'model' => $model
+            'model' => $this->findModel($id),
         ]);
-        
     }
 
     /**
@@ -90,6 +142,7 @@ class ArticulosController extends Controller
     public function actionCreate()
     {
         $model = new Articulos();
+
         $imagen = new UploadForm();
         //Si venimos del submit del formulario 
         if ($model->load(Yii::$app->request->post())) {
@@ -115,6 +168,7 @@ class ArticulosController extends Controller
         $cargarCategorias = \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
         return $this->render('create', [ 
             'model' => $model,'categorias'=>$cargarCategorias,'imagen'=>$imagen
+
         ]);
     }
 
@@ -128,6 +182,7 @@ class ArticulosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
         $imagen = new UploadForm();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -179,5 +234,73 @@ class ArticulosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+	
+	public function actionElegir_articulo($modo=0,$id_tienda=null)
+    {
+		$modo=(int)$modo;
+		
+        if (Tiendas::findOne($id_tienda) === null) {
+            $dev=null;
+			($modo===0) ? $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>2]) : $dev=$this->redirect(['tiendas/elegir_tienda','modo'=>1]);
+            return $dev;
+
+        }
+		
+		if($modo===1)
+        {
+			$searchModel = new ArticulosSearch();
+			$searchModel->visible = 1;
+			$searchModel->cerrado = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			return $this->render('elegir_articulo_com', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
+
+		if($modo===0)
+        {
+			$searchModel = new ArticulosSearch();
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			return $this->render('elegir_articulo', [
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+				'id_tienda' => $id_tienda,
+			]);
+		}
+		
+		return $this->goHome();
+    }
+
+    /**
+     * Creates a new Seguimiento usuarios model from the articulo.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionSeguimiento($id){
+        if(Yii::$app->user->getId()!=NULL){
+            return $this->redirect(['seguimientos-usuario/seguimiento', 'id_articulo' => $id, 'id_tienda'=>'', 'id_oferta'=>'']);
+        }
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
+        }
+    }
+    
+    /**
+     * Creates a new Seguimiento usuarios model from the articulo.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionQuitarseguimiento($id){
+        if(Yii::$app->user->getId()!=NULL){
+            return $this->redirect(['seguimientos-usuario/quitarseguimiento', 'id' => $id]);
+        }
+        else{
+            return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
+        }
     }
 }
