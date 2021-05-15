@@ -51,7 +51,7 @@ AppAsset::register($this);
             ['label' => 'Administración', 'url' => ['/site/menu_admin']],
             
             Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]
+                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]):
 
             ['label' => 'Tiendas',
                 'items' => [
