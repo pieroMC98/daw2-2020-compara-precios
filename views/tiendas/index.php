@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Tiendas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear una tienda', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver propietarios', ['propietarios'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre_tienda:ntext',
             'descripcion_tienda:ntext',
             'lugar_tienda:ntext',
-            'url_tienda:ntext',
+            'url_tienda:url',
             //'direccion_tienda:ntext',
             //'region_id_tienda',
             //'telefono_tienda',
@@ -60,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'modi_usuario_id',
             //'modi_fecha',
             //'notas_admin:ntext',
+            'nombreCompleto',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

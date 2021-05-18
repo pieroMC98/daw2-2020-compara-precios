@@ -9,7 +9,7 @@ use app\models\Articulos;
 /**
  * ArticulosSearch represents the model behind the search form of `app\models\Articulos`.
  */
-class ArticulosSearch extends Articulos
+class ArticulosSearch extends Articulos{
 
     public $etiquetaId;
     public $categoriaNombre;
