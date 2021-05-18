@@ -4,21 +4,24 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Avisosusuarios;
+use app\models\AvisosUsuarios;
 
 /**
- * AvisosusuariosSearch represents the model behind the search form of `app\models\Avisosusuarios`.
+ * AvisosUsuariosSearch represents the model behind the search form of `app\models\AvisosUsuarios`.
  */
-class AvisosusuariosSearch extends Avisosusuarios
+class AvisosUsuariosSearch extends AvisosUsuarios
 {
     /**
      * {@inheritdoc}
      */
+
+    public $nombre;
+
     public function rules()
     {
         return [
             [['id', 'destino_usuario_id', 'origen_usuario_id', 'tienda_id', 'articulo_id', 'comentario_id'], 'integer'],
-            [['fecha_aviso', 'clase_aviso', 'texto', 'fecha_lectura', 'fecha_aceptado'], 'safe'],
+            [['fecha_aviso', 'clase_aviso', 'texto', 'fecha_lectura', 'fecha_aceptado', 'nombre'], 'safe'],
         ];
     }
 
@@ -40,12 +43,16 @@ class AvisosusuariosSearch extends Avisosusuarios
      */
     public function search($params)
     {
-        $query = Avisosusuarios::find();
+        $query = AvisosUsuarios::find();
+        $query->joinWith(['nombre_tienda']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5
+            ],
         ]);
 
         $this->load($params);

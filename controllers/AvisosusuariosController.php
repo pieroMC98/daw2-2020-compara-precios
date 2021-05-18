@@ -3,16 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Avisosusuarios;
-use app\models\AvisosusuariosSearch;
+use app\models\AvisosUsuarios;
+use app\models\AvisosUsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
- * AvisosusuariosController implements the CRUD actions for Avisosusuarios model.
+ * AvisosUsuariosController implements the CRUD actions for AvisosUsuarios model.
  */
-class AvisosusuariosController extends Controller
+class AvisosUsuariosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -26,16 +29,32 @@ class AvisosusuariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'create', 'delete','update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'create', 'delete','update'],
+                        'roles' => ['admin', 'sysadmin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view'],
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
-     * Lists all Avisosusuarios models.
+     * Lists all AvisosUsuarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AvisosusuariosSearch();
+        $searchModel = new AvisosUsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +64,7 @@ class AvisosusuariosController extends Controller
     }
 
     /**
-     * Displays a single Avisosusuarios model.
+     * Displays a single AvisosUsuarios model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +77,13 @@ class AvisosusuariosController extends Controller
     }
 
     /**
-     * Creates a new Avisosusuarios model.
+     * Creates a new AvisosUsuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Avisosusuarios();
+        $model = new AvisosUsuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +95,7 @@ class AvisosusuariosController extends Controller
     }
 
     /**
-     * Updates an existing Avisosusuarios model.
+     * Updates an existing AvisosUsuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +115,7 @@ class AvisosusuariosController extends Controller
     }
 
     /**
-     * Deletes an existing Avisosusuarios model.
+     * Deletes an existing AvisosUsuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +129,15 @@ class AvisosusuariosController extends Controller
     }
 
     /**
-     * Finds the Avisosusuarios model based on its primary key value.
+     * Finds the AvisosUsuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Avisosusuarios the loaded model
+     * @return AvisosUsuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Avisosusuarios::findOne($id)) !== null) {
+        if (($model = AvisosUsuarios::findOne($id)) !== null) {
             return $model;
         }
 

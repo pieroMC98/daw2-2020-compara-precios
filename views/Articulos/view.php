@@ -1,25 +1,13 @@
 <?php
+
+use app\models\Articulos;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\db\Query;
-
-function enSeguimiento($model_id){
-    
-    $query = new Query;
-    $query->select('id')
-        ->from('seguimientos_usuario')
-        ->where(['=', 'articulo_id', $model_id])
-        ->andWhere(['=', 'usuario_id', Yii::$app->user->getId()]);
-    $rows = $query->all();
-
-    return $rows;
-}
-
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulos */
 
-$this->title = $model->id;
+$this->title = 'Ficha detallada de ['.$model->nombre.']';
 $this->params['breadcrumbs'][] = ['label' => 'Articulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -27,33 +15,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="articulos-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        
-        <?php
-        $res = enSeguimiento($model->id);
-        if(count($res)===0)
-        {?>
-            <?=Html::a('Seguir', ['seguimiento', 'id' => $model->id], ['class' => 'btn btn-primary'])?>
-        <?php }
-        else{?>
-            <?=Html::a('Dejar de seguir', ['quitarseguimiento', 'id' => $res[0]['id']], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Estas seguro de que quieres dejar de seguir este artículo?',
-                'method' => 'post',
-            ],
-            ]) ?>
-        <?php } ?>
+    <?php // Simplemente compruebo si el user puede modificar, porque son acciones del sysadmin o admin
+         // entonces le muestro los botones
+     if (Yii::$app->user->can('update')){?>
 
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Seguro que quieres seguir',
                 'method' => 'post',
             ],
         ]) ?>
+     //   <?php } ?>
     </p>
 
     <?= DetailView::widget([
@@ -62,12 +37,42 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nombre:ntext',
             'descripcion:ntext',
-            'categoria_id',
-            'categoriaNombre',
-            'imagen_id',
-            'visible',
-            'cerrado',
-            'comun',
+            [
+                'label' => 'categorias',
+                'value' => function ($model) {
+                    return $model->get_nombre_categoria();
+                }
+              ],
+              [
+
+                'attribute'=>'photo','label'=>'Imagen del articulo',
+
+                'value'=>'../../web/iconos/articulos/'.$model->imagen_id,
+
+                'format' => ['image',['width'=>'50','height'=>'50']],
+
+            ],
+            [
+                'label'=>'visibilidad',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_visibilidad();
+                    return $estados[$model->visible];
+                }
+              ],
+            [
+                'label'=>'Estado del artículo',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_estados();
+                    return $estados[$model->cerrado];
+                }
+              ],
+              [
+                'label'=>'Artículo común o particular',
+                'value' => function ($model) {
+                    $estados =  Articulos::get_comun();
+                    return $estados[$model->comun];
+                }
+              ],
             'crea_usuario_id',
             'crea_fecha',
             'modi_usuario_id',
