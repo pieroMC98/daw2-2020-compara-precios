@@ -3,7 +3,7 @@
 return [
 	'class' => 'yii\db\Connection',
 	'dsn' => 'mysql:host=localhost;dbname=daw2_20_comparaprecios',
-	'username' => 'root',
+	'username' => 'daw',
 	'password' => '',
 	'charset' => 'utf8',
 
