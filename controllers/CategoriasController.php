@@ -37,12 +37,15 @@ class CategoriasController extends Controller
     {
         $searchModel = new CategoriasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination = ['pageSize' => 10,];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
         ]);
     }
+    
 
     /**
      * Displays a single Categorias model.
