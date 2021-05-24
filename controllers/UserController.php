@@ -1,5 +1,7 @@
 <?php
+
 namespace app\controllers;
+
 use Yii;
 use yii\web\Controller;
 use app\models\User;
@@ -65,7 +67,7 @@ class UserController extends Controller
 
 			return $this->render('login', [
 				'error' =>
-					'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
+				'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
@@ -158,8 +160,8 @@ class UserController extends Controller
 
 	function actionUpdate($id)
 	{
-	  $user = User::findIdentity($id);
-	  $user->scenario = User::SCENARIO_REGISTER;
+		$user = User::findIdentity($id);
+		$user->scenario = User::SCENARIO_REGISTER;
 		return $this->render('create', ['model' => $user]);
 	}
 

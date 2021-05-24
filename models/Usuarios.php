@@ -53,7 +53,10 @@ class Usuarios extends \yii\db\ActiveRecord
             [['nick', 'telefono_contacto'], 'string', 'max' => 25],
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
+<<<<<<< HEAD
 			[['rol'], 'in','range'=>self::lista_roles()],
+=======
+>>>>>>> main
             [['email'], 'unique'],
             [['nick'], 'unique'],
         ];
@@ -62,11 +65,14 @@ class Usuarios extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
 	public static function lista_roles()
 	{
 		return ['usuario' => 'usuario', 'propietario' => 'propietario','moderador' => 'moderador', 'admin' => 'admin', 'sysadmin' => 'sysadmin'];
 		
 	}
+=======
+>>>>>>> main
     public function attributeLabels()
     {
         return [
@@ -89,6 +95,7 @@ class Usuarios extends \yii\db\ActiveRecord
             'notas_bloqueo' => 'Notas Bloqueo',
         ];
     }
+<<<<<<< HEAD
 	
 	public function getRol()
 	{
@@ -136,4 +143,6 @@ class Usuarios extends \yii\db\ActiveRecord
 		return $ok;
 	
 	}
+=======
+>>>>>>> main
 }

@@ -1,0 +1,45 @@
+.item-box{
+    border: solid rgba(36, 36, 36, 0.473) 2px;
+    border-radius: 15px;
+    padding-left: 0%;
+    margin: 5px 0px 5px 5px;
+}
+
+.barra{
+    background-color: black;
+    text-align: center;
+    border-radius: 12px;
+    padding:3px;
+    margin:0px;
+
+}
+.elemento{
+    color:white;
+    background-color: black;
+    margin-right: 20px;
+
+}
+a:hover {
+  background-color: lightgray;
+}
+
+.lateral{
+    padding: 1%;
+}
+
+.item-box2{
+    border: solid rgba(36, 36, 36, 0.473) 2px;
+    border-radius: 15px;
+    padding-left: 2%;
+    margin: 5px;
+    background-color: #151515;
+    color:white;
+}
+
+.item-box3{
+    border: solid rgba(36, 36, 36, 0.473) 2px;
+    border-radius: 15px;
+    padding-left: 0%;
+    margin: 5px 0px 5px 5px;
+    background-color: #EFEFEF;
+}

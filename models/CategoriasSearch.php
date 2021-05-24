@@ -76,4 +76,5 @@ class CategoriasSearch extends Categorias
 
         return $dataProvider;
     }
+
 }

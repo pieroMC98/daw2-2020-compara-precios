@@ -1,11 +1,13 @@
 <?php
 
 namespace app\models;
+
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
+
 
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -193,27 +195,27 @@ class User extends ActiveRecord implements IdentityInterface
 	//si es valido implementarlo
 	//revocar el anterior.
 
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'password' => 'Password',
-            'r_password' => 'Repetir password',
-            'nick' => 'Nick',
-            'nombre' => 'Nombre',
-            'apellidos' => 'Apellidos',
-            'direccion' => 'Direccion',
-            'region_id' => 'Region ID',
-            'telefono_contacto' => 'Telefono Contacto',
-            'fecha_nacimiento' => 'Fecha Nacimiento',
-            'fecha_registro' => 'Fecha Registro',
-            'confirmado' => 'Confirmado',
-            'fecha_acceso' => 'Fecha Acceso',
-            'num_accesos' => 'Num Accesos',
-            'bloqueado' => 'Bloqueado',
-            'fecha_bloqueo' => 'Fecha Bloqueo',
-            'notas_bloqueo' => 'Notas Bloqueo',
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'email' => 'Email',
+			'password' => 'Password',
+			'r_password' => 'Repetir password',
+			'nick' => 'Nick',
+			'nombre' => 'Nombre',
+			'apellidos' => 'Apellidos',
+			'direccion' => 'Direccion',
+			'region_id' => 'Region ID',
+			'telefono_contacto' => 'Telefono Contacto',
+			'fecha_nacimiento' => 'Fecha Nacimiento',
+			'fecha_registro' => 'Fecha Registro',
+			'confirmado' => 'Confirmado',
+			'fecha_acceso' => 'Fecha Acceso',
+			'num_accesos' => 'Num Accesos',
+			'bloqueado' => 'Bloqueado',
+			'fecha_bloqueo' => 'Fecha Bloqueo',
+			'notas_bloqueo' => 'Notas Bloqueo',
+		];
+	}
 }

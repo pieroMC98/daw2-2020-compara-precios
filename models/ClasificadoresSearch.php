@@ -46,6 +46,7 @@ class ClasificadoresSearch extends Clasificadores
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+<<<<<<< HEAD
             'pagination' => [
             'pageSize' => 10,
         ],
@@ -54,6 +55,8 @@ class ClasificadoresSearch extends Clasificadores
                 'id' => SORT_ASC,
             ]
         ],
+=======
+>>>>>>> main
         ]);
 
         $this->load($params);
