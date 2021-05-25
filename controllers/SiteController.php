@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AvisosUsuarios;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -157,12 +158,17 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'menu_admin'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['menu_admin'],
+                        'roles' => ['admin', 'sysadmin'],
                     ],
                 ],
             ],
@@ -236,6 +242,16 @@ class SiteController extends Controller
     }
 
     /**
+     * User action.
+     *
+     * @return Response
+     */
+    public function actionUser()
+    {
+        return $this->render('user');
+    }
+
+    /**
      * Displays contact page.
      *
      * @return Response|string
@@ -261,5 +277,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionMenu_admin()
+    {
+        return $this->render('menu_admin');
     }
 }

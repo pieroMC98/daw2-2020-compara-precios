@@ -42,6 +42,7 @@ class UsuariosSearch extends user
     {
         $query = user::find();
 
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

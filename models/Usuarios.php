@@ -26,10 +26,10 @@ use Yii;
  * @property string|null $notas_bloqueo Notas visibles sobre el motivo del bloqueo del usuario o NULL si no hay -se muestra por defecto según indique "bloqueado"-.
  */
  
- 
 class Usuarios extends \yii\db\ActiveRecord
 {
 	private $_rol;
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +53,7 @@ class Usuarios extends \yii\db\ActiveRecord
             [['nick', 'telefono_contacto'], 'string', 'max' => 25],
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
-			[['rol'], 'in','range'=>self::lista_roles()],
+			      [['rol'], 'in','range'=>self::lista_roles()],
             [['email'], 'unique'],
             [['nick'], 'unique'],
         ];
@@ -65,30 +65,30 @@ class Usuarios extends \yii\db\ActiveRecord
 	public static function lista_roles()
 	{
 		return ['usuario' => 'usuario', 'propietario' => 'propietario','moderador' => 'moderador', 'admin' => 'admin', 'sysadmin' => 'sysadmin'];
-		
 	}
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'password' => 'Password',
-            'nick' => 'Nick',
-            'nombre' => 'Nombre',
-            'apellidos' => 'Apellidos',
-            'direccion' => 'Direccion',
-            'region_id' => 'Region ID',
-            'telefono_contacto' => 'Telefono Contacto',
-            'fecha_nacimiento' => 'Fecha Nacimiento',
-            'fecha_registro' => 'Fecha Registro',
-            'confirmado' => 'Confirmado',
-            'fecha_acceso' => 'Fecha Acceso',
-            'num_accesos' => 'Num Accesos',
-            'bloqueado' => 'Bloqueado',
-            'fecha_bloqueo' => 'Fecha Bloqueo',
-            'notas_bloqueo' => 'Notas Bloqueo',
-        ];
-    }
+
+  public function attributeLabels()
+  {
+      return [
+          'id' => 'ID',
+          'email' => 'Email',
+          'password' => 'Password',
+          'nick' => 'Nick',
+          'nombre' => 'Nombre',
+          'apellidos' => 'Apellidos',
+          'direccion' => 'Direccion',
+          'region_id' => 'Region ID',
+          'telefono_contacto' => 'Telefono Contacto',
+          'fecha_nacimiento' => 'Fecha Nacimiento',
+          'fecha_registro' => 'Fecha Registro',
+          'confirmado' => 'Confirmado',
+          'fecha_acceso' => 'Fecha Acceso',
+          'num_accesos' => 'Num Accesos',
+          'bloqueado' => 'Bloqueado',
+          'fecha_bloqueo' => 'Fecha Bloqueo',
+          'notas_bloqueo' => 'Notas Bloqueo',
+      ];
+  }
 	
 	public function getRol()
 	{

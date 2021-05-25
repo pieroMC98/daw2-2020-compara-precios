@@ -1,0 +1,226 @@
+1,Electrónica,Categoría principal de todos los productos tecnológicos,electronica.svg,\N
+2,Deporte,Categoría principal para los deportes y actividades outdoor,deporte.svg,\N
+3,Familia,Categoría principal de productos para el cuidado de los niños,familia.svg,\N
+4,Hogar,Categoría principal para los productos del hogar y jardinería,hogar.svg,\N
+5,Alimentación,Categoría principal para los productos alimenticios,alimentacion.svg,\N
+6,Mascotas,Categoría principal para el cuidado de mascotas,mascotas.svg,\N
+7,Juguetes y videojuegos,Categoría principal para los juguetes y videojuegos,juguetes.svg,\N
+8,Moda,Categoría principal relacionada con el mundo de la moda,moda.svg,\N
+9,Medicina,Categoría principal para los productos de la salud y droguería,medicina.svg,\N
+10,Automóviles,Categoría principal para los productos relacionados con el automovilismo,automoviles.svg,\N
+11,Perros,Productos relacionados con el cuidado de los perros,,6
+12,Electrodomésticos,Lavadoras\, frigoríficos\, aspiradoras...,,1
+13,Teléfonos móviles,Todos los dispositivos móviles y accesorios,,1
+14,Gatos,Productos relacionados con el cuidado de los gatos,,6
+15,Pájaros,Productos relacionados con el cuidado de los pájaros,,6
+16,Peces,Productos relacionados con el cuidado de los peces,,6
+17,Roedores y conejos,Productos relacionados con el cuidado de los roedores y conejos,,6
+18,Moda hombre,Todo lo relacionado con el vestuario masculino,,8
+19,Moda mujer,Todo lo relacionado con el vestuario femenino,,8
+20,Moda infantil,Todo lo relacionado con el vestuario infantil,,8
+22,GPS,Productos relacionados con el GPS,,10
+23,Neumáticos,Neumáticos de cualquier automóvil,,10
+24,Accesorios moto,Accesorios para la moto como cascos\, guantes y monos,,10
+25,Informática,Ordenadores de sobre mesa\, portátiles\, tablets y accesorios,,1
+26,Televisiones,Televisiones y accesorios,,1
+27,Accesorios coche,Accesorios para el correcto mantenimiento y cuidado del coche,,10
+28,Sistemas de sonido,Auriculares\, sistemas sonido Hi-fi y altavoces,,1
+29,Futbol,Equipamiento y accesorios,,2
+30,Visión,Lentillas\, gafas y cualquier accesorio relacionado con la vista,,9
+31,Maquillaje,Accesorios para el maquillaje,,9
+32,Baloncesto,Equipamiento y accesorios,,2
+33,Ciclismo,Bicicletas\, GPS\, trackers y equipamiento,,2
+34,Fragancias,Perfumes para hombres\, mujeres y niños,,9
+35,Entrenamiento Indoor,Equipamiento y accesorios,,2
+36,Higiene,Desodorantes y objetos para la higiene bucal ,,9
+37,Cuidado de la piel,Cremas y protectores solares,,9
+38,Material escolar,Material escolar y de oficina,,3
+39,Medicamentos,Todo lo relacionado con los medicamentos,,9
+40,Cuidado de bebes,Pañales\, transportines\, tronas...,,3
+41,Juegos,Videojuegos de cualquier consola,,7
+42,Juguetes,Juguetes para niños y niñas,,7
+43,Muebles,Estanterías\, cómodas\, camas\, armarios...,,4
+44,Consolas,Cualquier consola que se encuentre en el mercado,,7
+45,Limpieza,Fregonas\, productos de limpieza\, cepillos,,4
+46,Bebidas alcohólicas,Cualquier bebida que contenga alcohol,,5
+47,Herramienta básica,Herramienta para hacer pequeños arreglos en casa,,4
+48,Decoración,Elementos decorativos\, marcos\, cuadros...,,4
+49,Café,Venta de café y accesorios del mismo,,5
+50,Té,Venta de té y accesorios del mismo,,5
+51,Muebles de Jardin,Barbacoas\, bancos\, elementos decorativos...,,4
+52,Piscinas,Mantenimiento de la piscina\, flotadores...,,4
+53,Comida para perros,Todo tipo de comida para perros,,11
+54,Accesorios para perros,Cualquier tipo de accesorio para perros,,11
+55,Juguetes para perros,Juguetes para perros,,11
+56,Ropa para perros,Ropa para perros,,11
+57,Correas para perros,Correas de todo tipo para perros,,11
+58,Arena para gatos,Arena para gatos,,14
+59,Comida para gatos,Todo tipos de comida para gatos,,14
+60,Cuidado del pelaje,Accesorios para el cuidado del pelaje de los gatos,,14
+61,Accesorios para gatos,Accesorios para gatos,,14
+62,Lavavajillas,Lavavajillas,,12
+63,Cafeteras,Cafeteras,,12
+64,accesorios para conejos,Todo tipo de accesorios para conejos,,17
+65,Vitroceramicas,,,12
+66,Accesorios para roedores,Todo de tipo de accesorios para roedores,,17
+67,Envasadoras al vacío,,,12
+68,Jaulas,Jaulas para conejos y roedores,,17
+69,Arroceras,,,12
+70,Comida para conejos,Comida para conejos,,17
+71,Comida para roedores,Comida para roedores,,17
+72,Aspiradoras,,,12
+73,Robots de limpieza,,,12
+74,Jaulas y pajareras,Jaulas para pájaros,,15
+75,Comida para pájaros,Comida para pájaros,,15
+76,Accesorios para pájaros,Todo tipo de accesorios para pájaros,,15
+77,Smartphones,Smartphones,,13
+78,Accesorios,Cargadores\, fundas\, protectores de pantalla,,13
+79,Calentadores acuario,Calentadores para las peceras de tus peces,,16
+80,Weareables,Fitness trackers y smartwatches,,13
+81,Acuarios,Peceras para tus peces,,16
+82,Comida para peces,Comida para peces,,16
+83,Teléfonos móviles simples,Móviles sin funciones inteligentes,,13
+84,Filtros para acuarios,Filtros para peceras,,16
+85,Tablets,,,25
+86,Accesorios Tablet,,,25
+87,Camisetas hombre,Camisetas para hombres,,18
+88,Pantalones hombre,Pantalones para hombres,,18
+89,Ropa interior masculina,Ropa interior para hombres,,18
+90,Ordenadores de sobremesa,Ordenadores premontados,,25
+91,Componentes PC,Gráficas\, placas base\, memoria RAM...,,25
+92,Portatiles,Ordenadores portátiles,,25
+93,Abrigos hombre,Abrigos para hombres,,18
+94,Calzado hombre,Calzado para hombres,,18
+95,Proyectores,,,26
+96,Calcetines hombre,Calcetines para hombres,,18
+97,Camisetas mujer,Camisetas para mujeres,,19
+98,Pantalones mujer,Pantalones para mujeres,,19
+99,Chaquetas mujer,Chaquetas para mujeres,,19
+100,Bolsos,Bolsos para mujeres,,19
+101,Ropa interior femenina,Ropa interior para mujeres,,19
+102,Camisetas niños,Camisetas para niños,,20
+103,Calzado infantil,Calzado para niños,,20
+104,Smart TV,,,26
+105,Calzado mujer,Calzado para mujeres,,19
+107,Accesorios TV,,,26
+108,Chaquetas niños,Chaquetas para niños,,20
+109,Reproductores BlueRay,,,26
+110,Reproductores DVD,,,26
+111,Auriculares,,,28
+112,Pantalones para niños,Pantalones para niños,,20
+113,Altavoces,,,28
+114,Equipos Hi-Fi,,,28
+115,Accesorios audio,Cables de conexión\, fundas de transporte...,,28
+116,Instrumentos musicales,Instrumentos musicales y equipo de DJ,,28
+117,GPS coche,GPS para coches,,22
+118,GPS moto,GPS para motos,,22
+119,Balones futbol,,,29
+120,GPS camión,GPS para camiones,,22
+121,Botas futbol,,,29
+122,Neumáticos verano,Neumáticos para verano,,23
+123,Equipamiento,Porterías\, redes...,,29
+124,Ropa futbol,,,29
+125,Neumáticos invierno,Neumáticos para el invierno,,23
+126,Balones Baloncesto,,,32
+127,Zapatillas Baloncesto,,,32
+128,Ropa baloncesto,,,32
+129,Neumáticos de competición,Semi-slicks\, slicks...,,23
+130,Equipamiento baloncesto,Canastas\, redes...,,32
+131,Mono de moto,Vestuario para ir en moto,,24
+132,Bicicletas montaña,,,33
+133,Guantes moto,Guantes para ir en moto,,24
+134,Bicicletas carretera,,,33
+135,Calzado moto,Calzado para ir en moto,,24
+136,Cascos de moto,Cascos para ir en moto,,24
+137,Repuestos,Cadenas\, frenos\, sillines\, cambios...,,33
+138,Accesorios ciclismo,Botas de ciclismo\, gafas protectoras\, maillots ,,33
+139,Cuidado de la pintura,Jabones especiales para el cuidado de la pintura del coche,,27
+140,Cintas de correr,,,35
+141,Bicicletas estáticas,,,35
+142,Pesas,,,35
+143,Limpieza del coche,Productos para la limpieza del coche,,27
+144,Tratamiento del coche,Productos para el correcto tratamiento del coche,,27
+145,Accesorios deporte indoor,Esterillas\, bancos...,,35
+146,Lentillas,,,30
+147,Gafas de ver,,,30
+148,Ropa aerobic,Mallas\, camisetas deportivas...,,35
+149,Gafas de protección,Gafas para soldar\, de albañiles...,,30
+150,Gafas de sol,,,30
+151,Pintalabios,,,31
+152,Sérum pestañas,,,31
+153,Base de maquillaje,,,31
+154,Higiene de Bebe,Jabones y champús especiales\, cremas...,,40
+155,Pañales,,,40
+156,Perfumes de mujer,,,34
+157,Perfumes de hombre,,,34
+158,Aceites esenciales,,,34
+159,Carros y trasportines,Carritos de bebes y sillas para coche.,,40
+160,Desodorantes,,,36
+161,Mochilas escolares,Mochilas con ruedas\, mochilas pequeñas para niños,,38
+162,Higiene bucal,Pastas y cepillos de dientes,,36
+163,Libretas y cuadernos,,,38
+164,Libros escolares,libros de texto y de lectura,,38
+165,Pasta de dientes,,,162
+166,Cepillo de dientes,,,162
+167,Escritura,Bolígrafos\, lapiceros y marcadores.,,38
+168,Herramientas de dibujo,Compases\, reglas y pinturas,,38
+169,Crema protectora de piel,,,37
+170,Calculadoras escolares,Simples y científicas,,38
+171,Crema protector solar,,,37
+172,Agendas escolares,Agendas especiales con el año escolar,,38
+173,Estanterias,,,43
+174,Cómodas y armarios,,,43
+175,Parafarmacia,Tratamientos con receta médica,,39
+176,Mesas,,,43
+177,Sillas,,,43
+178,Camas,,,43
+179,Complementos y vitaminas,,,39
+180,Antigripales,,,175
+181,Tratamientos musculares,,,175
+182,Productos de limpieza,lejía\, desinfectantes\, friegasuelos...,,45
+183,Tratamientos articulación,,,175
+184,Fregonas y mangos,,,45
+185,Tratamientos estómago,,,175
+186,Tratamientos para ojos,,,175
+187,Cepillos y cogedores,,,45
+188,Tratamientos para oídos,,,175
+189,Tratamientos para la piel,,,175
+190,Maletines organizadores,Maletines con compartimentos para distintos tipos de herramienta,,47
+191,Destornilladores,,,47
+192,Taladros,,,47
+193,Tornilleria,,,47
+194,Juegos PC,,,41
+195,Juegos PS5,,,41
+196,Juegos XBOX,,,41
+197,Juegos nintendo DS,,,41
+198,Juegos para la switch,,,41
+199,Posters y cuadros,,,48
+200,Luces LED,,,48
+201,Barbies,,,42
+202,Figuras y jarrones,,,48
+203,LEGO,,,42
+204,Playmobil,,,42
+205,Juguetes de exterior,,,42
+206,PS5,,,44
+207,Mantenimiento de jardin,Motosierras\, cortacéspedes\, desbrozadoras,,51
+208,XBOX-ONE,,,44
+209,Nintendo DS,,,44
+210,Nintendo Switch,,,44
+211,Parasoles,,,51
+212,Mesas jardin ,,,51
+213,Sillas jardin,,,51
+214,Armarios exterior,,,51
+215,Vodka,,,46
+216,Ron,,,46
+217,Cervezas,,,46
+218,Whisky,,,46
+219,Piscinas hichables,,,52
+220,Vino,,,46
+221,Cápsulas de café,,,49
+222,Desinfección y limpieza,Productos para limpiar el agua de las piscinas,,52
+223,Cubiertas piscina,,,52
+224,Cápsulas de té,,,50
+225,Refrescos,Coca-Cola\, Fanta\, bebidas energéticas...,,5
+226,Coca-cola,,,225
+227,Fanta ,,,225
+228,Bebidas energéticas,Monster\, acuarius\, powerade,,225

@@ -54,6 +54,7 @@ class ClasificadoresSearch extends Clasificadores
                 'id' => SORT_ASC,
             ]
         ],
+
         ]);
 
         $this->load($params);
