@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="site-login">
-	<?php if (isset($error)) : ?>
+	<?php if (isset($msg)) : ?>
 		<div class="alert alert-danger">
-			<?= $error ?>
+			<?= $msg ?>
 		</div>
 	<?php endif; ?>
 	<h1><?= Html::encode($this->title) ?></h1>
