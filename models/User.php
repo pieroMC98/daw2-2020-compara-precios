@@ -1,7 +1,11 @@
 <?php
 
 namespace app\models;
-
+use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -87,6 +91,7 @@ class User extends ActiveRecord implements IdentityInterface
 				'on' => 'register',
 				'message' => 'contrasena no coinciden',
 			],
+			['fecha_nacimiento', 'date', 'format' => 'yyyy-MM-dd'],
 		];
 	}
 
@@ -175,4 +180,44 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->password === $password;
 	}
+
+	public function getRol()
+	{
+		$auth = Yii::$app->authManager;
+		$roles = $auth->getAssignments($this->id);
+		if (count($roles) > 0) {
+			return array_keys($roles)[0];
+		} else {
+			return null;
+		}
+	}
+	//atributo virtual para rescribir
+	//Set roles
+	//comparar si lo que escribe es un role valido
+	//si es valido implementarlo
+	//revocar el anterior.
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'email' => 'Email',
+            'password' => 'Password',
+            'r_password' => 'Repetir password',
+            'nick' => 'Nick',
+            'nombre' => 'Nombre',
+            'apellidos' => 'Apellidos',
+            'direccion' => 'Direccion',
+            'region_id' => 'Region ID',
+            'telefono_contacto' => 'Telefono Contacto',
+            'fecha_nacimiento' => 'Fecha Nacimiento',
+            'fecha_registro' => 'Fecha Registro',
+            'confirmado' => 'Confirmado',
+            'fecha_acceso' => 'Fecha Acceso',
+            'num_accesos' => 'Num Accesos',
+            'bloqueado' => 'Bloqueado',
+            'fecha_bloqueo' => 'Fecha Bloqueo',
+            'notas_bloqueo' => 'Notas Bloqueo',
+        ];
+    }
 }
