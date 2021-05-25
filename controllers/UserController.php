@@ -1,5 +1,7 @@
 <?php
+
 namespace app\controllers;
+
 use Yii;
 use yii\web\Controller;
 use app\models\User;
@@ -22,15 +24,23 @@ class UserController extends Controller
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
-
 		$login = User::find()
 			->where(['email' => $post['User']['email']])
 			->one();
+		if ($login == null) {
+			$this->view->params['msg'] = 'Usuario no encontrado';
+			return $this->render('login', [
+				'msg' => 'Usuario no encontrado',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
+
 		$login->scenario = User::SCENARIO_LOGIN;
 
 		if ($login->confirmado == false) {
 			$this->view->params['msg'] = 'El usuario aun no ha sido confirmado';
 			return $this->render('login', [
+				'msg' => 'Usuario no confirmado',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
@@ -64,8 +74,8 @@ class UserController extends Controller
 			}
 
 			return $this->render('login', [
-				'error' =>
-					'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
+				'msg' =>
+				'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
@@ -118,12 +128,11 @@ class UserController extends Controller
 
 		$new_user->confirmado = false;
 		if (!$new_user->validate()) {
-			return $this->responseJson(function () use ($new_user) {
-				return [
-					'msg' => 'Error en validacion',
-					$new_user->getAttributes(),
-				];
-			});
+			return $this->render('create', [
+				'msg' => 'Error en validacion',
+				'model' => $new_user,
+				$new_user->errors
+			]);
 		}
 
 		if (!$new_user->save()) {
@@ -158,8 +167,8 @@ class UserController extends Controller
 
 	function actionUpdate($id)
 	{
-	  $user = User::findIdentity($id);
-	  $user->scenario = User::SCENARIO_REGISTER;
+		$user = User::findIdentity($id);
+		$user->scenario = User::SCENARIO_REGISTER;
 		return $this->render('create', ['model' => $user]);
 	}
 
