@@ -11,30 +11,8 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-	/* public $id; */
-	/* public $nombre; */
-	/* public $password; */
 	public $r_password;
 	public $rememberMe;
-	/* public $email; public $nick; public $apellidos; */
-	/* public $direccion; */
-	/* public $region_id; */
-	/* public $telefono_contacto; */
-	/* public $fecha_nacimiento; */
-	/* public $fecha_registro; */
-	/* public $confirmado; */
-	/* public $fecha_acceso; */
-	/* public $num_accesos; */
-	/* public $bloqueado; */
-	/* public $fecha_bloqueo; */
-	/* public $notas_bloqueo; */
-	/* public $authKey; */
-	/* public $accessToken; */
-
-	/* static $MODERADOR = false; */
-	/* static $PROPIETARIO = false; */
-	/* static $ADMINISTRADOR = false; */
-	/* public $rool; */
 
 	const SCENARIO_LOGIN = 'login';
 	const SCENARIO_REGISTER = 'register';
@@ -219,5 +197,10 @@ class User extends ActiveRecord implements IdentityInterface
 			'fecha_bloqueo' => 'Fecha Bloqueo',
 			'notas_bloqueo' => 'Notas Bloqueo',
 		];
+	}
+
+	function tienda()
+	{
+		return $this->hasMany(Tiendas::class, ['usuario_id' => 'id']);
 	}
 }

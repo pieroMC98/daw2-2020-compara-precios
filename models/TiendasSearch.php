@@ -56,15 +56,15 @@ class TiendasSearch extends Tiendas
             'query' => $query,
         ]);
 
-        $orden= $dataProvider->sort;//Aprovechar el objeto de ordenacion interno.
-        $orden->attributes['nombreCompleto']= [
+        $orden = $dataProvider->sort; //Aprovechar el objeto de ordenacion interno.
+        $orden->attributes['nombreCompleto'] = [
             'asc' => ['nombre' => SORT_ASC, 'apellidos' => SORT_ASC],
             'desc' => ['nombre' => SORT_DESC, 'apellidos' => SORT_DESC],
             //'default' => SORT_DESC,
             //'label' => 'Nombre, Apellidos',
         ];
 
-        $orden->attributes['nickPropietario']= [
+        $orden->attributes['nickPropietario'] = [
             'asc' => ['usuarios.nick' => SORT_ASC],
             'desc' => ['usuarios.nick' => SORT_DESC],
             //'default' => SORT_DESC,
@@ -123,13 +123,13 @@ class TiendasSearch extends Tiendas
             ->andFilterWhere(['like', 'tiendas.direccion', $this->direccion])
             ->andFilterWhere(['like', 'tiendas.telefono_contacto', $this->telefono_contacto])
             ->andFilterWhere(['like', 'tiendas.notas_admin', $this->notas_admin])
-            ->andFilterWhere(['like', 'tiendas_etiquetas.etiqueta_id', $this->etiquetaId]);
+            ->andFilterWhere(['like', 'tiendas_etiquetas.etiqueta_id', $this->etiquetaId])
             ->andFilterWhere(['like', 'usuarios.nick', $this->nickPropietario]);
 
-        $query->andFilterWhere(['like'
-            , 'CONCAT(tiendas.nombre," ",tiendas.apellidos)'
-            , $this->nombreCompleto]);
-        
+        $query->andFilterWhere([
+            'like', 'CONCAT(tiendas.nombre," ",tiendas.apellidos)', $this->nombreCompleto
+        ]);
+
         return $dataProvider;
     }
 }

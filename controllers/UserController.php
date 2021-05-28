@@ -207,4 +207,12 @@ class UserController extends Controller
 
 		return $this->redirect(['user/admin']);
 	}
+
+	function actionTienda()
+	{
+		$ower = Yii::$app->user->identity->tienda();
+		return $this->responseJson(function () use ($ower) {
+			return $ower;
+		});
+	}
 }
