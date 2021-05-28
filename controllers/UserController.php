@@ -214,5 +214,16 @@ class UserController extends Controller
 		return $this->responseJson(function () use ($ower) {
 			return $ower;
 		});
+		//return $this->render();
+	}
+
+	function actionArticulosquery()
+	{
+		$elements = Yii::$app->user->identity->articulosQuery();
+		$texto = "Cola de Articulos";
+		return $this->render('getElements', ['controller' => $texto, 'elements' => $elements]);
+		// return $this->responseJson(function () use ($ower) {
+		// 	return $ower;
+		// });
 	}
 }

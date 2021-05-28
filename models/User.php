@@ -203,4 +203,9 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->hasMany(Tiendas::class, ['usuario_id' => 'id']);
 	}
+
+	function articulosQuery()
+	{
+		return $this->hasMany(ArticulosQuery::class, ['crea_usuario_id' => 'id']);
+	}
 }
