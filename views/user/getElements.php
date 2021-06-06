@@ -7,6 +7,8 @@ use yii\widgets\DetailView;
 <?php
 echo DetailView::widget([
     'elements' => $elements,
+    'cm' => $comments
+
 
 ]); ?>
 

@@ -162,7 +162,6 @@ class User extends ActiveRecord implements IdentityInterface
 		$auth = Yii::$app->authManager;
 		if ($auth == null) return null;
 		$roles = $auth->getAssignments($this->id);
-		if ($roles == null) return null;
 		if (count($roles) > 0) {
 			return array_keys($roles)[0];
 		} else {
@@ -204,8 +203,13 @@ class User extends ActiveRecord implements IdentityInterface
 		return $this->hasMany(Tiendas::class, ['usuario_id' => 'id']);
 	}
 
-	function articulosQuery()
+	function articulo()
 	{
 		return $this->hasMany(ArticulosQuery::class, ['crea_usuario_id' => 'id']);
+	}
+
+	function comentario()
+	{
+		return $this->hasMany(Comentarios::class, ['crea_usuario_id' => 'id']);
 	}
 }

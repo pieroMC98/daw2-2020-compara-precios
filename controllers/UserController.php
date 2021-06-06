@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use app\models\User;
 use app\Traits\ApiResponse;
@@ -162,7 +163,20 @@ class UserController extends Controller
 
 	function actionGet()
 	{
-		return $this->render('view', ['model' => Yii::$app->user->identity]);
+		$elements = Yii::$app->user->identity->comentario();
+		$provider = new ActiveDataProvider([
+			'query' => $elements,
+			'pagination' => [
+				'pageSize' => 10,
+			],
+			'sort' => [
+				'defaultOrder' => [
+					//'created_at' => SORT_DESC,
+					//'title' => SORT_ASC,
+				]
+			],
+		]);
+		return $this->render('view', ['model' => Yii::$app->user->identity, 'cm' => $provider]);
 	}
 
 	function actionUpdate($id)
@@ -211,19 +225,63 @@ class UserController extends Controller
 	function actionTienda()
 	{
 		$ower = Yii::$app->user->identity->tienda();
-		return $this->responseJson(function () use ($ower) {
-			return $ower;
-		});
-		//return $this->render();
+		$provider = new ActiveDataProvider([
+			'query' => $ower,
+			'pagination' => [
+				'pageSize' => 10,
+			],
+			'sort' => [
+				'defaultOrder' => [
+					//'created_at' => SORT_DESC,
+					//'title' => SORT_ASC,
+				]
+			],
+		]);
+		return $this->render('tienda', [
+			'searchModel' => User::class,
+			'dataProvider' => $provider
+		]);
 	}
 
-	function actionArticulosquery()
+	function actionArticulos()
 	{
-		$elements = Yii::$app->user->identity->articulosQuery();
-		$texto = "Cola de Articulos";
-		return $this->render('getElements', ['controller' => $texto, 'elements' => $elements]);
-		// return $this->responseJson(function () use ($ower) {
-		// 	return $ower;
-		// });
+		$elements = Yii::$app->user->identity->articulo();
+		$provider = new ActiveDataProvider([
+			'query' => $elements,
+			'pagination' => [
+				'pageSize' => 10,
+			],
+			'sort' => [
+				'defaultOrder' => [
+					//'created_at' => SORT_DESC,
+					//'title' => SORT_ASC,
+				]
+			],
+		]);
+		return $this->render('articulo', [
+			'searchModel' => User::class,
+			'dataProvider' => $provider
+		]);
+	}
+
+	function actionComentario()
+	{
+		$elements = Yii::$app->user->identity->comentario();
+		$provider = new ActiveDataProvider([
+			'query' => $elements,
+			'pagination' => [
+				'pageSize' => 10,
+			],
+			'sort' => [
+				'defaultOrder' => [
+					//'created_at' => SORT_DESC,
+					//'title' => SORT_ASC,
+				]
+			],
+		]);
+		return $this->render('comentario', [
+			'searchModel' => User::class,
+			'dataProvider' => $provider
+		]);
 	}
 }

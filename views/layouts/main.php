@@ -57,11 +57,18 @@ AppAsset::register($this);
                         'label' => 'Tiendas',
                         'items' => [
                             ['label' => 'Listado', 'url' => ['/tiendas']],
-                            ['label' => 'Mi tienda', 'url' => ['/tiendas']]
+                            ['label' => 'Mi tienda', 'url' => ['/user/tienda']]
                         ],
                         'url' => ['/tiendas']
                     ],
-                ['label' => 'Artículos', 'url' => ['/articulos']],
+                [
+                    'label' => 'Artículos',
+                    'items' => [
+                        ['label' => 'Mis articulos', 'url' => ['/user/articulos']]
+                    ],
+
+                    'url' => ['/articulos']
+                ],
                 ['label' => 'Categorías', 'url' => ['/categorias']],
 
                 ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
