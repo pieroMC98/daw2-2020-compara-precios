@@ -123,7 +123,7 @@ class TiendasSearch extends Tiendas
             ->andFilterWhere(['like', 'tiendas.direccion', $this->direccion])
             ->andFilterWhere(['like', 'tiendas.telefono_contacto', $this->telefono_contacto])
             ->andFilterWhere(['like', 'tiendas.notas_admin', $this->notas_admin])
-            ->andFilterWhere(['like', 'tiendas_etiquetas.etiqueta_id', $this->etiquetaId]);
+            ->andFilterWhere(['like', 'tiendas_etiquetas.etiqueta_id', $this->etiquetaId])
             ->andFilterWhere(['like', 'usuarios.nick', $this->nickPropietario]);
 
         $query->andFilterWhere(['like'

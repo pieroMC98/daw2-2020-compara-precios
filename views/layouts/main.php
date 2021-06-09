@@ -36,60 +36,55 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-
-        'brandLabel' => "COMPARADOR DE PRECIOS - DAW2",
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+    	'brandLabel' => Yii::$app->name,
+    	'brandUrl' => Yii::$app->homeUrl,
+    	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-          
-            ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Administración', 'url' => ['/site/menu_admin']],
-            
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]):
 
-            ['label' => 'Tiendas',
-                'items' => [
-                     ['label' => 'Listado', 'url' => ['/tiendas']],
-                     ['label' => 'Mi tienda', 'url' => ['/tiendas']]
-                ],
-                'url' => ['/tiendas']
-            ],
+    echo Nav::widget([
+    	'options' => ['class' => 'navbar-nav navbar-right'],
+    	'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Tiendas', 'url' => ['/tiendas']],
             ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
-
             ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Usuarios', 'url' => ['/user']]
-            ) : (
-                ['label' => Yii::$app->user->identity->username , 'url' => ['/user']]
-            ),
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
 
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Cerrar Sesión',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            Yii::$app->user->isGuest
+    			? ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/user/login']]
+    			: [
+    				'label' => Yii::$app->user->identity->nick,
+    				'items' => [
+    					[
+    						'label' => 'Cuenta',
+    						'url' => ['user/get'],
+    						'id' => Yii::$app->user->identity->id,
+    					],
+    					['label' => 'logout', 'url' => ['/user/logout']],
+						
+						Yii::$app->user->identity->rol == 'admin' ? 
+    					['label' => 'Mantenimiento', 'url' => ['/usuarios']] : "",
+
+                        Yii::$app->user->identity->rol == 'admin' ? 
+    					['label' => 'Administración', 'url' => ['/site/menu_admin']] : "",
+
+    				],
+    			],
         ],
-    ]);
+    ]);    
+
     NavBar::end();
     ?>
-  
-    <div class="container">
+	<?php if (isset($this->params['msg']) && $this->params['msg'] != ''): ?>
+		<div class="container">
+				<div class="alert alert-warning" role="alert">
+					<strong>
+						<?= $this->params['msg'] ?>
+					</strong>
+				</div>
+		</div>
+	<?php endif; ?>
+  <div class="container">
         <?= Breadcrumbs::widget([
         	'links' => isset($this->params['breadcrumbs'])
         		? $this->params['breadcrumbs']
