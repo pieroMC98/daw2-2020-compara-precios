@@ -48,6 +48,7 @@ AppAsset::register($this);
             ['label' => 'Tiendas', 'url' => ['/tiendas']],
             ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
+            ['label' => 'Histórico', 'url' => ['/historico-precios']],
             ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
 
             Yii::$app->user->isGuest

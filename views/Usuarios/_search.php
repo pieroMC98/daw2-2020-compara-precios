@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="usuarios-search">
+<div class="user-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nick') ?>
 
     <?= $form->field($model, 'nombre') ?>
+	
+	 <?= $form->field($model, 'rol') ?>
 
     <?php // echo $form->field($model, 'apellidos') ?>
 
