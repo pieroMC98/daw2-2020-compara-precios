@@ -198,11 +198,4 @@ class Tiendas extends \yii\db\ActiveRecord
         $this->sumaValores=$sumVotos;
         $this->save();
     }
-
-
-    public function getNombre_tienda()
-    {
-        return $this->nombre_tienda;
-    }
-  
 }

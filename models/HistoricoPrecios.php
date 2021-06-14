@@ -43,8 +43,8 @@ class HistoricoPrecios extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'articulo_id' => 'Articulo ID',
-            'tienda_id' => 'Tienda ID',
+            'articulo_id' => 'Articulo',
+            'tienda_id' => 'Tienda',
             'fecha' => 'Fecha',
             'precio' => 'Precio',
         ];
