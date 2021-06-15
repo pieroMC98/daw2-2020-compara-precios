@@ -44,12 +44,17 @@ class HistoricoPrecios extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'articulo_id' => 'Articulo ID',
             'tienda_id' => 'Tienda ID',
 =======
             'articulo_id' => 'Articulo',
             'tienda_id' => 'Tienda',
 >>>>>>> origin/grupo-2
+=======
+            'articulo_id' => 'Articulo',
+            'tienda_id' => 'Tienda',
+>>>>>>> origin/grupo-5
             'fecha' => 'Fecha',
             'precio' => 'Precio',
         ];
