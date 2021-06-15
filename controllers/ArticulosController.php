@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Articulos;
 use app\models\ArticulosSearch;
+use app\models\AvisosUsuarios;
 
 use app\models\Categorias;
 use yii\web\Controller;
