@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -161,6 +162,7 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		$auth = Yii::$app->authManager;
 		if ($auth == null) return null;
+
 		$roles = $auth->getAssignments($this->id);
 		if (count($roles) > 0) {
 			return array_keys($roles)[0];
@@ -212,4 +214,5 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return $this->hasMany(Comentarios::class, ['crea_usuario_id' => 'id']);
 	}
+
 }

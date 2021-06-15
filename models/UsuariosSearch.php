@@ -41,7 +41,6 @@ class UsuariosSearch extends user
     public function search($params)
     {
         $query = user::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

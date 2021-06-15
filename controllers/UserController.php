@@ -1,12 +1,10 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use app\models\User;
 use app\Traits\ApiResponse;
+use yii\data\ActiveDataProvider;
 
 class UserController extends Controller
 {
@@ -25,6 +23,7 @@ class UserController extends Controller
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
+    
 		$login = User::find()
 			->where(['email' => $post['User']['email']])
 			->one();
@@ -35,6 +34,7 @@ class UserController extends Controller
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
+
 
 		$login->scenario = User::SCENARIO_LOGIN;
 
@@ -77,6 +77,7 @@ class UserController extends Controller
 			return $this->render('login', [
 				'msg' =>
 				'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
+
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
 		}
@@ -134,6 +135,7 @@ class UserController extends Controller
 				'model' => $new_user,
 				$new_user->errors
 			]);
+
 		}
 
 		if (!$new_user->save()) {
@@ -177,12 +179,14 @@ class UserController extends Controller
 			],
 		]);
 		return $this->render('view', ['model' => Yii::$app->user->identity, 'cm' => $provider]);
+
 	}
 
 	function actionUpdate($id)
 	{
 		$user = User::findIdentity($id);
 		$user->scenario = User::SCENARIO_REGISTER;
+
 		return $this->render('create', ['model' => $user]);
 	}
 
@@ -283,5 +287,6 @@ class UserController extends Controller
 			'searchModel' => User::class,
 			'dataProvider' => $provider
 		]);
+
 	}
 }

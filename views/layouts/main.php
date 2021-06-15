@@ -45,55 +45,36 @@ AppAsset::register($this);
             ],
         ]);
         echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
+    	'options' => ['class' => 'navbar-nav navbar-right'],
+    	'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Tiendas', 'url' => ['/tiendas']],
+            ['label' => 'Artículos', 'url' => ['/articulos']],
+            ['label' => 'Categorías', 'url' => ['/categorias']],
+            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
 
-                ['label' => 'Inicio', 'url' => ['/site/index']],
-                ['label' => 'Administración', 'url' => ['/site/menu_admin']],
+            Yii::$app->user->isGuest
+    			? ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/user/login']]
+    			: [
+    				'label' => Yii::$app->user->identity->nick,
+    				'items' => [
+    					[
+    						'label' => 'Cuenta',
+    						'url' => ['user/get'],
+    						'id' => Yii::$app->user->identity->id,
+    					],
+    					['label' => 'logout', 'url' => ['/user/logout']],
+						
+						Yii::$app->user->identity->rol == 'admin' ? 
+    					['label' => 'Mantenimiento', 'url' => ['/usuarios']] : "",
 
-                Yii::$app->user->isGuest ? (['label' => 'Iniciar sesión', 'url' => ['/site/login']]) :
+                        Yii::$app->user->identity->rol == 'admin' ? 
+    					['label' => 'Administración', 'url' => ['/site/menu_admin']] : "",
 
-                    [
-                        'label' => 'Tiendas',
-                        'items' => [
-                            ['label' => 'Listado', 'url' => ['/tiendas']],
-                            ['label' => 'Mi tienda', 'url' => ['/user/tienda']]
-                        ],
-                        'url' => ['/tiendas']
-                    ],
-                [
-                    'label' => 'Artículos',
-                    'items' => [
-                        ['label' => 'Mis articulos', 'url' => ['/user/articulos']]
-                    ],
-
-                    'url' => ['/articulos']
-                ],
-                ['label' => 'Categorías', 'url' => ['/categorias']],
-
-                ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-                ['label' => 'About', 'url' => ['/site/about']],
-
-                Yii::$app->user->isGuest
-                    ? ['label' => 'Login', 'url' => ['/user/login']]
-                    : [
-                        'label' => Yii::$app->user->identity->nick,
-                        'items' => [
-                            [
-                                'label' => 'Cuenta',
-                                'url' => ['user/get'],
-                                'id' => Yii::$app->user->identity->id,
-                            ],
-                            ['label' => 'logout', 'url' => ['/user/logout']],
-
-                            Yii::$app->user->identity->rol == 'admin' ?
-                                ['label' => 'Mantenimiento', 'url' => ['/usuarios']] : "",
-
-                        ],
-                    ],
-            ],
-        ]);
+    				],
+    			],
+        ],
+    ]);
         NavBar::end();
         ?>
 

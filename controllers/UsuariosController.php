@@ -153,4 +153,5 @@ class UsuariosController extends Controller
             'id_tienda' => $id_tienda,
         ]);
     }
+
 }

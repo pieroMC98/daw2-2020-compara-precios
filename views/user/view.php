@@ -3,6 +3,7 @@
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 use yii\helpers\Html;
+
 ?>
 <h1>Usuario: <?= Yii::$app->user->identity->nick ?></h1>
 <?php

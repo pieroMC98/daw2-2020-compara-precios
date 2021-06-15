@@ -30,6 +30,7 @@ use Yii;
 class Usuarios extends \yii\db\ActiveRecord
 {
     private $_rol;
+
     /**
      * {@inheritdoc}
      */
@@ -54,6 +55,7 @@ class Usuarios extends \yii\db\ActiveRecord
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
             [['rol'], 'in', 'range' => self::lista_roles()],
+
             [['email'], 'unique'],
             [['nick'], 'unique'],
         ];
@@ -126,4 +128,5 @@ class Usuarios extends \yii\db\ActiveRecord
         }
         return $ok;
     }
+
 }
