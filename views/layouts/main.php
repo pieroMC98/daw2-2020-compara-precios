@@ -12,7 +12,6 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
-
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -36,44 +35,37 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-    	'brandLabel' => Yii::$app->name,
-    	'brandUrl' => Yii::$app->homeUrl,
-    	'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
+      'brandLabel' => Yii::$app->name,
+      'brandUrl' => Yii::$app->homeUrl,
+      'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
 
     echo Nav::widget([
-    	'options' => ['class' => 'navbar-nav navbar-right'],
-    	'items' => [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Tiendas', 'url' => ['/tiendas']],
             ['label' => 'Artículos', 'url' => ['/articulos']],
             ['label' => 'Categorías', 'url' => ['/categorias']],
             ['label' => 'Histórico', 'url' => ['/historico-precios']],
             ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-
             Yii::$app->user->isGuest
-    			? ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/user/login']]
-    			: [
-    				'label' => Yii::$app->user->identity->nick,
-    				'items' => [
-    					[
-    						'label' => 'Cuenta',
-    						'url' => ['user/get'],
-    						'id' => Yii::$app->user->identity->id,
-    					],
-    					['label' => 'logout', 'url' => ['/user/logout']],
-						
-						Yii::$app->user->identity->rol == 'admin' ? 
-    					['label' => 'Mantenimiento', 'url' => ['/usuarios']] : "",
-
-                        Yii::$app->user->identity->rol == 'admin' ? 
-    					['label' => 'Administración', 'url' => ['/site/menu_admin']] : "",
-
-    				],
-    			],
+              ? ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/user/login']]
+              : ['label' => Yii::$app->user->identity->nick, 
+                  'items' => [
+                      ['label' => 'Cuenta', 'url' => ['user/get'], 'id' => Yii::$app->user->identity->id],
+                      ['label' => 'logout', 'url' => ['/user/logout']],
+                      Yii::$app->user->identity->rol == 'admin' 
+                        ? ['label' => 'Mantenimiento', 'url' => ['/usuarios']] 
+                        : "",
+                      Yii::$app->user->identity->rol == 'admin' 
+                        ? ['label' => 'Administración', 'url' => ['/site/menu_admin']] 
+                        : "",
+                  ],
+              ],
         ],
     ]);    
-
+    
     NavBar::end();
     ?>
 	<?php if (isset($this->params['msg']) && $this->params['msg'] != ''): ?>
@@ -96,15 +88,3 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
-<?php $this->endBody(); ?>
-</body>
-</html>
-<?php $this->endPage(); ?>
