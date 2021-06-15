@@ -45,6 +45,44 @@ class Articulos extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getEtiquetas()
+    {
+        return $this->hasMany(ArticulosEtiquetas::className(), ['articulo_id' => 'id'])->inverseOf('articulos');
+    }
+
+    public function getEtiquetaId()
+    {
+        if($this->etiquetas!==null){
+
+            return $this->etiquetas->etiqueta_id;
+        }
+
+        return null;		
+    }
+
+    public function getCategorias()
+    {
+        return $this->hasOne(Categorias::className(), ['id' => 'categoria_id'])->inverseOf('articulos');
+    }
+
+    public function getCategoriaNombre()
+    {
+        if($this->categorias!==null){
+
+            return $this->categorias->nombre;
+        }
+
+        return null;		
+    }
+
+    public function getOfertas()
+    {
+        return $this->hasMany(Oferta::className(), (['articulo_id' => 'id']))->inverseOf('articulos');
+    }
+
+
+    
+
     /**
      * {@inheritdoc}
      */
@@ -104,11 +142,6 @@ class Articulos extends \yii\db\ActiveRecord
      public static function get_categorias_de_una_vez(){
        return \yii\helpers\ArrayHelper::map(Categorias::find()->all(), 'id', 'nombre');
      }
-
-
-
-
-
 }
 
 
@@ -128,3 +161,4 @@ class Articulos extends \yii\db\ActiveRecord
             'notas_admin' => 'Notas adicionales que solo ven/modifican los moderadores/administradores sobre los datos del regsitro o NULL si no hay.',
 
         */
+

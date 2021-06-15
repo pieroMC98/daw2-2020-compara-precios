@@ -46,6 +46,14 @@ class CategoriasSearch extends Categorias
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+            'pageSize' => 10,
+        ],
+        'sort' => [
+            'defaultOrder' => [
+                'nombre' => SORT_ASC,
+            ]
+        ],
         ]);
 
         $this->load($params);
@@ -68,4 +76,5 @@ class CategoriasSearch extends Categorias
 
         return $dataProvider;
     }
+
 }

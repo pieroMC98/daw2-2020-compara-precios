@@ -32,6 +32,13 @@ class TiendasEtiquetas extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function getTiendas()
+    {
+        return $this->hasMany(TiendasEtiquetas::className(), [ 'id' => 'tienda_id'])->inverseOf('etiquetas');
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -43,4 +50,14 @@ class TiendasEtiquetas extends \yii\db\ActiveRecord
             'etiqueta_id' => 'Etiqueta ID',
         ];
     }
+  
+    /**
+     * {@inheritdoc}
+     * @return TiendasEtiquetasQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new TiendasEtiquetasQuery(get_called_class());
+    }
+
 }

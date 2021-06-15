@@ -9,8 +9,11 @@ use app\models\Articulos;
 /**
  * ArticulosSearch represents the model behind the search form of `app\models\Articulos`.
  */
-class ArticulosSearch extends Articulos
-{
+class ArticulosSearch extends Articulos{
+
+    public $etiquetaId;
+    public $categoriaNombre;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +21,8 @@ class ArticulosSearch extends Articulos
     {
         return [
             [['id', 'categoria_id', 'visible', 'cerrado', 'comun', 'crea_usuario_id', 'modi_usuario_id'], 'integer'],
-            [['nombre', 'descripcion', 'imagen_id', 'crea_fecha', 'modi_fecha', 'notas_admin'], 'safe'],
+            [['nombre', 'descripcion', 'imagen_id', 'crea_fecha', 'modi_fecha', 'notas_admin', 'etiquetaId', 'categoriaNombre'], 'safe'],
+
         ];
     }
 
@@ -56,23 +60,27 @@ class ArticulosSearch extends Articulos
             return $dataProvider;
         }
 
+        $query->joinWith(['etiquetas', 'categorias']);
+
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'categoria_id' => $this->categoria_id,
-            'visible' => $this->visible,
-            'cerrado' => $this->cerrado,
-            'comun' => $this->comun,
-            'crea_usuario_id' => $this->crea_usuario_id,
-            'crea_fecha' => $this->crea_fecha,
-            'modi_usuario_id' => $this->modi_usuario_id,
-            'modi_fecha' => $this->modi_fecha,
+            'articulos.id' => $this->id,
+            'articulos.categoria_id' => $this->categoria_id,
+            'articulos.visible' => $this->visible,
+            'articulos.cerrado' => $this->cerrado,
+            'articulos.comun' => $this->comun,
+            'articulos.crea_usuario_id' => $this->crea_usuario_id,
+            'articulos.crea_fecha' => $this->crea_fecha,
+            'articulos.modi_usuario_id' => $this->modi_usuario_id,
+            'articulos.modi_fecha' => $this->modi_fecha,
         ]);
-
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'imagen_id', $this->imagen_id])
-            ->andFilterWhere(['like', 'notas_admin', $this->notas_admin]);
+      
+        $query->andFilterWhere(['like', 'articulos.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'articulos.descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'articulos.imagen_id', $this->imagen_id])
+            ->andFilterWhere(['like', 'articulos.notas_admin', $this->notas_admin])
+            ->andFilterWhere(['like', 'articulos_etiquetas.etiqueta_id', $this->etiquetaId])
+            ->andFilterWhere(['like', 'categorias.nombre', $this->categoriaNombre]);
 
         return $dataProvider;
     }

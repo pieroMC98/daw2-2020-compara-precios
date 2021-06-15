@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AvisosUsuarios */
@@ -12,9 +13,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fecha_aviso')->textInput() ?>
-
-    <?= $form->field($model, 'clase_aviso')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'clase_aviso')->dropdownList([
+            'A' => 'Aviso', 
+            'N' => 'Notificación',
+            'D' => 'Denuncia',
+            'C' => 'Consulta',
+            'B' => 'Bloqueo',
+            'M' => 'Mensaje'
+        ],
+        ['options' => ['A' => ['Selected' => true]]]
+    ); ?>
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6]) ?>
 
@@ -27,10 +35,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'articulo_id')->textInput() ?>
 
     <?= $form->field($model, 'comentario_id')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_lectura')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_aceptado')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -16,7 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'icono')->textInput(['maxlength' => true]) ?>
+    <?php //$form->field($model, 'icono')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($imagen, 'imageFile')->fileInput() ?>
 
     <?= $form->field($model, 'categoria_id')->textInput() ?>
 
