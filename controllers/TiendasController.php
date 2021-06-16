@@ -168,13 +168,26 @@ class TiendasController extends Controller
     public function actionCreate()
     {
         $model = new Tiendas();
+
+        $model->sumaValores = 0;
+        $model->totalVotos = 0;
+        if (Yii::$app->user->getId() != NULL) {
+            $model->crea_usuario_id = Yii::$app->user->getId();
+            $model->modi_usuario_id = Yii::$app->user->getId();
+        } else {
+            $model->crea_usuario_id = 0;
+            $model->modi_usuario_id = 0;
+        }
+        $model->crea_fecha = new Expression('NOW()');
+        $model->modi_fecha = new Expression('NOW()');
+
         $aviso = new Avisosusuarios();
 
         $aviso->fecha_aviso = new Expression('NOW()');
         $aviso->clase_aviso = 'N';
         $aviso->texto = 'Aviso del sistema: Tienda creada';
         if (Yii::$app->user->getId() != NULL) {
-            $aviso->Yii::$app->user->getId();
+            $aviso->origen_usuario_id = Yii::$app->user->getId();
         } else {
             $aviso->origen_usuario_id = 0;
         }
