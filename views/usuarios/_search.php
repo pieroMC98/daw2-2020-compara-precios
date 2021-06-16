@@ -24,32 +24,44 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nick') ?>
 
     <?= $form->field($model, 'nombre') ?>
-	
-	 <?= $form->field($model, 'rol') ?>
 
-    <?php // echo $form->field($model, 'apellidos') ?>
+    <?= $form->field($model, 'rol') ?>
 
-    <?php // echo $form->field($model, 'direccion') ?>
+    <?php // echo $form->field($model, 'apellidos') 
+    ?>
 
-    <?php // echo $form->field($model, 'region_id') ?>
+    <?php // echo $form->field($model, 'direccion') 
+    ?>
 
-    <?php // echo $form->field($model, 'telefono_contacto') ?>
+    <?php // echo $form->field($model, 'region_id') 
+    ?>
 
-    <?php // echo $form->field($model, 'fecha_nacimiento') ?>
+    <?php // echo $form->field($model, 'telefono_contacto') 
+    ?>
 
-    <?php // echo $form->field($model, 'fecha_registro') ?>
+    <?php // echo $form->field($model, 'fecha_nacimiento') 
+    ?>
 
-    <?php // echo $form->field($model, 'confirmado') ?>
+    <?php // echo $form->field($model, 'fecha_registro') 
+    ?>
 
-    <?php // echo $form->field($model, 'fecha_acceso') ?>
+    <?php // echo $form->field($model, 'confirmado') 
+    ?>
 
-    <?php // echo $form->field($model, 'num_accesos') ?>
+    <?php // echo $form->field($model, 'fecha_acceso') 
+    ?>
 
-    <?php // echo $form->field($model, 'bloqueado') ?>
+    <?php // echo $form->field($model, 'num_accesos') 
+    ?>
 
-    <?php // echo $form->field($model, 'fecha_bloqueo') ?>
+    <?php // echo $form->field($model, 'bloqueado') 
+    ?>
 
-    <?php // echo $form->field($model, 'notas_bloqueo') ?>
+    <?php // echo $form->field($model, 'fecha_bloqueo') 
+    ?>
+
+    <?php // echo $form->field($model, 'notas_bloqueo') 
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

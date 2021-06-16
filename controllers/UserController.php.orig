@@ -40,6 +40,7 @@ class UserController extends Controller
 
 		if ($login->confirmado == false) {
 			$this->view->params['msg'] = 'El usuario aun no ha sido confirmado';
+<<<<<<< HEAD
 			return $this->render('login', [
 				'msg' => 'Usuario no confirmado',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
@@ -75,6 +76,43 @@ class UserController extends Controller
 			}
 
 			return $this->render('login', [
+=======
+			return $this->render('login', [
+				'msg' => 'Usuario no confirmado',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
+
+		$session = Yii::$app->session;
+		if (!isset($session['count'])) {
+			$session->set('count', 0);
+		}
+
+		if ($session['count'] >= 3 && $login->bloqueado != 1) {
+			$time = new \DateTime('now', new \DateTimeZone('+1'));
+			$login->bloqueado = 1;
+			$login->fecha_bloqueo = $time->format('Y-m-d H:i:s');
+			$login->save();
+		}
+
+		if ($login->bloqueado == 1) {
+			$time = new \DateTime('now', new \DateTimeZone('+1'));
+			$fecha_bloqueo = new \DateTime(
+				$login->fecha_bloqueo,
+				new \DateTimeZone('+1')
+			);
+			$fecha_bloqueo->modify('+5 minutes');
+			if (
+				$time->format('Y-m-d H:i:s') >
+				$fecha_bloqueo->format('Y-m-d H:i:s')
+			) {
+				$session['count'] = 0;
+				$login->bloqueado = 0;
+				$login->save();
+			}
+
+			return $this->render('login', [
+>>>>>>> grupo-3
 				'msg' =>
 				'Demasiados intentos fallidos. Intente de nuevo en 5 minutos.',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
@@ -92,6 +130,7 @@ class UserController extends Controller
 			$session['count'] = $session['count'] + 1;
 			$login->num_accesos = $session['count'];
 			$login->save();
+<<<<<<< HEAD
 			return $this->render('login', [
 				'msg' => 'Invalido',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
@@ -100,6 +139,16 @@ class UserController extends Controller
 
 		if ($login->confirmado == false) {
 			return $this->render('login', [
+=======
+			return $this->render('login', [
+				'msg' => 'Invalido',
+				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
+			]);
+		}
+
+		if ($login->confirmado == false) {
+			return $this->render('login', [
+>>>>>>> grupo-3
 				'msg' => 'Usuario no confirmado',
 				'model' => new User(['scenario' => User::SCENARIO_LOGIN]),
 			]);
@@ -221,6 +270,8 @@ class UserController extends Controller
 
 		return $this->redirect(['user/admin']);
 	}
+<<<<<<< HEAD
+=======
 
 	function actionTienda()
 	{
@@ -284,4 +335,5 @@ class UserController extends Controller
 			'dataProvider' => $provider
 		]);
 	}
+>>>>>>> grupo-3
 }

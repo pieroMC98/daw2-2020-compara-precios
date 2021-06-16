@@ -7,15 +7,26 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UsuariosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+<<<<<<< HEAD
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
+=======
+$this->title = 'Usuarios';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="usuarios-index">
+>>>>>>> grupo-3
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+<<<<<<< HEAD
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+=======
+        <?= Html::a('Create Usuarios', ['create'], ['class' => 'btn btn-success']) ?>
+>>>>>>> grupo-3
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,7 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'password',
             'nick',
             'nombre',
+<<<<<<< HEAD
 			'rol',
+=======
+>>>>>>> grupo-3
             //'apellidos',
             //'direccion:ntext',
             //'region_id',

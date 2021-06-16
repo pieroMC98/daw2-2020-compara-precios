@@ -36,12 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'apellidos',
             'direccion:ntext',
+            'region_id',
             'telefono_contacto',
+            'fecha_nacimiento',
             'fecha_registro',
+            'confirmado',
+            'fecha_acceso',
             'num_accesos',
             'bloqueado',
-
-			'rol',
+            'fecha_bloqueo',
+            'notas_bloqueo:ntext',
         ],
     ]) ?>
 
