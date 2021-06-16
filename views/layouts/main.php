@@ -11,6 +11,23 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
+//---------------------------------------------------------------------------
+//DTR: Crear el menu de opciones usando un archivo con los "items".
+//Se podría dejar fijas las opciones del "invitado" y "usuario conectado", 
+//pero se deja en el contenido del fichero.
+$opciones_menu= @include( 'menu_items.php');
+if (!is_array( $opciones_menu)) {
+  //Solo si no hay menu se hace uno simple.
+  $opciones_menu= [
+      ['label' => 'Inicio', 'url' => ['/site/index']],
+      (Yii::$app->user->isGuest
+          ? ['label' => 'Iniciar Sesión', 'url' => ['/user/login']]
+          : ['label' => 'Cerrar Sesión ['.Yii::$app->user->name.'-'.Yii::$app->user->id.']', 'url' => ['/user/logout']]
+      ),
+  ];
+}//if
+//---------------------------------------------------------------------------
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -41,59 +58,36 @@ AppAsset::register($this);
     ]);
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Tiendas', 'url' => ['/tiendas']],
-            ['label' => 'Artículos', 'url' => ['/articulos']],
-            ['label' => 'Categorías', 'url' => ['/categorias']],
-            ['label' => 'Histórico', 'url' => ['/historico-precios']],
-            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-            Yii::$app->user->isGuest
-              ? ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/user/login']]
-              : ['label' => Yii::$app->user->identity->nick, 
-                  'items' => [
-                      ['label' => 'Cuenta', 'url' => ['user/get'], 'id' => Yii::$app->user->identity->id],
-                      ['label' => 'logout', 'url' => ['/user/logout']],
-                      Yii::$app->user->identity->rol == 'admin' 
-                        ? ['label' => 'Mantenimiento', 'url' => ['/usuarios']] 
-                        : "",
-                      Yii::$app->user->identity->rol == 'admin' 
-                        ? ['label' => 'Administración', 'url' => ['/site/menu_admin']] 
-                        : "",
-                  ],
-              ],
-        ],
+      'options' => ['class' => 'navbar-nav navbar-right'],
+      'items' => $opciones_menu
     ]);    
     
     NavBar::end();
     ?>
-	<?php if (isset($this->params['msg']) && $this->params['msg'] != ''): ?>
-		<div class="container">
-				<div class="alert alert-warning" role="alert">
-					<strong>
-						<?= $this->params['msg'] ?>
-					</strong>
-				</div>
-		</div>
-	<?php endif; ?>
+  <?php if (isset($this->params['msg']) && $this->params['msg'] != '') : ?>
   <div class="container">
-        <?= Breadcrumbs::widget([
-        	'links' => isset($this->params['breadcrumbs'])
-        		? $this->params['breadcrumbs']
-        		: [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <div class="alert alert-warning" role="alert">
+      <strong><?= $this->params['msg'] ?></strong>
     </div>
+  </div>
+  <?php endif; ?>
+  <div class="container">
+    <?= Breadcrumbs::widget([
+      'links' => isset($this->params['breadcrumbs'])
+        ? $this->params['breadcrumbs']
+        : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
+  </div>
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+  <div class="container">
+    <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+    <p class="pull-right"><?= Yii::powered() ?></p>
+  </div>
 </footer>
 
 <?php $this->endBody(); ?>
