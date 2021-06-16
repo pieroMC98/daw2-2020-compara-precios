@@ -5,7 +5,6 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Regiones;
 use app\models\Usuarios;
-use app\models\Clasificadores;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tiendas */
@@ -30,14 +29,50 @@ use app\models\Clasificadores;
 
     <?= $form->field($model, 'telefono_tienda')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'clasificacion_id')->dropDownList(\yii\helpers\ArrayHelper::map(Clasificadores::find()->all(), 'id', 'nombre'), ['prompt' => 'Seleccione una clasificación' ]) ?>
+    <?= $form->field($model, 'clasificacion_id')->textInput() ?>
+
+    <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'sumaValores')->textInput() ?>
+
+    <?= $form->field($model, 'totalVotos')->textInput() ?>
 
     <?= $form->field($model, 'visible')->dropDownList([
             0 => 'Invisible', 
             1 => 'Visible']
         ) ?>
 
-    <?= $form->field($model, 'usuario_id')->hiddenInput(['value'=> 0])->label(false); ?>
+    <?= $form->field($model, 'cerrada')->dropDownList([
+            0 => 'No (activa)', 
+            1 => 'Eliminada por solicitud de baja',
+            2 => 'Suspendida',
+            3 => 'Cancelada por Inadecuada']
+        ) ?>
+
+    <?= $form->field($model, 'num_denuncias')->textInput() ?>
+
+    <?= $form->field($model, 'fecha_denuncia1')->textInput() ?>
+
+    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'bloqueada')->dropDownList([
+            0 => 'No', 
+            1 => 'Si (bloqueada por denuncias)',
+            2 => 'Si (bloqueada por moderador o administrador)']
+        ) ?>
+
+    <?= $form->field($model, 'fecha_bloqueo')->textInput() ?>
+
+    <?= $form->field($model, 'notas_bloqueo')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'cerrado_comentar')->dropDownList([
+            0 => 'No', 
+            1 => 'Si']
+        ) ?>
+
+    <?= $form->field($model, 'usuario_id')->textInput() ?>
+
+    <?= $form->field($model, 'usuario_id')->dropDownList(\yii\helpers\ArrayHelper::map(Usuarios::find()->all(), 'id', 'id'), ['prompt' => 'Seleccione un usuario' ]) ?>
 
     <?= $form->field($model, 'nif_cif')->textInput(['maxlength' => true]) ?>
 
@@ -53,8 +88,18 @@ use app\models\Clasificadores;
 
     <?= $form->field($model, 'telefono_contacto')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'crea_usuario_id')->textInput() ?>
+
+    <?= $form->field($model, 'crea_fecha')->textInput() ?>
+
+    <?= $form->field($model, 'modi_usuario_id')->textInput() ?>
+
+    <?= $form->field($model, 'modi_fecha')->textInput() ?>
+
+    <?= $form->field($model, 'notas_admin')->textarea(['rows' => 6]) ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Crear Tienda', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Actualizar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
