@@ -46,24 +46,14 @@ class ClasificadoresSearch extends Clasificadores
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> grupo-3
             'pagination' => [
-            'pageSize' => 10,
-        ],
-        'sort' => [
-            'defaultOrder' => [
-                'id' => SORT_ASC,
-            ]
-        ],
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> main
->>>>>>> grupo-3
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_ASC,
+                ]
+            ],
         ]);
 
         $this->load($params);

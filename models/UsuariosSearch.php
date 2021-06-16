@@ -41,10 +41,6 @@ class UsuariosSearch extends user
     public function search($params)
     {
         $query = user::find();
-<<<<<<< HEAD
-
-=======
->>>>>>> grupo-3
 
         // add conditions that should always apply here
 

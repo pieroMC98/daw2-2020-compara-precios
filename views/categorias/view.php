@@ -89,9 +89,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ?>
 
-<<<<<<< HEAD
 
 </div>
-=======
-</div>
->>>>>>> grupo-3
