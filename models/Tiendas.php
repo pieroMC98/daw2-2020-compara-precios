@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\Regiones;
+use app\models\Clasificadores;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 
@@ -69,7 +71,7 @@ class Tiendas extends \yii\db\ActiveRecord
             [['nombre'], 'string', 'max' => 100],
             [['apellidos'], 'string', 'max' => 150],
             [['razon_social'], 'string', 'max' => 250],
-            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'),'on'=>'bloqueo'],
+            ['fecha_bloqueo', 'default', 'value' => new Expression('NOW()'), 'on' => 'bloqueo'],
         ];
     }
 
@@ -80,12 +82,12 @@ class Tiendas extends \yii\db\ActiveRecord
 
     public function getEtiquetaId()
     {
-        if($this->etiquetas!==null){
+        if ($this->etiquetas !== null) {
 
             return $this->etiquetas->etiqueta_id;
         }
 
-        return null;		
+        return null;
     }
 
     public function getOfertas()
@@ -114,8 +116,8 @@ class Tiendas extends \yii\db\ActiveRecord
             'totalVotos' => 'Total Votos',
             'visible' => 'Visible',
             'cerrada' => 'Cerrada',
-            'num_denuncias' => 'Num Denuncias',
-            'fecha_denuncia1' => 'Fecha Denuncia1',
+            'num_denuncias' => 'Num. Denuncias',
+            'fecha_denuncia1' => 'Fecha Denuncia',
             'notas_denuncia' => 'Notas Denuncia',
             'bloqueada' => 'Bloqueada',
             'fecha_bloqueo' => 'Fecha Bloqueo',
@@ -131,9 +133,9 @@ class Tiendas extends \yii\db\ActiveRecord
             'telefono_contacto' => 'Telefono Contacto',
             'crea_usuario_id' => 'Crea Usuario ID',
             'crea_fecha' => 'Crea Fecha',
-            'modi_usuario_id' => 'Modi Usuario ID',
-            'modi_fecha' => 'Modi Fecha',
-            'notas_admin' => 'Notas Admin',
+            'modi_usuario_id' => 'Modi. Usuario ID',
+            'modi_fecha' => 'Modi. Fecha',
+            'notas_admin' => 'Notas Admin.',
             'nombreCompleto' => 'Nombre Completo',
             'nickPropietario' => 'Nick Propietario',
         ];
@@ -142,41 +144,42 @@ class Tiendas extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-                    [
-                        'class' => TimestampBehavior::className(),
-                        'createdAtAttribute' => 'crea_fecha',
-                        'updatedAtAttribute' => 'modi_fecha',
-                        'value' => new Expression('NOW()'),
-                    ],
-                ];
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'crea_fecha',
+                'updatedAtAttribute' => 'modi_fecha',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 
     public function getNombreCompleto()
     {
-        return $this->nombre.' '.$this->apellidos;
+        return $this->nombre . ' ' . $this->apellidos;
     }
 
-    public function getUsuarios(){
+    public function getUsuarios()
+    {
 
-        return $this->hasOne(Usuarios::className(),['id' => 'usuario_id']);
-
+        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
     }
 
-    public function getNickPropietario(){
+    public function getNickPropietario()
+    {
 
-        if($this->usuarios!==null){
+        if ($this->usuarios !== null) {
 
             return $this->usuarios->nick;
         }
 
         return null;
-
     }
 
-    public function deletePropietario(){
+    public function deletePropietario()
+    {
 
-        $this->usuario_id =0;
-        $this->nif_cif='NULO';
+        $this->usuario_id = 0;
+        $this->nif_cif = 'NULO';
         $this->nombre = NULL;
         $this->apellidos = NULL;
         $this->razon_social = NULL;
@@ -186,23 +189,36 @@ class Tiendas extends \yii\db\ActiveRecord
 
         $this->save();
     }
-	
-	public function actualizarVotos(){
-		
-		$query = new \yii\db\Query();
-		
-		$numVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->count('valoracion');
-		$sumVotos=$query->from('comentarios')->where(['tienda_id' => $this->id])->sum('valoracion');
 
-        $this->totalVotos=$numVotos;
-        $this->sumaValores=$sumVotos;
+    public function actualizarVotos()
+    {
+
+        $query = new \yii\db\Query();
+
+        $numVotos = $query->from('comentarios')->where(['tienda_id' => $this->id])->count('valoracion');
+        $sumVotos = $query->from('comentarios')->where(['tienda_id' => $this->id])->sum('valoracion');
+
+        $this->totalVotos = $numVotos;
+        $this->sumaValores = $sumVotos;
         $this->save();
     }
 
-
-    public function getNombre_tienda()
+    public function getRegiones()
     {
-        return $this->nombre_tienda;
+        return $this->hasOne(Regiones::className(), ['id' => 'region_id_tienda']);
     }
-  
+
+    public function getClasificadores()
+    {
+        return $this->hasOne(Clasificadores::className(), ['id' => 'clasificacion_id']);
+    }
+
+    public static function listVisibilidad()
+    {
+        return [
+            0 => 'Cerrada',
+            1 => 'Abierta',
+            NULL => 'No definido',
+        ];
+    }
 }

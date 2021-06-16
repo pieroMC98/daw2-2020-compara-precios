@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Oferta;
 use app\models\OfertaSearch;
+use app\models\AvisosUsuarios;
+use app\models\HistoricoPrecios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -88,8 +90,23 @@ class OfertaController extends Controller
     public function actionCreate()
     {
         $model = new Oferta();
+        $aviso = new Avisosusuarios();
+        $historico = new HistoricoPrecios();
+
+        $aviso->clase_aviso = 'N';
+        $aviso->fecha_aviso = new Expression('NOW()');
+        $aviso->texto = 'Aviso del sistema: nueva oferta';
+        $aviso->tienda_id = $model->tienda_id;
+        $aviso->articulo_id = $model->articulo_id;
+
+        $historico->articulo_id = $model->articulo_id;
+        $historico->tienda_id = $model->tienda_id;
+        $historico->fecha = new Expression('NOW()');
+        $historico->precio = $model->precio_oferta;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $aviso->save();
+            $historico->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -129,6 +146,15 @@ class OfertaController extends Controller
     {
         $this->findModel($id)->delete();
 
+        $aviso = new Avisosusuarios();
+
+        $aviso->clase_aviso = 'N';
+        $aviso->fecha_aviso = new Expression('NOW()');
+        $aviso->texto = 'Aviso del sistema: oferta eliminada';
+        $aviso->origen_usuario_id = 0;
+        //$aviso->tienda_id = $model->tienda_id;
+        //$aviso->articulo_id = $model->articulo_id;
+
         return $this->redirect(['index']);
     }
 
@@ -153,11 +179,11 @@ class OfertaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionSeguimiento($id){
-        if(Yii::$app->user->getId()!=NULL){
-            return $this->redirect(['seguimientos-usuario/seguimiento', 'id_articulo' => '', 'id_tienda'=>'', 'id_oferta'=> $id]);
-        }
-        else{
+    public function actionSeguimiento($id)
+    {
+        if (Yii::$app->user->getId() != NULL) {
+            return $this->redirect(['seguimientos-usuario/seguimiento', 'id_articulo' => '', 'id_tienda' => '', 'id_oferta' => $id]);
+        } else {
             return $this->redirect(['site/login', 'error' => 'No se puede seguir una oferta si no estas conectado']);
         }
     }
@@ -167,11 +193,11 @@ class OfertaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionQuitarseguimiento($id){
-        if(Yii::$app->user->getId()!=NULL){
-            return $this->redirect(['seguimientos-usuario/quitarseguimiento', 'id'=>$id]);
-        }
-        else{
+    public function actionQuitarseguimiento($id)
+    {
+        if (Yii::$app->user->getId() != NULL) {
+            return $this->redirect(['seguimientos-usuario/quitarseguimiento', 'id' => $id]);
+        } else {
             return $this->redirect(['site/login', 'error' => 'No se puede seguir un articulo si no estas conectado']);
         }
     }

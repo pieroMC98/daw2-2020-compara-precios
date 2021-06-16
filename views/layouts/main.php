@@ -11,8 +11,24 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-?>
 
+//---------------------------------------------------------------------------
+//DTR: Crear el menu de opciones usando un archivo con los "items".
+//Se podría dejar fijas las opciones del "invitado" y "usuario conectado", 
+//pero se deja en el contenido del fichero.
+$opciones_menu= @include( 'menu_items.php');
+if (!is_array( $opciones_menu)) {
+  //Solo si no hay menu se hace uno simple.
+  $opciones_menu= [
+      ['label' => 'Inicio', 'url' => ['/site/index']],
+      (Yii::$app->user->isGuest
+          ? ['label' => 'Iniciar Sesión', 'url' => ['/user/login']]
+          : ['label' => 'Cerrar Sesión ['.Yii::$app->user->name.'-'.Yii::$app->user->id.']', 'url' => ['/user/logout']]
+      ),
+  ];
+}//if
+//---------------------------------------------------------------------------
+?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -36,76 +52,42 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-
-        'brandLabel' => "COMPARADOR DE PRECIOS - DAW2",
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+      'brandLabel' => Yii::$app->name,
+      'brandUrl' => Yii::$app->homeUrl,
+      'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
+
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-          
-            ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Administración', 'url' => ['/site/menu_admin']],
-            
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]):
-
-            ['label' => 'Tiendas',
-                'items' => [
-                     ['label' => 'Listado', 'url' => ['/tiendas']],
-                     ['label' => 'Mi tienda', 'url' => ['/tiendas']]
-                ],
-                'url' => ['/tiendas']
-            ],
-            ['label' => 'Artículos', 'url' => ['/articulos']],
-            ['label' => 'Categorías', 'url' => ['/categorias']],
-
-            ['label' => 'Avisos', 'url' => ['/avisos-usuarios']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Usuarios', 'url' => ['/user']]
-            ) : (
-                ['label' => Yii::$app->user->identity->username , 'url' => ['/user']]
-            ),
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar Sesión / Registrarse', 'url' => ['/site/login']]
-
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Cerrar Sesión',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
+      'options' => ['class' => 'navbar-nav navbar-right'],
+      'items' => $opciones_menu
+    ]);    
+    
     NavBar::end();
     ?>
-  
-    <div class="container">
-        <?= Breadcrumbs::widget([
-        	'links' => isset($this->params['breadcrumbs'])
-        		? $this->params['breadcrumbs']
-        		: [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+  <?php if (isset($this->params['msg']) && $this->params['msg'] != '') : ?>
+  <div class="container">
+    <div class="alert alert-warning" role="alert">
+      <strong><?= $this->params['msg'] ?></strong>
     </div>
+  </div>
+  <?php endif; ?>
+  <div class="container">
+    <?= Breadcrumbs::widget([
+      'links' => isset($this->params['breadcrumbs'])
+        ? $this->params['breadcrumbs']
+        : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
+  </div>
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+  <div class="container">
+    <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+    <p class="pull-right"><?= Yii::powered() ?></p>
+  </div>
 </footer>
 
 <?php $this->endBody(); ?>

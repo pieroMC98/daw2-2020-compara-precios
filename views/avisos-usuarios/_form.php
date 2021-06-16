@@ -13,8 +13,6 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fecha_aviso')->widget(DatePicker::className(),['clientOptions' => ['dateFormat' => 'dd-mm-YY', 'defaultDate' => '01-01-2021', 'language' => 'es-ES','changeMonth'=> true, 'changeYear'=> true,], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
-
     <?= $form->field($model, 'clase_aviso')->dropdownList([
             'A' => 'Aviso', 
             'N' => 'Notificación',
@@ -37,10 +35,6 @@ use yii\jui\DatePicker;
     <?= $form->field($model, 'articulo_id')->textInput() ?>
 
     <?= $form->field($model, 'comentario_id')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_lectura')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2021-01-01'], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
-
-    <?= $form->field($model, 'fecha_aceptado')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2021-01-01'], 'dateFormat' => 'php:Y-m-d H:i:s']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

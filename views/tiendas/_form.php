@@ -1,7 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\Regiones;
+use app\models\Usuarios;
+use app\models\Clasificadores;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tiendas */
@@ -12,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre_tienda')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'nombre_tienda')->textarea(['rows' => 1]) ?>
 
     <?= $form->field($model, 'descripcion_tienda')->textarea(['rows' => 6]) ?>
 
@@ -22,37 +26,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'direccion_tienda')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'region_id_tienda')->textInput() ?>
+    <?= $form->field($model, 'region_id_tienda')->dropDownList(\yii\helpers\ArrayHelper::map(Regiones::find()->all(), 'id', 'nombre'), ['prompt' => 'Seleccione una región' ]) ?>
 
     <?= $form->field($model, 'telefono_tienda')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'clasificacion_id')->textInput() ?>
+    <?= $form->field($model, 'clasificacion_id')->dropDownList(\yii\helpers\ArrayHelper::map(Clasificadores::find()->all(), 'id', 'nombre'), ['prompt' => 'Seleccione una clasificación' ]) ?>
 
-    <?= $form->field($model, 'imagen_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'visible')->dropDownList([
+            0 => 'Invisible', 
+            1 => 'Visible']
+        ) ?>
 
-    <?= $form->field($model, 'sumaValores')->textInput() ?>
-
-    <?= $form->field($model, 'totalVotos')->textInput() ?>
-
-    <?= $form->field($model, 'visible')->textInput() ?>
-
-    <?= $form->field($model, 'cerrada')->textInput() ?>
-
-    <?= $form->field($model, 'num_denuncias')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_denuncia1')->textInput() ?>
-
-    <?= $form->field($model, 'notas_denuncia')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'bloqueada')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_bloqueo')->textInput() ?>
-
-    <?= $form->field($model, 'notas_bloqueo')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'cerrado_comentar')->textInput() ?>
-
-    <?= $form->field($model, 'usuario_id')->textInput() ?>
+    <?= $form->field($model, 'usuario_id')->hiddenInput(['value'=> 0])->label(false); ?>
 
     <?= $form->field($model, 'nif_cif')->textInput(['maxlength' => true]) ?>
 
@@ -64,22 +49,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'direccion')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'region_id')->textInput() ?>
+    <?= $form->field($model, 'region_id')->dropDownList(\yii\helpers\ArrayHelper::map(Regiones::find()->all(), 'id', 'nombre'), ['prompt' => 'Seleccione una región' ]) ?>
 
     <?= $form->field($model, 'telefono_contacto')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'crea_usuario_id')->textInput() ?>
-
-    <?= $form->field($model, 'crea_fecha')->textInput() ?>
-
-    <?= $form->field($model, 'modi_usuario_id')->textInput() ?>
-
-    <?= $form->field($model, 'modi_fecha')->textInput() ?>
-
-    <?= $form->field($model, 'notas_admin')->textarea(['rows' => 6]) ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Crear Tienda', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

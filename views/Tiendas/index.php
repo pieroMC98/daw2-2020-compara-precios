@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nombre_tienda:ntext',
             'descripcion_tienda:ntext',
             'lugar_tienda:ntext',
@@ -63,7 +63,27 @@ $this->params['breadcrumbs'][] = $this->title;
             //'notas_admin:ntext',
             'nombreCompleto',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {propietarios} {addPropietario} {addEtiqueta} {bloquear} {denunciar} {delete}',
+                'buttons' => [
+                    'propietarios' => function ($url, $model, $key) {
+                        return Html::a ('<i class="bi bi-person-badge" title="Ver propietarios"></i>', ['propietarios_view', 'id' => $model->id]);
+                    },
+                    'addPropietario' => function ($url, $model) {
+                        return Html::a('<i class="bi bi-person-plus-fill" title="Actualizar propietarios"></i>', ['propietarios_update', 'id' => $model->id]);
+                    },
+                    'addEtiqueta' => function ($url, $model) {
+                        return Html::a('<i class="bi bi-tag-fill" title="Añadir etiqueta"></i>' ,['etiquetas', 'id' => $model->id]);
+                    },
+                    'bloquear' => function ($url, $model) {
+                        return Html::a('<i class="bi bi-x-octagon-fill" title="Bloquear"></i>', ['bloqueos', 'id' => $model->id]);
+                    },
+                    'denunciar' => function ($url, $model) {
+                        return Html::a('<i class="bi bi-exclamation-diamond-fill" title="Denunciar"></i>', ['denuncias', 'id' => $model->id]);
+                    },
+                ],
+            ]
         ],
     ]); ?>
 

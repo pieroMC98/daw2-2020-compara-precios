@@ -8,140 +8,131 @@ use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Tiendas;
-use app\models\TiendasSearch;
 
 /**
- * UsuariosController implements the CRUD actions for Usuarios model.
+ * UsuariosController implements the CRUD actions for user model.
  */
 class UsuariosController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function behaviors()
+	{
+		return [
+			'verbs' => [
+				'class' => VerbFilter::class,
+				'actions' => [
+					'delete' => ['POST'],
+				],
+			],
+		];
+	}
 
-    /**
-     * Lists all Usuarios models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new UsuariosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+	/**
+	 * Lists all user models.
+	 * @return mixed
+	 */
+	public function actionIndex()
+	{
+		$login = Yii::$app->user->identity;
+		if ($login->rol !== 'admin') {
+			return $this->redirect(['site/index']);
+		}
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+		$searchModel = new UsuariosSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$dataProvider->pagination = ['pageSize' => 10];
 
-    /**
-     * Displays a single Usuarios model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+		return $this->render('index', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
+	}
 
-    /**
-     * Creates a new Usuarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Usuarios();
+	/**
+	 * Displays a single user model.
+	 * @param integer $id
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	function actionGet()
+	{
+		return $this->render('view', ['model' => Yii::$app->user->identity]);
+	}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+	public function actionView($id)
+	{
+		return $this->render('view', [
+			'model' => $this->findModel($id),
+		]);
+	}
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+	/**
+	 * Creates a new user model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * @return mixed
+	 */
+	public function actionCreate()
+	{
+		$model = new Usuarios();
 
-    /**
-     * Updates an existing Usuarios model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['view', 'id' => $model->id]);
+		}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+		return $this->render('create', [
+			'model' => $model,
+		]);
+	}
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+	/**
+	 * Updates an existing user model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	public function actionUpdate($id)
+	{
+		$model = $this->findModel($id);
 
-    /**
-     * Deletes an existing Usuarios model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['view', 'id' => $model->id]);
+		}
 
-        return $this->redirect(['index']);
-    }
+		return $this->render('update', [
+			'model' => $model,
+		]);
+	}
 
-    /**
-     * Finds the Usuarios model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Usuarios the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Usuarios::findOne($id)) !== null) {
-            return $model;
-        }
+	/**
+	 * Deletes an existing user model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * @param integer $id
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	public function actionDelete($id)
+	{
+		$this->findModel($id)->delete();
 
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-	
-	public function actionElegir_usuario()
-    {
-        if (Tiendas::findOne($id_tienda=Yii::$app->request->get('id_tienda')) === null) {
-            
-            return $this->redirect(['tiendas/elegir_tienda']);
+		return $this->redirect(['index']);
+	}
 
-        }
+	/**
+	 * Finds the user model based on its primary key value.
+	 * If the model is not found, a 404 HTTP exception will be thrown.
+	 * @param integer $id
+	 * @return user the loaded model
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	protected function findModel($id)
+	{
+		if (($model = Usuarios::findOne($id)) !== null) {
+			return $model;
+		}
 
-        $searchModel = new UsuariosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('elegir_usuario', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'id_tienda' => $id_tienda,
-        ]);
-    }
+		throw new NotFoundHttpException('The requested page does not exist.');
+	}
 }

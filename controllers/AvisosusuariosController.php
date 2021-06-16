@@ -86,6 +86,7 @@ class AvisosUsuariosController extends Controller
         $model = new AvisosUsuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->fecha_aviso = time();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -142,5 +143,47 @@ class AvisosUsuariosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionAviso($clase_aviso, $texto, $destino_usuario_id, $origen_usuario_id, $tienda_id, $articulo_id, $comentario_id)
+    {
+        $model = new AvisosUsuarios();
+
+        if ($clase_aviso == NULL)
+        {
+            $clase_aviso = 'A';
+        }
+        $model['fecha_aviso'] = new Expression('NOW()');
+        $model['clase_aviso'] = $clase_aviso;
+        $model['texto'] = $texto;
+        $model['destino_usuario_id'] = $destino_usuario_id;
+        $model['origen_usuario_id'] = $origen_usuario_id;
+        $model['tienda_id'] = $tienda_id;
+        $model['articulo_id'] = $articulo_id;
+        $model['comentario_id'] = $comentario_id;
+
+        $model->save();
+    }
+
+    public function actionMarcarComoLeido($id)
+    {
+        $model = $this->findModel($id);
+        $model->fecha_lectura = new Expression('NOW()');
+        
+        if ($model->load(Yii::$app->request->post()))
+        {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+    }
+
+    public function actionMarcarComoAceptado($id)
+    {
+        $model = $this->findModel($id);
+        $model->fecha_aceptado = new Expression('NOW()');
+        
+        if ($model->load(Yii::$app->request->post()))
+        {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
     }
 }
